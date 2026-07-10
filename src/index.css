@@ -44,9 +44,10 @@
     @apply font-serif;
   }
 
-  /* Mono utility for venues, code refs, keywords */
+  /* Mono utility for venues, code refs, keywords — plain CSS so @apply-able classes above can't reference it */
   .mono {
-    @apply font-mono text-signal-soft;
+    font-family: var(--font-mono);
+    color: var(--color-signal-soft);
     letter-spacing: -0.01em;
   }
 }
@@ -72,12 +73,12 @@
   }
 
   .chip {
-    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs mono
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono
            bg-signal/10 border border-signal/20 text-signal-soft;
   }
 
   .chip-ember {
-    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs mono
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono
            bg-ember/10 border border-ember/30 text-ember;
   }
 
