@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+@theme {
+  /* SEAL Palette — trust, signal, humanity */
+  --color-ink: #0B1929;         /* deep midnight base */
+  --color-slate: #1F2937;       /* elevated surface / glass tint */
+  --color-signal: #22D3EE;      /* electric cyan — clarity, safety */
+  --color-signal-soft: #67E8F9; /* lighter signal for hover / accents */
+  --color-ember: #F5C147;       /* warm gold — humanity, equity */
+  --color-paper: #F8F5F0;       /* warm off-white for reversed sections */
+  --color-mist: #94A3B8;        /* muted body text on dark */
+
+  /* Typography */
+  --font-serif: "Fraunces", "Iowan Old Style", Georgia, serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", monospace;
+
+  /* Motion */
+  --animate-drift: drift 12s ease-in-out infinite;
+  --animate-pulse-signal: pulse-signal 2.5s ease-in-out infinite;
+
+  @keyframes drift {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(20px, -30px); }
+  }
+
+  @keyframes pulse-signal {
+    0%, 100% { filter: drop-shadow(0 0 6px rgba(34, 211, 238, 0.4)); }
+    50% { filter: drop-shadow(0 0 20px rgba(34, 211, 238, 0.9)); }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sans bg-ink text-paper transition-colors duration-500 selection:bg-signal/30;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+
+  /* Mono utility for venues, code refs, keywords */
+  .mono {
+    @apply font-mono text-signal-soft;
+    letter-spacing: -0.01em;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply backdrop-blur-md bg-slate/40 border border-signal/10;
+  }
+
+  .glass-strong {
+    @apply backdrop-blur-lg bg-slate/60 border border-signal/20;
+  }
+
+  .btn-primary {
+    @apply relative overflow-hidden px-8 py-3 bg-signal text-ink font-medium rounded-full
+           hover:bg-signal-soft transition-all duration-300 transform hover:scale-105 active:scale-95
+           shadow-lg hover:shadow-signal/40;
+  }
+
+  .btn-ghost {
+    @apply relative overflow-hidden px-8 py-3 border border-signal/40 text-signal font-medium rounded-full
+           hover:bg-signal/10 hover:border-signal transition-all duration-300;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs mono
+           bg-signal/10 border border-signal/20 text-signal-soft;
+  }
+
+  .chip-ember {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs mono
+           bg-ember/10 border border-ember/30 text-ember;
+  }
+
+  .section-eyebrow {
+    @apply text-signal font-mono text-xs uppercase tracking-[0.3em] mb-4;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-ink;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-signal/40 rounded-full hover:bg-signal;
+}

@@ -1,0 +1,23 @@
+[
+  {
+    "id": "phd-fall27",
+    "role": "PhD Students (Fall 2027)",
+    "audience": "Prospective PhD applicants",
+    "description": "Seeking 2–3 PhD students to join SEAL starting Fall 2027. Areas: multilingual NLP, AI safety, information integrity, algorithmic fairness. Strong preference for candidates with backgrounds in NLP, ML, HCI, computational linguistics, or related fields. International applicants encouraged.",
+    "howToApply": "Apply to the CU Boulder Computer Science PhD program and mention SEAL / Jason Lucas in your statement. Email a CV to jason.lucas@colorado.edu before submitting."
+  },
+  {
+    "id": "postdoc",
+    "role": "Postdoctoral Researcher",
+    "audience": "Recent PhDs",
+    "description": "Open call for postdoctoral researchers in multilingual AI safety, adversarial ML, or socio-technical evaluation. Two-year appointment with option to extend.",
+    "howToApply": "Send a CV, research statement, and 3 references to jason.lucas@colorado.edu."
+  },
+  {
+    "id": "undergrad",
+    "role": "Undergraduate Researchers",
+    "audience": "CU Boulder undergraduates",
+    "description": "CU Boulder undergraduates interested in research experience are welcome. Prior coursework in ML/NLP helpful but not required — motivation and consistency matter more.",
+    "howToApply": "Email jason.lucas@colorado.edu with your resume and a paragraph on what draws you to SEAL's work."
+  }
+]

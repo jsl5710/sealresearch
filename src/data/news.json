@@ -1,0 +1,23 @@
+[
+  {
+    "id": "icml26-position",
+    "date": "2026-07-09",
+    "title": "ICML 2026 Position Paper accepted",
+    "summary": "Our position paper — Breaking the Dual Curse of Multilingual AI — argues that multilingual safety cannot be retrofitted through post-hoc alignment.",
+    "tag": "Paper"
+  },
+  {
+    "id": "acl26-social-impact",
+    "date": "2026-07-07",
+    "title": "DIA-HARM wins ACL 2026 Social Impact Paper Award 🏆",
+    "summary": "Recognized at the 64th ACL for advancing equity in harmful-content detection across 50 English dialects.",
+    "tag": "Award"
+  },
+  {
+    "id": "seal-launch",
+    "date": "2026-08-15",
+    "title": "SEAL Lab launches at CU Boulder",
+    "summary": "The Secure and Ethical AI Lab formally begins operations. Recruiting PhD students, postdocs, and undergrad researchers.",
+    "tag": "Announcement"
+  }
+]

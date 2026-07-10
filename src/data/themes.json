@@ -1,0 +1,38 @@
+[
+  {
+    "id": "multilingual",
+    "title": "Multilingual NLP and Low-Resource AI",
+    "eyebrow": "Language equity",
+    "summary": "Advancing language technology for the world's underserved linguistic communities — beyond the top 20 high-resource languages.",
+    "description": "We build multilingual models, benchmarks, and pipelines that work for the long tail of world languages. Our research spans transfer learning, adversarial robustness, cross-lingual generation, and end-to-end systems for low-resource NLP, with particular attention to Caribbean Creoles, African languages, and dialectal English varieties.",
+    "keywords": ["Low-Resource NLP", "Cross-Lingual Transfer", "Dialect Robustness", "Multilingual LLMs"],
+    "accent": "signal"
+  },
+  {
+    "id": "integrity",
+    "title": "Information Integrity and Trustworthy AI",
+    "eyebrow": "Safety by design",
+    "summary": "Detecting, attributing, and defending against harmful and synthetic content — across modalities and languages.",
+    "description": "We study how generative AI reshapes the information ecosystem: fake news, hallucination, deepfakes, jailbreaks, and adversarial attacks. Our work develops benchmarks, defenses, and attribution methods that hold up under real-world, adversarial, and multilingual conditions.",
+    "keywords": ["Disinformation", "Deepfake Detection", "Adversarial ML", "AI Attribution", "Jailbreak Defense"],
+    "accent": "signal"
+  },
+  {
+    "id": "equity",
+    "title": "Fair, Ethical, and Equitable AI",
+    "eyebrow": "Justice as a design constraint",
+    "summary": "Auditing AI systems for who they help, who they harm, and building the guardrails that close the gap.",
+    "description": "We treat fairness as a first-class technical and socio-technical concern — not a downstream patch. Our research audits deployed models for disparate impact, formalizes community-led harm specifications, and develops evaluation metrics that jointly balance utility, safety, and equity.",
+    "keywords": ["Algorithmic Fairness", "Model Auditing", "Socio-Technical Guardrails", "Community-Led AI"],
+    "accent": "ember"
+  },
+  {
+    "id": "human",
+    "title": "Human-Centered AI",
+    "eyebrow": "AI with people, not for them",
+    "summary": "Designing AI systems, interfaces, and evaluations that center human judgment, context, and lived experience.",
+    "description": "We build human-in-the-loop systems, participatory evaluation methodologies, and interactive tools that respect user agency. This includes conversational AI, RAG-based assistants, and agentic workflows designed with — and evaluated by — the communities they serve.",
+    "keywords": ["Human-AI Interaction", "Participatory ML", "Agentic AI", "RAG Systems"],
+    "accent": "ember"
+  }
+]

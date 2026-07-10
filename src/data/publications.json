@@ -1,0 +1,39 @@
+[
+  {
+    "id": "dua-curse-icml26",
+    "title": "Position: Breaking the Dual Curse of Multilingual AI Requires Socio-Technical Guardrails, Not Post-Hoc Alignment",
+    "authors": ["Jason Lucas", "Pureheart Ogheneogaga Irikefe", "Adaku Uchendu", "Umniya Najaer", "Cornelius Adejoro", "Patrice Sterling", "Dongwon Lee"],
+    "venue": "ICML 2026",
+    "venueLong": "International Conference on Machine Learning — Position Paper Track",
+    "year": 2026,
+    "themes": ["multilingual", "equity", "integrity"],
+    "featured": true,
+    "url": "https://icml.cc/virtual/2026/poster/67071",
+    "abstract": "Multilingual language models exhibit a dual curse — harmful content generation rises to 35% in low-resource languages while instruction-following collapses. Reward models achieve only 49–50% accuracy in low-resource languages, undermining post-deployment safety. We argue for socio-technical guardrails built in from pre-training."
+  },
+  {
+    "id": "dia-harm-acl26",
+    "title": "DIA-HARM: Dialectal Disparities in Harmful Content Detection Across 50 English Dialects",
+    "authors": ["Jason Lucas", "Matt Murtagh-White", "Ali Al-Lawati", "Uchendu Uchendu", "Adaku Uchendu", "Dongwon Lee"],
+    "venue": "ACL 2026",
+    "venueLong": "64th Annual Meeting of the Association for Computational Linguistics",
+    "year": 2026,
+    "themes": ["multilingual", "integrity", "equity"],
+    "featured": true,
+    "award": "Social Impact Paper Award",
+    "url": "https://arxiv.org/abs/2604.05318",
+    "abstract": "The first benchmark for evaluating disinformation detection robustness across 50 English dialects. We introduce the D3 corpus (195K samples) and evaluate 16 detection models, revealing systematic disparities across dialect groups."
+  },
+  {
+    "id": "bluff-kdd26",
+    "title": "BLUFF: Benchmarking in Low-resoUrce Languages for detecting Falsehoods and Fake news",
+    "authors": ["Jason Lucas", "Matt Murtagh-White", "Adaku Uchendu", "Ali Al-Lawati", "Michiharu Yamashita", "Dominik Macko", "Ivan Srba", "Robert Moro", "Dongwon Lee"],
+    "venue": "KDD 2026",
+    "venueLong": "32nd ACM SIGKDD Conference on Knowledge Discovery and Data Mining — Datasets and Benchmarks Track",
+    "year": 2026,
+    "themes": ["multilingual", "integrity"],
+    "featured": true,
+    "url": "https://arxiv.org/abs/2603.00634",
+    "abstract": "The largest multilingual fake news detection benchmark to date — 79 languages, 202K+ samples. Introduces AXL-CoI for adversarial cross-lingual generation and mPURIFY for quality filtering."
+  }
+]
