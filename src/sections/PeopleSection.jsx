@@ -14,7 +14,7 @@ const PersonCard = ({ person, isPI }) => (
       <div className={`${isPI ? 'md:w-1/3' : 'w-full'} aspect-square rounded-xl overflow-hidden bg-slate flex items-center justify-center border border-signal/20`}>
         {person.photo ? (
           <img
-            src={person.photo}
+            src={`${import.meta.env.BASE_URL}${person.photo}`}
             alt={person.name}
             className="w-full h-full object-cover"
             onError={(e) => { e.target.style.display = 'none'; }}
