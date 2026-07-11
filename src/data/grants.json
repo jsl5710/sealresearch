@@ -9,6 +9,18 @@
   ],
   "grants": [
     {
+      "id": "cub-startup-2026",
+      "source": "internal",
+      "program": "CU Boulder — Faculty Start-Up Package",
+      "title": "SEAL Lab Start-Up: 2 PhD Students + Equipment",
+      "role": "PI",
+      "status": "awarded",
+      "date": "2026-08-15",
+      "amount": "$378,500",
+      "url": "",
+      "notes": "Assistant Professor start-up package covering funding for 2 PhD students and lab equipment to launch SEAL."
+    },
+    {
       "id": "cub-seed-2027",
       "source": "internal",
       "program": "CU Boulder Innovative Seed Grant Program",
