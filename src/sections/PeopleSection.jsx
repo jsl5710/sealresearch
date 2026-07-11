@@ -1,7 +1,78 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import people from '../data/people.json';
 import courses from '../data/courses.json';
+
+const fmtPeriod = (start, end) => {
+  const format = (s) => {
+    if (!s) return '';
+    const m = /^(\d{4})-(\d{2})$/.exec(s);
+    if (!m) return s;
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    return `${months[parseInt(m[2],10)-1]} ${m[1]}`;
+  };
+  const s = format(start);
+  const e = end ? format(end) : 'Present';
+  return s && e ? `${s} – ${e}` : s || e;
+};
+
+const AppointmentsBlock = ({ appointments }) => {
+  const [open, setOpen] = useState(false);
+  if (!appointments || appointments.length === 0) return null;
+
+  return (
+    <div className="mb-4">
+      <button
+        onClick={() => setOpen(o => !o)}
+        className="mono text-xs uppercase tracking-widest text-signal hover:text-signal-soft transition-colors flex items-center gap-2"
+        aria-expanded={open}
+      >
+        Appointments &amp; Trajectory
+        <motion.span
+          animate={{ rotate: open ? 90 : 0 }}
+          transition={{ duration: 0.2 }}
+          className="inline-block"
+        >→</motion.span>
+        <span className="text-mist normal-case tracking-normal">({appointments.length})</span>
+      </button>
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.25 }}
+            className="overflow-hidden"
+          >
+            <div className="pt-4 pl-4 border-l border-signal/20 mt-2 space-y-4">
+              {appointments.map((a, i) => (
+                <div key={i} className="text-sm">
+                  <div className="flex flex-wrap items-baseline gap-x-2 mb-1">
+                    <span className="text-paper font-medium">{a.role}</span>
+                    {a.program && <span className="text-signal-soft">· {a.program}</span>}
+                  </div>
+                  <p className="text-mist text-xs mb-1">{a.organization}{a.location ? ` — ${a.location}` : ''}</p>
+                  <p className="mono text-xs text-signal/80 mb-2">{fmtPeriod(a.start, a.end)}</p>
+                  {a.description && <p className="text-mist text-xs leading-relaxed mb-2">{a.description}</p>}
+                  {a.links && a.links.length > 0 && (
+                    <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs mono">
+                      {a.links.map(l => (
+                        <a key={l.url} href={l.url} className="text-signal hover:text-signal-soft transition-colors">
+                          {l.label} →
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
 
 const PersonCard = ({ person, isPI }) => (
   <motion.div
@@ -47,6 +118,7 @@ const PersonCard = ({ person, isPI }) => (
             </ul>
           </div>
         )}
+        <AppointmentsBlock appointments={person.appointments} />
         {person.links && (
           <div className="flex flex-wrap gap-x-4 gap-y-2 text-xs mono">
             {person.links.website && <a href={person.links.website} className="text-signal hover:text-signal-soft transition-colors">website</a>}
@@ -76,7 +148,7 @@ const PeopleSection = () => {
 
         {people.students.length > 0 && (
           <>
-            <h3 className="mono text-signal text-xs uppercase tracking-widest text-center mb-6">Students & Researchers</h3>
+            <h3 className="mono text-signal text-xs uppercase tracking-widest text-center mb-6">Students &amp; Researchers</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
               {people.students.map(s => <PersonCard key={s.name} person={s} />)}
             </div>
