@@ -20,7 +20,7 @@ const LoadingScreen = ({ onComplete }) => {
         className="mb-8"
       >
         <img
-          src={`${import.meta.env.BASE_URL}seal-logo.svg`}
+          src={`${import.meta.env.BASE_URL}seal-logo.png`}
           alt="SEAL logo"
           className="w-28 h-28 object-contain"
         />

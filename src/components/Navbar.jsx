@@ -36,7 +36,7 @@ const Navbar = () => {
           className="flex items-center gap-3 group"
         >
           <img
-            src={`${import.meta.env.BASE_URL}seal-logo.svg`}
+            src={`${import.meta.env.BASE_URL}seal-logo.png`}
             alt="SEAL logo"
             className="h-9 w-9 md:h-10 md:w-10 object-contain transition-transform group-hover:scale-105"
           />
