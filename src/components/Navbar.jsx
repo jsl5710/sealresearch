@@ -9,6 +9,7 @@ const navLinks = [
   { name: 'Publications', href: '#publications' },
   { name: 'Courses', href: '#courses' },
   { name: 'News', href: '#news' },
+  { name: 'Grants', href: '#grants' },
   { name: 'Join Us', href: '#join' },
   { name: 'Contact', href: '#contact' },
 ];

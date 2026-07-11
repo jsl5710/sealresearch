@@ -15,6 +15,7 @@ import PeopleSection from './sections/PeopleSection';
 import PublicationsSection from './sections/PublicationsSection';
 import CoursesSection from './sections/CoursesSection';
 import NewsSection from './sections/NewsSection';
+import GrantsSection from './sections/GrantsSection';
 import JoinUsSection from './sections/JoinUsSection';
 import ContactSection from './sections/ContactSection';
 
@@ -46,6 +47,7 @@ function App() {
                         <PublicationsSection />
                         <CoursesSection />
                         <NewsSection />
+                        <GrantsSection />
                         <JoinUsSection />
                         <ContactSection />
                     </main>

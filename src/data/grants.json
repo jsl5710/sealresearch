@@ -1,0 +1,103 @@
+{
+  "sources": [
+    { "id": "internal",  "label": "CU Boulder (Internal)", "kind": "internal" },
+    { "id": "nsf",       "label": "NSF",                    "kind": "federal" },
+    { "id": "nih",       "label": "NIH",                    "kind": "federal" },
+    { "id": "darpa",     "label": "DARPA",                  "kind": "federal" },
+    { "id": "aca",       "label": "American Cancer Association", "kind": "foundation" },
+    { "id": "industry",  "label": "Industry",               "kind": "industry" }
+  ],
+  "grants": [
+    {
+      "id": "cub-seed-2027",
+      "source": "internal",
+      "program": "CU Boulder Innovative Seed Grant Program",
+      "title": "SEAL Lab Launch — Multilingual AI Safety Testbed",
+      "role": "PI",
+      "status": "targeting",
+      "opens": "2026-10-01",
+      "closes": "2027-01-15",
+      "amount": "$50,000",
+      "url": "",
+      "notes": "Seed funding to build the lab's multilingual evaluation infrastructure and pay initial GRA support."
+    },
+    {
+      "id": "nsf-satc-2027",
+      "source": "nsf",
+      "program": "NSF SaTC (Secure and Trustworthy Cyberspace)",
+      "title": "Dialectal Robustness in Content-Moderation AI",
+      "role": "PI",
+      "status": "targeting",
+      "opens": "Rolling",
+      "closes": "2027-03-01",
+      "amount": "$550,000",
+      "url": "https://new.nsf.gov/funding/opportunities/secure-trustworthy-cyberspace-satc",
+      "notes": "Extends DIA-HARM's dialectal framework to defenses. Program officer contact pending."
+    },
+    {
+      "id": "nsf-fai-2027",
+      "source": "nsf",
+      "program": "NSF Fairness in AI (FAI)",
+      "title": "Community-Led Harm Specification for Multilingual LLMs",
+      "role": "PI",
+      "status": "planning",
+      "opens": "2027-01-01",
+      "closes": "2027-05-15",
+      "amount": "$450,000",
+      "url": "",
+      "notes": "Builds on the ICML 2026 position paper — participatory pipelines for low-resource languages."
+    },
+    {
+      "id": "nih-r21-2027",
+      "source": "nih",
+      "program": "NIH R21 — Exploratory / Developmental",
+      "title": "Detecting Health Misinformation in Caribbean Creole Languages",
+      "role": "PI",
+      "status": "planning",
+      "opens": "Rolling",
+      "closes": "2027-02-16",
+      "amount": "$275,000",
+      "url": "https://grants.nih.gov/grants/funding/r21.htm",
+      "notes": "Cross-listed with NIH Office of Behavioral and Social Sciences Research."
+    },
+    {
+      "id": "darpa-2027",
+      "source": "darpa",
+      "program": "DARPA Information Innovation Office (I2O)",
+      "title": "Self-Modifying AI: Auditing and Governance",
+      "role": "co-PI",
+      "status": "planning",
+      "opens": "TBA",
+      "closes": "TBA",
+      "amount": "TBA",
+      "url": "https://www.darpa.mil/about-us/offices/i2o",
+      "notes": "Aligns with the 'When AI Rewrites Itself' preprint. Watching for a matching BAA."
+    },
+    {
+      "id": "aca-2027",
+      "source": "aca",
+      "program": "American Cancer Association — Research Grant",
+      "title": "Equity in AI-Driven Patient Communication Tools",
+      "role": "PI",
+      "status": "targeting",
+      "opens": "2027-02-01",
+      "closes": "2027-04-01",
+      "amount": "$300,000",
+      "url": "",
+      "notes": "Human-centered AI theme; targets equity in oncology patient-education chatbots across languages."
+    },
+    {
+      "id": "industry-google-2027",
+      "source": "industry",
+      "program": "Google Research Scholar Program",
+      "title": "Adversarial Robustness of Multilingual LLMs",
+      "role": "PI",
+      "status": "targeting",
+      "opens": "2026-09-01",
+      "closes": "2026-11-15",
+      "amount": "$60,000",
+      "url": "https://research.google/programs-and-events/research-scholar-program/",
+      "notes": "Annual junior-faculty award; unrestricted funds."
+    }
+  ]
+}
