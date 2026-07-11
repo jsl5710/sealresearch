@@ -13,6 +13,7 @@ import MissionSection from './sections/MissionSection';
 import ResearchThemes from './sections/ResearchThemes';
 import PeopleSection from './sections/PeopleSection';
 import PublicationsSection from './sections/PublicationsSection';
+import CoursesSection from './sections/CoursesSection';
 import NewsSection from './sections/NewsSection';
 import JoinUsSection from './sections/JoinUsSection';
 import ContactSection from './sections/ContactSection';
@@ -43,6 +44,7 @@ function App() {
                         <ResearchThemes />
                         <PeopleSection />
                         <PublicationsSection />
+                        <CoursesSection />
                         <NewsSection />
                         <JoinUsSection />
                         <ContactSection />

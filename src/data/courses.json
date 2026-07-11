@@ -1,0 +1,22 @@
+[
+  {
+    "id": "fair-ml-fall26",
+    "title": "Fair ML",
+    "code": "",
+    "term": "Fall 2026",
+    "level": "Graduate",
+    "institution": "CU Boulder",
+    "status": "upcoming",
+    "summary": "An introduction to fairness in machine learning: what fairness means (and doesn't), how to measure disparate impact, and how to intervene during data collection, model training, and deployment.",
+    "topics": [
+      "Definitions of fairness (group vs. individual)",
+      "Disparate impact and auditing",
+      "Bias in data and representation",
+      "Fair training and post-processing",
+      "Case studies: language, vision, health, criminal justice",
+      "Socio-technical guardrails and limits of algorithmic fixes"
+    ],
+    "syllabusUrl": "",
+    "canvasUrl": ""
+  }
+]
