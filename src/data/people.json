@@ -26,7 +26,7 @@
   "collaborators": [
     {
       "name": "Dr. Dongwon Lee",
-      "role": "Collaborator",
+      "role": "Advisor & Collaborator",
       "affiliation": "Penn State — PIKE Lab",
       "links": { "website": "https://pike.psu.edu/dongwon/" }
     },
@@ -35,6 +35,48 @@
       "role": "Collaborator",
       "affiliation": "MIT Lincoln Laboratory",
       "links": { "website": "https://adauchendu.github.io/" }
+    },
+    {
+      "name": "Pureheart Ogheneogaga Irikefe",
+      "role": "Collaborator",
+      "affiliation": "Interdisciplinary AI & Social Science",
+      "links": {}
+    },
+    {
+      "name": "Dr. Dominik Macko",
+      "role": "Collaborator",
+      "affiliation": "Kempelen Institute (KInIT), Slovakia",
+      "links": {}
+    },
+    {
+      "name": "Dr. Robert Moro",
+      "role": "Collaborator",
+      "affiliation": "Kempelen Institute (KInIT), Slovakia",
+      "links": {}
+    },
+    {
+      "name": "Dr. Ivan Srba",
+      "role": "Collaborator",
+      "affiliation": "Kempelen Institute (KInIT), Slovakia",
+      "links": {}
+    },
+    {
+      "name": "Ali Al-Lawati",
+      "role": "Frequent Co-Author",
+      "affiliation": "Penn State",
+      "links": {}
+    },
+    {
+      "name": "Dr. Suhang Wang",
+      "role": "Collaborator",
+      "affiliation": "Penn State",
+      "links": {}
+    },
+    {
+      "name": "Dr. Prasenjit Mitra",
+      "role": "Collaborator",
+      "affiliation": "Penn State",
+      "links": {}
     }
   ]
 }
