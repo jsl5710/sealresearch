@@ -9,18 +9,6 @@
   ],
   "grants": [
     {
-      "id": "nsf-lindiv-fellow-2023",
-      "source": "nsf",
-      "program": "NSF LinDiv Fellowship (Penn State)",
-      "title": "Interdisciplinary AI Research — Language Diversity",
-      "role": "Fellow",
-      "status": "awarded",
-      "date": "2023-08-01",
-      "amount": "$9,000",
-      "url": "https://lindiv.la.psu.edu/",
-      "notes": "Awarded to support transdisciplinary research advancing human–AI language interaction for social good."
-    },
-    {
       "id": "cub-seed-2027",
       "source": "internal",
       "program": "CU Boulder Innovative Seed Grant Program",
