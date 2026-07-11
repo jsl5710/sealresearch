@@ -33,12 +33,13 @@ const Navbar = () => {
           href="#"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="flex items-center gap-2 group"
+          className="flex items-center gap-3 group"
         >
-          <span className="relative inline-flex items-center justify-center w-9 h-9 rounded-full border border-signal/40 group-hover:border-signal transition-colors">
-            <span className="absolute inset-0 rounded-full bg-signal/10 group-hover:bg-signal/20 transition-colors" />
-            <span className="relative mono text-signal text-sm font-medium">S</span>
-          </span>
+          <img
+            src={`${import.meta.env.BASE_URL}seal-logo.svg`}
+            alt="SEAL logo"
+            className="h-9 w-9 md:h-10 md:w-10 object-contain transition-transform group-hover:scale-105"
+          />
           <span className="text-xl md:text-2xl font-serif font-semibold tracking-tight text-paper">
             {lab.short}
             <span className="text-signal">.</span>

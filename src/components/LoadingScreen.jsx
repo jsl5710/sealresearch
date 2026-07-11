@@ -15,16 +15,15 @@ const LoadingScreen = ({ onComplete }) => {
     >
       <motion.div
         initial={{ scale: 0.8, opacity: 0 }}
-        animate={{ scale: [0.8, 1.05, 1], opacity: 1 }}
-        transition={{ duration: 1.5, repeat: Infinity, repeatType: "reverse" }}
+        animate={{ scale: [0.9, 1.02, 0.9], opacity: 1 }}
+        transition={{ duration: 2.4, repeat: Infinity }}
         className="mb-8"
       >
-        <svg width="88" height="88" viewBox="0 0 24 24" fill="none" className="text-signal">
-          <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.5" />
-          <path d="M8 12a4 4 0 0 1 8 0" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-          <circle cx="12" cy="12" r="1.8" fill="currentColor" />
-          <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="0.6" strokeDasharray="2 5" opacity="0.5" />
-        </svg>
+        <img
+          src={`${import.meta.env.BASE_URL}seal-logo.svg`}
+          alt="SEAL logo"
+          className="w-28 h-28 object-contain"
+        />
       </motion.div>
 
       <motion.h1
