@@ -8,6 +8,15 @@
     "teachesCourseIds": ["fair-ml-fall26"],
     "appointments": [
       {
+        "role": "Assistant Professor",
+        "program": "Department of Information Science",
+        "organization": "College of Media, Communication and Information, University of Colorado Boulder",
+        "location": "Boulder, CO",
+        "start": "2026-08",
+        "end": null,
+        "links": []
+      },
+      {
         "role": "Senior Researcher",
         "program": "JSALT 2026 Workshop on Uncertainty-Aware Health Coaching",
         "organization": "Johns Hopkins University — Center for Language and Speech Processing",
