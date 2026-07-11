@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import people from '../data/people.json';
+import courses from '../data/courses.json';
 
 const PersonCard = ({ person, isPI }) => (
   <motion.div
@@ -29,6 +30,23 @@ const PersonCard = ({ person, isPI }) => (
         {person.title && <p className="text-sm text-mist mb-3">{person.title}</p>}
         {person.affiliation && <p className="text-sm text-mist mb-3">{person.affiliation}</p>}
         <p className="text-mist leading-relaxed text-sm mb-4">{person.bio}</p>
+        {person.teachesCourseIds && person.teachesCourseIds.length > 0 && (
+          <div className="mb-4">
+            <p className="mono text-xs uppercase tracking-widest text-signal mb-2">Teaches</p>
+            <ul className="text-sm text-paper/85 space-y-1">
+              {person.teachesCourseIds
+                .map(id => courses.find(c => c.id === id))
+                .filter(Boolean)
+                .map(c => (
+                  <li key={c.id}>
+                    <a href="#courses" className="hover:text-signal transition-colors">
+                      {c.title} <span className="text-mist">— {c.term}</span>
+                    </a>
+                  </li>
+                ))}
+            </ul>
+          </div>
+        )}
         {person.links && (
           <div className="flex flex-wrap gap-x-4 gap-y-2 text-xs mono">
             {person.links.website && <a href={person.links.website} className="text-signal hover:text-signal-soft transition-colors">website</a>}

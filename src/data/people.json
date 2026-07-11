@@ -5,6 +5,7 @@
     "title": "Assistant Professor, CU Boulder",
     "photo": "people/jason.jpg",
     "bio": "Dr. Jason Lucas leads the Secure and Ethical AI Lab. His research spans multilingual NLP across 79 languages, information integrity, and socio-technical AI safety — with published work in ACL, EMNLP, NAACL, KDD, and ICML.",
+    "teachesCourseIds": ["fair-ml-fall26"],
     "links": {
       "website": "https://www.jasonslucas.com",
       "scholar": "https://scholar.google.com/citations?hl=en&user=XU1WN6YAAAAJ",
