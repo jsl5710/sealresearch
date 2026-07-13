@@ -43,7 +43,7 @@ const ResearchThemes = () => {
                   ? 'bg-signal text-ink font-medium'
                   : 'border border-signal/30 text-signal-soft hover:bg-signal/10'}`}
             >
-              {t.title.split(' and ')[0].split(':')[0]}
+              {t.short || t.title.split(' and ')[0].split(':')[0]}
             </button>
           ))}
         </div>

@@ -11,7 +11,7 @@ const TYPE_ORDER = [
   { id: 'thesis',     label: 'Dissertation & Theses' },
 ];
 
-const themeShort = (t) => t.title.split(' and ')[0].split(':')[0];
+const themeShort = (t) => t.short || t.title.split(' and ')[0].split(':')[0];
 
 const PublicationItem = ({ p, i }) => (
   <motion.article
