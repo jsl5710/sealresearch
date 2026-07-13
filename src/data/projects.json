@@ -1,0 +1,21 @@
+{
+  "_schema": {
+    "note": "Delete this _schema key when the first real project lands. It's here as documentation for the shape a project entry should take.",
+    "fields": {
+      "id": "kebab-case stable identifier",
+      "title": "Human-readable project name",
+      "status": "one of: planning | active | wrapping-up | archived",
+      "direction": "1–3 sentence research direction / hypothesis",
+      "summary": "Longer paragraph describing scope, methods, expected contribution",
+      "start": "YYYY-MM or YYYY-MM-DD",
+      "end": "YYYY-MM or null (ongoing)",
+      "themeIds": "array of theme IDs from themes.json (e.g. ['multilingual','integrity'])",
+      "grantIds": "array of grant IDs from grants.json that fund this project",
+      "leadIds": "array of person identifiers (pi | student:name-slug)",
+      "outputIds": "array of publication IDs from publications.json produced by this project",
+      "collaboratorNames": "free-text list of external collaborators for this specific project",
+      "url": "optional project page / GitHub URL"
+    }
+  },
+  "projects": []
+}

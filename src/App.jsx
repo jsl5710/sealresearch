@@ -11,6 +11,7 @@ import Footer from './components/Footer';
 import HeroSection from './sections/HeroSection';
 import MissionSection from './sections/MissionSection';
 import ResearchThemes from './sections/ResearchThemes';
+import ProjectsSection from './sections/ProjectsSection';
 import PeopleSection from './sections/PeopleSection';
 import PublicationsSection from './sections/PublicationsSection';
 import CoursesSection from './sections/CoursesSection';
@@ -43,6 +44,7 @@ function App() {
                         <HeroSection />
                         <MissionSection />
                         <ResearchThemes />
+                        <ProjectsSection />
                         <PeopleSection />
                         <PublicationsSection />
                         <CoursesSection />

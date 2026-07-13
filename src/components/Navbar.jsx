@@ -5,6 +5,7 @@ import lab from '../data/lab.json';
 const navLinks = [
   { name: 'Mission', href: '#mission' },
   { name: 'Research', href: '#research' },
+  { name: 'Projects', href: '#projects' },
   { name: 'People', href: '#people' },
   { name: 'Publications', href: '#publications' },
   { name: 'Courses', href: '#courses' },
