@@ -208,7 +208,7 @@
   },
   {
     "id": "caribbean-constraint22",
-    "type": "conference",
+    "type": "workshop",
     "title": "Detecting False Claims in Low-Resource Regions: A Case Study of Caribbean Islands",
     "authors": ["Jason Lucas", "Limeng Cui", "Thai Le", "Dongwon Lee"],
     "venue": "CONSTRAINT @ ACL 2022",

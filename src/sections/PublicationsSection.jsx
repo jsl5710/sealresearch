@@ -6,7 +6,8 @@ import themes from '../data/themes.json';
 const TYPE_ORDER = [
   { id: 'journal',    label: 'Journal Articles' },
   { id: 'chapter',    label: 'Book Chapters' },
-  { id: 'conference', label: 'Conference & Workshop' },
+  { id: 'conference', label: 'Conference Papers' },
+  { id: 'workshop',   label: 'Workshop Papers' },
   { id: 'preprint',   label: 'Under Review / In Preparation' },
   { id: 'thesis',     label: 'Dissertation & Theses' },
 ];
