@@ -17,6 +17,7 @@ import PublicationsSection from './sections/PublicationsSection';
 import CoursesSection from './sections/CoursesSection';
 import NewsSection from './sections/NewsSection';
 import GrantsSection from './sections/GrantsSection';
+import ConferencesSection from './sections/ConferencesSection';
 import JoinUsSection from './sections/JoinUsSection';
 import HandbookSection from './sections/HandbookSection';
 import ContactSection from './sections/ContactSection';
@@ -51,6 +52,7 @@ function App() {
                         <CoursesSection />
                         <NewsSection />
                         <GrantsSection />
+                        <ConferencesSection />
                         <JoinUsSection />
                         <HandbookSection />
                         <ContactSection />
