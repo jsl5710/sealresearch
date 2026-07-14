@@ -1,4 +1,9 @@
 {
+  "source": {
+    "name": "AI Deadlines (mlciv.com)",
+    "url": "https://mlciv.com/ai-deadlines/?sub=ML,CV,CG,NLP,RO,SP,DM,AP,KR,HCI,EDU",
+    "note": "Deadlines are cross-checked against mlciv.com/ai-deadlines. Unconfirmed deadlines are marked TBA rather than guessed."
+  },
   "fields": [
     { "id": "nlp",     "label": "NLP" },
     { "id": "ml",      "label": "ML" },
@@ -54,36 +59,87 @@
       "name": "EMNLP 2026",
       "long": "Conference on Empirical Methods in Natural Language Processing",
       "field": "nlp",
-      "location": "Suzhou, China",
-      "start": "2026-11-08",
-      "end": "2026-11-12",
+      "location": "TBA",
+      "start": "2026-10-24",
+      "end": "2026-10-29",
       "status": "targeting",
-      "note": "Two preprints being prepped for submission (Lost in Dialect; Spoken Hallucinations).",
+      "note": "Two preprints being prepped for submission (Lost in Dialect; Spoken Hallucinations). Submitted via ACL Rolling Review.",
       "site": "https://2026.emnlp.org/",
       "cfp": "",
-      "deadlines": [
-        { "label": "Abstract",       "date": "2026-06-15" },
-        { "label": "Paper",          "date": "2026-06-22" },
-        { "label": "Notification",   "date": "2026-08-24" },
-        { "label": "Camera-ready",   "date": "2026-10-05" }
-      ]
+      "deadlines": []
     },
     {
       "id": "neurips-2026",
       "name": "NeurIPS 2026",
       "long": "Conference on Neural Information Processing Systems",
       "field": "ml",
-      "location": "San Diego, CA, USA",
-      "start": "2026-12-07",
-      "end": "2026-12-13",
+      "location": "TBA",
+      "start": null,
+      "end": null,
       "status": "targeting",
-      "note": "Watching Datasets & Benchmarks track for a BLUFF-style extension.",
-      "site": "https://neurips.cc/Conferences/2026",
+      "note": "Watching Datasets & Benchmarks track for a BLUFF-style extension. Dates and deadlines TBA.",
+      "site": "https://neurips.cc/",
+      "cfp": "",
+      "deadlines": []
+    },
+    {
+      "id": "aaai-2027",
+      "name": "AAAI 2027",
+      "long": "AAAI Conference on Artificial Intelligence",
+      "field": "ml",
+      "location": "Montréal, Canada",
+      "start": "2027-02-16",
+      "end": "2027-02-23",
+      "status": "targeting",
+      "note": "Broad AI venue; possible home for multilingual safety evaluation.",
+      "site": "https://aaai.org/conference/aaai/aaai-27/",
       "cfp": "",
       "deadlines": [
-        { "label": "Abstract",     "date": "2026-05-15" },
-        { "label": "Paper",        "date": "2026-05-22" },
-        { "label": "Notification", "date": "2026-09-25" }
+        { "label": "Notification", "date": "2026-11-30" }
+      ]
+    },
+    {
+      "id": "eacl-2027",
+      "name": "EACL 2027",
+      "long": "20th Conference of the European Chapter of the Association for Computational Linguistics",
+      "field": "nlp",
+      "location": "Athens, Greece",
+      "start": "2027-03-09",
+      "end": "2027-03-14",
+      "status": "targeting",
+      "note": "Submission via ACL Rolling Review; deadlines TBA.",
+      "site": "https://2027.eacl.org/",
+      "cfp": "https://2027.eacl.org/calls/papers/",
+      "deadlines": []
+    },
+    {
+      "id": "iclr-2027",
+      "name": "ICLR 2027",
+      "long": "International Conference on Learning Representations",
+      "field": "ml",
+      "location": "TBA",
+      "start": "2027-04-24",
+      "end": "2027-04-28",
+      "status": "targeting",
+      "note": "Considering an evaluation-methods submission on multilingual reward-model failure modes. Deadlines TBA.",
+      "site": "https://iclr.cc/Conferences/2027/CallForPapers",
+      "cfp": "https://iclr.cc/Conferences/2027/CallForPapers",
+      "deadlines": []
+    },
+    {
+      "id": "coling-2027",
+      "name": "COLING 2027",
+      "long": "32nd International Conference on Computational Linguistics",
+      "field": "nlp",
+      "location": "Macau, China",
+      "start": "2027-05-09",
+      "end": "2027-05-14",
+      "status": "targeting",
+      "note": "Submission via ACL Rolling Review.",
+      "site": "https://2027.coling-iccl.org/",
+      "cfp": "",
+      "deadlines": [
+        { "label": "Paper (via ARR, predicted)", "date": "2026-10-12" }
       ]
     },
     {
@@ -92,33 +148,13 @@
       "long": "ACM Conference on Fairness, Accountability, and Transparency",
       "field": "ethics",
       "location": "TBA",
-      "start": "2027-06-01",
-      "end": "2027-06-04",
+      "start": null,
+      "end": null,
       "status": "targeting",
-      "note": "Natural home for the dialect-fairness and community-led harm-spec work.",
+      "note": "Natural home for the dialect-fairness and community-led harm-spec work. Dates and deadlines TBA.",
       "site": "https://facctconference.org/",
       "cfp": "",
-      "deadlines": [
-        { "label": "Paper",        "date": "2027-01-30" },
-        { "label": "Notification", "date": "2027-03-10" }
-      ]
-    },
-    {
-      "id": "iclr-2027",
-      "name": "ICLR 2027",
-      "long": "International Conference on Learning Representations",
-      "field": "ml",
-      "location": "Vienna, Austria",
-      "start": "2027-04-26",
-      "end": "2027-04-30",
-      "status": "targeting",
-      "note": "Considering an evaluation-methods submission on multilingual reward-model failure modes.",
-      "site": "https://iclr.cc/",
-      "cfp": "",
-      "deadlines": [
-        { "label": "Paper",        "date": "2026-09-25" },
-        { "label": "Notification", "date": "2027-01-20" }
-      ]
+      "deadlines": []
     },
     {
       "id": "naacl-2027",
@@ -126,16 +162,13 @@
       "long": "Conference of the North American Chapter of the ACL",
       "field": "nlp",
       "location": "TBA",
-      "start": "2027-06-06",
-      "end": "2027-06-12",
+      "start": null,
+      "end": null,
       "status": "targeting",
-      "note": "Target venue for a DIA-HARM-style extension to speech.",
-      "site": "https://2027.naacl.org/",
+      "note": "Target venue for a DIA-HARM-style extension to speech. Dates and deadlines TBA.",
+      "site": "https://naacl.org/",
       "cfp": "",
-      "deadlines": [
-        { "label": "Paper",        "date": "2026-12-15" },
-        { "label": "Notification", "date": "2027-03-01" }
-      ]
+      "deadlines": []
     },
     {
       "id": "acl-2027",
@@ -143,16 +176,13 @@
       "long": "65th Annual Meeting of the Association for Computational Linguistics",
       "field": "nlp",
       "location": "TBA",
-      "start": "2027-07-20",
-      "end": "2027-07-25",
+      "start": "2027-07-01",
+      "end": "2027-07-31",
       "status": "targeting",
-      "note": "Primary submission target for full lab papers in 2027.",
+      "note": "Primary submission target for full lab papers in 2027. Submission via ACL Rolling Review.",
       "site": "https://2027.aclweb.org/",
       "cfp": "",
-      "deadlines": [
-        { "label": "Paper (ARR)",  "date": "2027-02-15" },
-        { "label": "Commitment",   "date": "2027-05-01" }
-      ]
+      "deadlines": []
     }
   ]
 }

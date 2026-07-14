@@ -141,13 +141,22 @@ const ConferencesSection = () => {
           to the day.
         </p>
 
-        {/* Phase-3 tracker callout */}
+        {/* Source + Phase-3 tracker callout */}
         <div className="glass rounded-2xl p-5 md:p-6 mb-12 max-w-3xl mx-auto text-sm">
+          <p className="mono text-xs uppercase tracking-widest text-signal mb-2">Canonical source</p>
+          <p className="text-mist leading-relaxed mb-4">
+            Deadlines are cross-checked against{' '}
+            <a href={data.source.url} className="text-signal hover:text-signal-soft underline transition-colors">
+              {data.source.name}
+            </a>
+            . Where a CFP isn't posted yet, we mark deadlines <span className="mono text-signal-soft">TBA</span>{' '}
+            rather than guess.
+          </p>
           <p className="mono text-xs uppercase tracking-widest text-signal mb-2">Coming soon — automated tracker</p>
           <p className="text-mist leading-relaxed">
-            Hand-maintained today. Same Phase-3 backbone as Grants: a scheduled agent will watch AI Deadlines feeds,
-            ACL Anthology, and conference sites, surface deadline changes, and auto-PR updates to this file — so the
-            countdowns never go stale.
+            Same Phase-3 backbone as Grants: a scheduled agent will poll the mlciv.com feed and conference sites,
+            surface deadline changes, and auto-PR updates to <span className="mono text-signal-soft">conferences.json</span> —
+            so the countdowns never go stale.
           </p>
         </div>
 
