@@ -87,6 +87,61 @@
   }
 }
 
+/* Handbook typography — rendered from markdown via HandbookSection */
+.hb-content { @apply text-paper/90; }
+.hb-content .hb-h2 { @apply font-serif text-3xl md:text-4xl text-paper mt-12 mb-4; }
+.hb-content .hb-h3 { @apply font-serif text-2xl text-paper mt-10 mb-3 pb-2 border-b border-signal/10; }
+.hb-content .hb-h4 { @apply font-serif text-lg text-paper mt-6 mb-2; }
+.hb-content .hb-p  { @apply text-mist leading-relaxed my-4; }
+.hb-content .hb-ul { @apply list-disc list-outside pl-6 my-4 space-y-2; }
+.hb-content .hb-li { @apply text-mist leading-relaxed; }
+.hb-content .hb-hr { @apply border-signal/10 my-10; }
+.hb-content .hb-strong { @apply text-paper font-semibold; }
+.hb-content .hb-em { @apply italic; }
+.hb-content .hb-link {
+  color: var(--color-signal);
+  text-decoration: underline;
+  text-decoration-color: rgba(34, 211, 238, 0.4);
+  text-underline-offset: 3px;
+  transition: color 0.2s;
+}
+.hb-content .hb-link:hover { color: var(--color-signal-soft); }
+.hb-content .hb-code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background: rgba(34, 211, 238, 0.08);
+  border: 1px solid rgba(34, 211, 238, 0.15);
+  padding: 0.1em 0.4em;
+  border-radius: 0.25rem;
+  color: var(--color-signal-soft);
+}
+
+/* Inline handbook decision/scope tags — used both in the handbook and in the intro copy */
+.hb-tag {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  padding: 0.1rem 0.5rem;
+  border-radius: 9999px;
+  background: rgba(34, 211, 238, 0.1);
+  border: 1px solid rgba(34, 211, 238, 0.2);
+  color: var(--color-signal-soft);
+  vertical-align: baseline;
+  line-height: 1.4;
+}
+.hb-tag-decide {
+  background: rgba(245, 193, 71, 0.12);
+  border-color: rgba(245, 193, 71, 0.35);
+  color: var(--color-ember);
+}
+.hb-tag-seal {
+  background: rgba(34, 211, 238, 0.12);
+  border-color: rgba(34, 211, 238, 0.35);
+  color: var(--color-signal);
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;

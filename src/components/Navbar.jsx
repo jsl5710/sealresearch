@@ -12,6 +12,7 @@ const navLinks = [
   { name: 'News', href: '#news' },
   { name: 'Grants', href: '#grants' },
   { name: 'Join Us', href: '#join' },
+  { name: 'Handbook', href: '#handbook' },
   { name: 'Contact', href: '#contact' },
 ];
 
