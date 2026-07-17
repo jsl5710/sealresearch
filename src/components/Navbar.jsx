@@ -1,39 +1,39 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import lab from '../data/lab.json';
 
-const navLinks = [
-  { name: 'Mission', href: '#mission' },
-  { name: 'Research', href: '#research' },
-  { name: 'Projects', href: '#projects' },
-  { name: 'People', href: '#people' },
+const primary = [
+  { name: 'Research',     href: '#research' },
+  { name: 'People',       href: '#people' },
   { name: 'Publications', href: '#publications' },
-  { name: 'Courses', href: '#courses' },
-  { name: 'News', href: '#news' },
-  { name: 'Grants', href: '#grants' },
+  { name: 'Join Us',      href: '#join' },
+];
+
+const more = [
+  { name: 'Mission',     href: '#mission' },
+  { name: 'Projects',    href: '#projects' },
+  { name: 'Courses',     href: '#courses' },
+  { name: 'News',        href: '#news' },
+  { name: 'Grants',      href: '#grants' },
   { name: 'Conferences', href: '#conferences' },
-  { name: 'Join Us', href: '#join' },
-  { name: 'Handbook', href: '#handbook' },
-  { name: 'Contact', href: '#contact' },
+  { name: 'Handbook',    href: '#handbook' },
 ];
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [moreOpen, setMoreOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setIsScrolled(window.scrollY > 40);
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   return (
-    <nav
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 py-4 px-6 md:px-12
-        ${isScrolled ? 'glass py-3 shadow-xl shadow-signal/5' : 'bg-transparent'}
-      `}
-    >
-      <div className="max-w-7xl mx-auto flex justify-between items-center">
+    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 px-6 md:px-12
+      ${isScrolled ? 'glass py-3 shadow-xl shadow-signal/5' : 'bg-transparent py-4'}`}>
+      <div className="max-w-7xl mx-auto flex items-center justify-between">
         <motion.a
           href="#"
           initial={{ opacity: 0, x: -20 }}
@@ -52,52 +52,85 @@ const Navbar = () => {
         </motion.a>
 
         {/* Desktop */}
-        <div className="hidden md:flex items-center space-x-7">
-          {navLinks.map((link, i) => (
+        <div className="hidden md:flex items-center gap-1">
+          {primary.map((l, i) => (
             <motion.a
-              key={link.name}
-              href={link.href}
-              initial={{ opacity: 0, y: -10 }}
+              key={l.name}
+              href={l.href}
+              initial={{ opacity: 0, y: -6 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.05 * i }}
-              className="font-medium text-sm text-paper/80 hover:text-signal transition-colors"
+              className="px-4 py-2 rounded-full text-sm font-medium text-paper/80 hover:text-signal hover:bg-signal/5 transition-colors"
             >
-              {link.name}
+              {l.name}
             </motion.a>
           ))}
+
+          <div className="relative">
+            <button
+              onClick={() => setMoreOpen(o => !o)}
+              onBlur={() => setTimeout(() => setMoreOpen(false), 180)}
+              className="px-4 py-2 rounded-full text-sm font-medium text-paper/80 hover:text-signal hover:bg-signal/5 transition-colors flex items-center gap-1"
+              aria-expanded={moreOpen}
+            >
+              More
+              <motion.span animate={{ rotate: moreOpen ? 180 : 0 }} className="inline-block text-xs">▾</motion.span>
+            </button>
+            <AnimatePresence>
+              {moreOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -6 }}
+                  className="absolute right-0 top-full mt-2 min-w-[180px] glass-strong rounded-xl p-2 shadow-xl"
+                >
+                  {more.map(l => (
+                    <a
+                      key={l.name}
+                      href={l.href}
+                      className="block px-4 py-2 rounded-lg text-sm text-paper/85 hover:bg-signal/10 hover:text-signal transition-colors"
+                    >
+                      {l.name}
+                    </a>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          <a href="#contact" className="ml-3 btn-primary text-sm py-2">
+            Contact
+          </a>
         </div>
 
         {/* Mobile toggle */}
         <button
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          onClick={() => setMobileOpen(o => !o)}
           className="md:hidden text-signal focus:outline-none"
           aria-label="Toggle menu"
         >
           <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            {isMenuOpen ? (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            ) : (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
-            )}
+            {mobileOpen
+              ? <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              : <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />}
           </svg>
         </button>
       </div>
 
-      {/* Mobile menu */}
       <motion.div
         initial={false}
-        animate={isMenuOpen ? { height: 'auto', opacity: 1 } : { height: 0, opacity: 0 }}
+        animate={mobileOpen ? { height: 'auto', opacity: 1 } : { height: 0, opacity: 0 }}
         className="md:hidden overflow-hidden glass rounded-b-2xl mt-4"
       >
-        <div className="flex flex-col p-6 space-y-3">
-          {navLinks.map((link) => (
+        <div className="flex flex-col p-6 space-y-2">
+          {[...primary, ...more, { name: 'Contact', href: '#contact' }].map(l => (
             <a
-              key={link.name}
-              href={link.href}
-              onClick={() => setIsMenuOpen(false)}
-              className="text-lg font-medium text-paper hover:text-signal"
+              key={l.name}
+              href={l.href}
+              onClick={() => setMobileOpen(false)}
+              className="text-base font-medium text-paper hover:text-signal py-1"
             >
-              {link.name}
+              {l.name}
             </a>
           ))}
         </div>

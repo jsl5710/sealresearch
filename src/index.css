@@ -1,21 +1,78 @@
 @import "tailwindcss";
 
-@theme {
-  /* SEAL Palette — trust, signal, humanity */
-  --color-ink: #0B1929;         /* deep midnight base */
-  --color-slate: #1F2937;       /* elevated surface / glass tint */
-  --color-signal: #22D3EE;      /* electric cyan — clarity, safety */
-  --color-signal-soft: #67E8F9; /* lighter signal for hover / accents */
-  --color-ember: #F5C147;       /* warm gold — humanity, equity */
-  --color-paper: #F8F5F0;       /* warm off-white for reversed sections */
-  --color-mist: #94A3B8;        /* muted body text on dark */
+/*
+ * Three-theme system.
+ * Semantic token names stay the same (ink, slate, paper, signal, ember, mist)
+ * so no component needs to change; the values flip per data-theme attribute.
+ *
+ * ink    = base background surface
+ * slate  = elevated card / glass surface
+ * paper  = primary readable text on ink
+ * mist   = secondary / muted text
+ * signal = primary accent (links, chips, focus)
+ * signal-soft = lighter accent (hover, secondary)
+ * ember  = warm secondary accent (used for equity/humanity moments)
+ */
 
-  /* Typography */
+@theme {
+  /* Default = Dark Cinematic (original SEAL) */
+  --color-ink: #0B1929;
+  --color-slate: #1F2937;
+  --color-paper: #F8F5F0;
+  --color-mist: #94A3B8;
+  --color-signal: #22D3EE;
+  --color-signal-soft: #67E8F9;
+  --color-ember: #F5C147;
+
   --font-serif: "Fraunces", "Iowan Old Style", Georgia, serif;
   --font-sans: "Inter", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", "Fira Code", monospace;
+  --font-heading: var(--font-serif);
+}
 
-  /* Motion */
+/*
+ * Theme overrides. The default (:root / no data-theme) is dark-cinematic
+ * because that's what the site's shipped as. When JS sets data-theme, the
+ * cascade below takes over.
+ */
+
+[data-theme="dark"] {
+  --color-ink: #0B1929;
+  --color-slate: #1F2937;
+  --color-paper: #F8F5F0;
+  --color-mist: #94A3B8;
+  --color-signal: #22D3EE;
+  --color-signal-soft: #67E8F9;
+  --color-ember: #F5C147;
+  --font-heading: var(--font-serif);
+}
+
+[data-theme="light"] {
+  /* Light Editorial (PAIR-inspired) */
+  --color-ink: #FBFAF7;
+  --color-slate: #FFFFFF;
+  --color-paper: #1A1A1A;
+  --color-mist: #5F6368;
+  --color-signal: #0F62FE;
+  --color-signal-soft: #4C8BFE;
+  --color-ember: #F5A623;
+  --font-heading: var(--font-serif);
+}
+
+[data-theme="pro"] {
+  /* Professional & Simple — institutional academic feel */
+  --color-ink: #FFFFFF;
+  --color-slate: #F7F7F8;
+  --color-paper: #202124;
+  --color-mist: #6B7280;
+  --color-signal: #1F5AA1;
+  --color-signal-soft: #2D6DBD;
+  --color-ember: #1F5AA1;
+  --font-heading: var(--font-sans);
+}
+
+/* Motion tokens (dark only — hidden in other themes by React conditional) */
+@theme {
   --animate-drift: drift 12s ease-in-out infinite;
   --animate-pulse-signal: pulse-signal 2.5s ease-in-out infinite;
 
@@ -23,7 +80,6 @@
     0%, 100% { transform: translate(0, 0); }
     50% { transform: translate(20px, -30px); }
   }
-
   @keyframes pulse-signal {
     0%, 100% { filter: drop-shadow(0 0 6px rgba(34, 211, 238, 0.4)); }
     50% { filter: drop-shadow(0 0 20px rgba(34, 211, 238, 0.9)); }
@@ -31,20 +87,19 @@
 }
 
 @layer base {
-  html {
-    scroll-behavior: smooth;
-  }
+  html { scroll-behavior: smooth; }
+  html { transition: background-color 0.5s ease, color 0.5s ease; }
 
   body {
     @apply font-sans bg-ink text-paper transition-colors duration-500 selection:bg-signal/30;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-serif;
+    font-family: var(--font-heading);
   }
 
-  /* Mono utility for venues, code refs, keywords — plain CSS so @apply-able classes above can't reference it */
   .mono {
     font-family: var(--font-mono);
     color: var(--color-signal-soft);
@@ -52,19 +107,30 @@
   }
 }
 
+/*
+ * .glass — semantic surface that adapts per theme:
+ *   Dark: blurred slate with cyan hairline
+ *   Light: white card with hairline border, no blur
+ *   Pro: pale grey surface, minimal border, no blur
+ */
 @layer components {
   .glass {
-    @apply backdrop-blur-md bg-slate/40 border border-signal/10;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: var(--glass-blur, none);
+    -webkit-backdrop-filter: var(--glass-blur, none);
   }
-
   .glass-strong {
-    @apply backdrop-blur-lg bg-slate/60 border border-signal/20;
+    background: var(--glass-strong-bg);
+    border: 1px solid var(--glass-strong-border);
+    backdrop-filter: var(--glass-strong-blur, none);
+    -webkit-backdrop-filter: var(--glass-strong-blur, none);
   }
 
   .btn-primary {
     @apply relative overflow-hidden px-8 py-3 bg-signal text-ink font-medium rounded-full
            hover:bg-signal-soft transition-all duration-300 transform hover:scale-105 active:scale-95
-           shadow-lg hover:shadow-signal/40;
+           shadow-lg;
   }
 
   .btn-ghost {
@@ -74,7 +140,8 @@
 
   .chip {
     @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono
-           bg-signal/10 border border-signal/20 text-signal-soft;
+           bg-signal/10 border border-signal/20;
+    color: var(--color-signal-soft);
   }
 
   .chip-ember {
@@ -87,70 +154,80 @@
   }
 }
 
-/* Handbook typography — rendered from markdown via HandbookSection */
-.hb-content { @apply text-paper/90; }
-.hb-content .hb-h2 { @apply font-serif text-3xl md:text-4xl text-paper mt-12 mb-4; }
-.hb-content .hb-h3 { @apply font-serif text-2xl text-paper mt-10 mb-3 pb-2 border-b border-signal/10; }
-.hb-content .hb-h4 { @apply font-serif text-lg text-paper mt-6 mb-2; }
-.hb-content .hb-p  { @apply text-mist leading-relaxed my-4; }
-.hb-content .hb-ul { @apply list-disc list-outside pl-6 my-4 space-y-2; }
-.hb-content .hb-li { @apply text-mist leading-relaxed; }
-.hb-content .hb-hr { @apply border-signal/10 my-10; }
-.hb-content .hb-strong { @apply text-paper font-semibold; }
-.hb-content .hb-em { @apply italic; }
-.hb-content .hb-link {
-  color: var(--color-signal);
-  text-decoration: underline;
-  text-decoration-color: rgba(34, 211, 238, 0.4);
-  text-underline-offset: 3px;
-  transition: color 0.2s;
+/* Per-theme glass values */
+:root, [data-theme="dark"] {
+  --glass-bg: rgba(31, 41, 55, 0.4);
+  --glass-border: rgba(34, 211, 238, 0.15);
+  --glass-blur: blur(12px);
+  --glass-strong-bg: rgba(31, 41, 55, 0.6);
+  --glass-strong-border: rgba(34, 211, 238, 0.25);
+  --glass-strong-blur: blur(16px);
 }
+[data-theme="light"] {
+  --glass-bg: #FFFFFF;
+  --glass-border: #EFEDE8;
+  --glass-blur: none;
+  --glass-strong-bg: #FFFFFF;
+  --glass-strong-border: #E5E4DF;
+  --glass-strong-blur: none;
+}
+[data-theme="pro"] {
+  --glass-bg: #FFFFFF;
+  --glass-border: #E5E7EB;
+  --glass-blur: none;
+  --glass-strong-bg: #F7F7F8;
+  --glass-strong-border: #E5E7EB;
+  --glass-strong-blur: none;
+}
+
+/* Handbook typography — inherits from theme tokens */
+.hb-content { color: var(--color-paper); opacity: 0.9; }
+.hb-content .hb-h2 { font-family: var(--font-heading); font-size: 2rem; margin: 3rem 0 1rem; font-weight: 600; color: var(--color-paper); }
+.hb-content .hb-h3 { font-family: var(--font-heading); font-size: 1.5rem; margin: 2.5rem 0 0.75rem; font-weight: 500; padding-bottom: 0.5rem; border-bottom: 1px solid var(--glass-border); color: var(--color-paper); }
+.hb-content .hb-h4 { font-family: var(--font-heading); font-size: 1.15rem; margin: 1.5rem 0 0.5rem; font-weight: 500; color: var(--color-paper); }
+.hb-content .hb-p  { color: var(--color-mist); line-height: 1.75; margin: 1rem 0; }
+.hb-content .hb-ul { list-style: disc; padding-left: 1.5rem; margin: 1rem 0; }
+.hb-content .hb-li { color: var(--color-mist); line-height: 1.75; margin: 0.5rem 0; }
+.hb-content .hb-hr { border: 0; border-top: 1px solid var(--glass-border); margin: 2.5rem 0; }
+.hb-content .hb-strong { color: var(--color-paper); font-weight: 600; }
+.hb-content .hb-em { font-style: italic; }
+.hb-content .hb-link { color: var(--color-signal); text-decoration: underline; text-decoration-color: color-mix(in oklab, var(--color-signal) 40%, transparent); text-underline-offset: 3px; transition: color 0.2s; }
 .hb-content .hb-link:hover { color: var(--color-signal-soft); }
 .hb-content .hb-code {
   font-family: var(--font-mono);
   font-size: 0.85em;
-  background: rgba(34, 211, 238, 0.08);
-  border: 1px solid rgba(34, 211, 238, 0.15);
+  background: color-mix(in oklab, var(--color-signal) 8%, transparent);
+  border: 1px solid color-mix(in oklab, var(--color-signal) 15%, transparent);
   padding: 0.1em 0.4em;
   border-radius: 0.25rem;
   color: var(--color-signal-soft);
 }
 
-/* Inline handbook decision/scope tags — used both in the handbook and in the intro copy */
 .hb-tag {
-  display: inline-flex;
-  align-items: center;
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.05em;
-  padding: 0.1rem 0.5rem;
-  border-radius: 9999px;
-  background: rgba(34, 211, 238, 0.1);
-  border: 1px solid rgba(34, 211, 238, 0.2);
+  display: inline-flex; align-items: center;
+  font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.05em;
+  padding: 0.1rem 0.5rem; border-radius: 9999px;
+  background: color-mix(in oklab, var(--color-signal) 10%, transparent);
+  border: 1px solid color-mix(in oklab, var(--color-signal) 20%, transparent);
   color: var(--color-signal-soft);
-  vertical-align: baseline;
-  line-height: 1.4;
+  vertical-align: baseline; line-height: 1.4;
 }
 .hb-tag-decide {
-  background: rgba(245, 193, 71, 0.12);
-  border-color: rgba(245, 193, 71, 0.35);
+  background: color-mix(in oklab, var(--color-ember) 12%, transparent);
+  border-color: color-mix(in oklab, var(--color-ember) 35%, transparent);
   color: var(--color-ember);
 }
 .hb-tag-seal {
-  background: rgba(34, 211, 238, 0.12);
-  border-color: rgba(34, 211, 238, 0.35);
+  background: color-mix(in oklab, var(--color-signal) 12%, transparent);
+  border-color: color-mix(in oklab, var(--color-signal) 35%, transparent);
   color: var(--color-signal);
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  @apply bg-ink;
-}
-
+/* Scrollbar — subtle in all themes */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--color-ink); }
 ::-webkit-scrollbar-thumb {
-  @apply bg-signal/40 rounded-full hover:bg-signal;
+  background: color-mix(in oklab, var(--color-signal) 40%, transparent);
+  border-radius: 9999px;
 }
+::-webkit-scrollbar-thumb:hover { background: var(--color-signal); }

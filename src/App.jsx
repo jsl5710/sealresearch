@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+import { ThemeProvider, useTheme } from './theme/ThemeContext';
+import ThemeSwitcher, { AdminKeystrokeListener } from './components/ThemeSwitcher';
+
 import LoadingScreen from './components/LoadingScreen';
 import Navbar from './components/Navbar';
 import ScrollProgress from './components/ScrollProgress';
@@ -22,47 +25,72 @@ import JoinUsSection from './sections/JoinUsSection';
 import HandbookSection from './sections/HandbookSection';
 import ContactSection from './sections/ContactSection';
 
+/**
+ * Cursor + drifting-node particles are Dark Cinematic signatures.
+ * They feel out of place in the light editorial and professional themes,
+ * so we suppress them there.
+ */
+const ThemeConditional = () => {
+  const { theme } = useTheme();
+  if (theme !== 'dark') return null;
+  return (
+    <>
+      <ParticleBackground />
+      <CursorEffect />
+    </>
+  );
+};
+
+function AppInner() {
+  const [loading, setLoading] = useState(true);
+
+  return (
+    <div className="min-h-screen bg-ink">
+      <AnimatePresence>
+        {loading && <LoadingScreen onComplete={() => setLoading(false)} />}
+      </AnimatePresence>
+
+      {!loading && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+        >
+          <ThemeConditional />
+          <ScrollProgress />
+          <Navbar />
+
+          <main className="relative z-10">
+            <HeroSection />
+            <MissionSection />
+            <ResearchThemes />
+            <ProjectsSection />
+            <PeopleSection />
+            <PublicationsSection />
+            <CoursesSection />
+            <NewsSection />
+            <GrantsSection />
+            <ConferencesSection />
+            <JoinUsSection />
+            <HandbookSection />
+            <ContactSection />
+          </main>
+
+          <Footer />
+          <ThemeSwitcher />
+          <AdminKeystrokeListener />
+        </motion.div>
+      )}
+    </div>
+  );
+}
+
 function App() {
-    const [loading, setLoading] = useState(true);
-
-    return (
-        <div className="min-h-screen bg-ink">
-            <AnimatePresence>
-                {loading && <LoadingScreen onComplete={() => setLoading(false)} />}
-            </AnimatePresence>
-
-            {!loading && (
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 1 }}
-                >
-                    <ParticleBackground />
-                    <CursorEffect />
-                    <ScrollProgress />
-                    <Navbar />
-
-                    <main className="relative z-10">
-                        <HeroSection />
-                        <MissionSection />
-                        <ResearchThemes />
-                        <ProjectsSection />
-                        <PeopleSection />
-                        <PublicationsSection />
-                        <CoursesSection />
-                        <NewsSection />
-                        <GrantsSection />
-                        <ConferencesSection />
-                        <JoinUsSection />
-                        <HandbookSection />
-                        <ContactSection />
-                    </main>
-
-                    <Footer />
-                </motion.div>
-            )}
-        </div>
-    );
+  return (
+    <ThemeProvider>
+      <AppInner />
+    </ThemeProvider>
+  );
 }
 
 export default App;
