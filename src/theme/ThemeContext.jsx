@@ -45,6 +45,7 @@ const ThemeContext = createContext(null);
 export const ThemeProvider = ({ children }) => {
   const [theme, setThemeState] = useState(DEFAULT_THEME);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [loginOpen, setLoginOpen] = useState(false);
 
   useEffect(() => {
     // Read persisted theme
@@ -101,8 +102,11 @@ export const ThemeProvider = ({ children }) => {
     try { localStorage.removeItem(STORAGE_ADMIN); } catch {}
   }, []);
 
+  const openLogin = useCallback(() => setLoginOpen(true), []);
+  const closeLogin = useCallback(() => setLoginOpen(false), []);
+
   return (
-    <ThemeContext.Provider value={{ theme, setTheme, isAdmin, login, logout }}>
+    <ThemeContext.Provider value={{ theme, setTheme, isAdmin, login, logout, loginOpen, openLogin, closeLogin }}>
       {children}
     </ThemeContext.Provider>
   );

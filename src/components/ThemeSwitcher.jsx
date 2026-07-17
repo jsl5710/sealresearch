@@ -14,12 +14,11 @@ import { useTheme, THEMES } from '../theme/ThemeContext';
  * doesn't need to remember the URL param.
  */
 
+// Keystroke shortcut: Shift+A pressed 5x within 2s opens the admin login modal.
+// The modal itself lives in AdminLogin.jsx; this component only fires openLogin().
 export const AdminKeystrokeListener = () => {
-  const { isAdmin, login } = useTheme();
+  const { isAdmin, openLogin } = useTheme();
   const [count, setCount] = useState(0);
-  const [showLogin, setShowLogin] = useState(false);
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
 
   React.useEffect(() => {
     let last = 0;
@@ -38,59 +37,12 @@ export const AdminKeystrokeListener = () => {
 
   React.useEffect(() => {
     if (count >= 5) {
-      setShowLogin(true);
+      openLogin();
       setCount(0);
     }
-  }, [count]);
+  }, [count, openLogin]);
 
-  if (isAdmin || !showLogin) return null;
-
-  const submit = (e) => {
-    e.preventDefault();
-    if (login(password)) {
-      setShowLogin(false);
-      setPassword('');
-      setError('');
-    } else {
-      setError('Wrong password.');
-    }
-  };
-
-  return (
-    <div className="fixed inset-0 z-[200] flex items-center justify-center bg-ink/70 backdrop-blur-sm p-6">
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="glass-strong rounded-2xl p-8 max-w-sm w-full"
-      >
-        <p className="mono text-xs uppercase tracking-widest text-signal mb-2">Admin</p>
-        <h3 className="text-2xl font-serif text-paper mb-4">Sign in</h3>
-        <form onSubmit={submit}>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => { setPassword(e.target.value); setError(''); }}
-            autoFocus
-            placeholder="Admin password"
-            className="w-full px-4 py-3 rounded-full border border-signal/30 bg-transparent text-paper placeholder:text-mist focus:outline-none focus:border-signal transition-colors mb-2"
-          />
-          {error && <p className="text-ember text-xs mb-3">{error}</p>}
-          <div className="flex justify-end gap-3 mt-4">
-            <button type="button" onClick={() => setShowLogin(false)} className="text-mist text-sm hover:text-paper transition-colors">
-              Cancel
-            </button>
-            <button type="submit" className="btn-primary text-sm py-2">
-              Enter
-            </button>
-          </div>
-        </form>
-        <p className="mono text-xs text-mist/70 mt-6 leading-relaxed">
-          Tip: you can also unlock via <span className="text-signal-soft">?admin=&lt;password&gt;</span> in the URL.
-          Auth is client-side only — see the code for details.
-        </p>
-      </motion.div>
-    </div>
-  );
+  return null;
 };
 
 const ThemeSwitcher = () => {

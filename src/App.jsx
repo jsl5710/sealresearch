@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 import { ThemeProvider, useTheme } from './theme/ThemeContext';
 import ThemeSwitcher, { AdminKeystrokeListener } from './components/ThemeSwitcher';
+import AdminLoginModal from './components/AdminLogin';
 
 import LoadingScreen from './components/LoadingScreen';
 import Navbar from './components/Navbar';
@@ -79,6 +80,7 @@ function AppInner() {
           <Footer />
           <ThemeSwitcher />
           <AdminKeystrokeListener />
+          <AdminLoginModal />
         </motion.div>
       )}
     </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import lab from '../data/lab.json';
+import { AdminLoginLink } from './AdminLogin';
 
 const Footer = () => {
   return (
@@ -51,8 +52,9 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto mt-16 pt-8 border-t border-signal/5 text-center text-xs mono uppercase tracking-widest text-mist/50">
-        &copy; {new Date().getFullYear()} {lab.name}. Built with care in Boulder, CO.
+      <div className="max-w-7xl mx-auto mt-16 pt-8 border-t border-signal/5 flex flex-col md:flex-row items-center justify-between gap-3 text-xs mono uppercase tracking-widest text-mist/50">
+        <p>&copy; {new Date().getFullYear()} {lab.name}. Built with care in Boulder, CO.</p>
+        <AdminLoginLink />
       </div>
     </footer>
   );
