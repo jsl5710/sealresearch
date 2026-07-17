@@ -27,17 +27,16 @@ import HandbookSection from './sections/HandbookSection';
 import ContactSection from './sections/ContactSection';
 
 /**
- * Cursor + drifting-node particles are Dark Cinematic signatures.
- * They feel out of place in the light editorial and professional themes,
- * so we suppress them there.
+ * Particles run in every theme — colors, density, and opacity adapt in
+ * ParticleBackground. Custom cursor stays dark-only (mix-blend-difference
+ * behaves weirdly against light backgrounds).
  */
 const ThemeConditional = () => {
   const { theme } = useTheme();
-  if (theme !== 'dark') return null;
   return (
     <>
       <ParticleBackground />
-      <CursorEffect />
+      {theme === 'dark' && <CursorEffect />}
     </>
   );
 };
