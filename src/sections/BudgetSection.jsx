@@ -1,7 +1,10 @@
 import React, { useState, useMemo } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import budget from '../data/budget.json';
+import projectsData from '../data/projects.json';
 import { useTheme } from '../theme/ThemeContext';
+
+const projectById = (id) => projectsData.projects.find(p => p.id === id);
 
 const fmtMoney = (n, opts = {}) => {
   const { compact = false } = opts;
@@ -18,36 +21,121 @@ const fmtDate = (d) => {
   return `${months[parseInt(m[2],10)-1]} ${parseInt(m[3],10)}, ${m[1]}`;
 };
 
-const CategoryBar = ({ cat, spent }) => {
+const CategoryBar = ({ cat, spent, expenses }) => {
+  const [open, setOpen] = useState(false);
   const pct = cat.allocated > 0 ? Math.min(100, (spent / cat.allocated) * 100) : 0;
   const remaining = cat.allocated - spent;
   const overbudget = remaining < 0;
+  const catExpenses = useMemo(
+    () => expenses.filter(e => e.categoryId === cat.id).sort((a, b) => (b.date || '').localeCompare(a.date || '')),
+    [expenses, cat.id]
+  );
+
+  // Group expenses by project — unlinked expenses go into a "General" bucket
+  const grouped = useMemo(() => {
+    const map = new Map();
+    for (const e of catExpenses) {
+      const key = e.projectId || '__none__';
+      if (!map.has(key)) map.set(key, []);
+      map.get(key).push(e);
+    }
+    return Array.from(map.entries()).map(([projectId, items]) => ({
+      projectId: projectId === '__none__' ? null : projectId,
+      project: projectId === '__none__' ? null : projectById(projectId),
+      items,
+      subtotal: items.reduce((s, x) => s + x.amount, 0),
+    }));
+  }, [catExpenses]);
 
   return (
-    <div className="glass rounded-xl p-4">
-      <div className="flex items-baseline justify-between gap-3 mb-2">
-        <div className="flex items-center gap-2">
-          <span className="w-2.5 h-2.5 rounded-full" style={{ background: cat.color }} />
-          <span className="text-paper text-sm font-medium">{cat.label}</span>
+    <div className="glass rounded-xl overflow-hidden">
+      <button
+        onClick={() => setOpen(o => !o)}
+        disabled={catExpenses.length === 0}
+        className="w-full text-left p-4 hover:bg-signal/5 transition-colors disabled:cursor-default"
+        aria-expanded={open}
+      >
+        <div className="flex items-baseline justify-between gap-3 mb-2">
+          <div className="flex items-center gap-2">
+            <motion.span
+              animate={{ rotate: open ? 90 : 0 }}
+              transition={{ duration: 0.2 }}
+              className={`inline-block text-signal/70 text-xs ${catExpenses.length === 0 ? 'opacity-30' : ''}`}
+            >▸</motion.span>
+            <span className="w-2.5 h-2.5 rounded-full" style={{ background: cat.color }} />
+            <span className="text-paper text-sm font-medium">{cat.label}</span>
+            {catExpenses.length > 0 && (
+              <span className="mono text-[10px] text-mist">({catExpenses.length})</span>
+            )}
+          </div>
+          <span className={`mono text-xs ${overbudget ? 'text-ember' : 'text-mist'}`}>
+            {fmtMoney(spent, { compact: true })} / {fmtMoney(cat.allocated, { compact: true })}
+          </span>
         </div>
-        <span className={`mono text-xs ${overbudget ? 'text-ember' : 'text-mist'}`}>
-          {fmtMoney(spent, { compact: true })} / {fmtMoney(cat.allocated, { compact: true })}
-        </span>
-      </div>
 
-      <div className="relative h-2 rounded-full overflow-hidden bg-signal/10 mb-2">
-        <div
-          className="absolute inset-y-0 left-0 rounded-full transition-all duration-500"
-          style={{ width: `${pct}%`, background: cat.color, opacity: 0.85 }}
-        />
-      </div>
+        <div className="relative h-2 rounded-full overflow-hidden bg-signal/10 mb-2">
+          <div
+            className="absolute inset-y-0 left-0 rounded-full transition-all duration-500"
+            style={{ width: `${pct}%`, background: cat.color, opacity: 0.85 }}
+          />
+        </div>
 
-      <div className="flex items-center justify-between text-xs">
-        <span className="text-mist">{pct.toFixed(0)}% spent</span>
-        <span className={overbudget ? 'text-ember font-medium' : 'text-signal-soft'}>
-          {overbudget ? `Over by ${fmtMoney(Math.abs(remaining))}` : `${fmtMoney(remaining)} left`}
-        </span>
-      </div>
+        <div className="flex items-center justify-between text-xs">
+          <span className="text-mist">{pct.toFixed(0)}% spent</span>
+          <span className={overbudget ? 'text-ember font-medium' : 'text-signal-soft'}>
+            {overbudget ? `Over by ${fmtMoney(Math.abs(remaining))}` : `${fmtMoney(remaining)} left`}
+          </span>
+        </div>
+      </button>
+
+      <AnimatePresence initial={false}>
+        {open && catExpenses.length > 0 && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="overflow-hidden"
+          >
+            <div className="px-4 pb-4 pt-2 border-t border-signal/10 space-y-3">
+              {grouped.map((g, gi) => (
+                <div key={g.projectId || `none-${gi}`}>
+                  {g.project ? (
+                    <div className="flex items-baseline justify-between gap-3 mb-1.5">
+                      <a href="#projects" className="mono text-[10px] uppercase tracking-widest text-signal hover:text-signal-soft transition-colors">
+                        Project · {g.project.title.length > 60 ? g.project.title.slice(0, 60) + '…' : g.project.title}
+                      </a>
+                      <span className="mono text-[10px] text-mist">{fmtMoney(g.subtotal)}</span>
+                    </div>
+                  ) : (
+                    <div className="flex items-baseline justify-between gap-3 mb-1.5">
+                      <span className="mono text-[10px] uppercase tracking-widest text-mist/70">Uncategorized · General</span>
+                      <span className="mono text-[10px] text-mist">{fmtMoney(g.subtotal)}</span>
+                    </div>
+                  )}
+                  <ul className="space-y-1.5">
+                    {g.items.map(e => (
+                      <li key={e.id} className="flex items-baseline gap-3 text-xs">
+                        <span className="w-1 h-1 rounded-full bg-signal/40 shrink-0 mt-1.5" />
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-baseline justify-between gap-2">
+                            <span className="text-paper truncate">
+                              <span className="font-medium">{e.vendor}</span>
+                              <span className="text-mist"> · {e.description}</span>
+                            </span>
+                            <span className="mono text-paper shrink-0">{fmtMoney(e.amount)}</span>
+                          </div>
+                          <p className="mono text-[10px] text-mist/60 mt-0.5">{fmtDate(e.date)}</p>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
@@ -124,10 +212,17 @@ const FundCard = ({ fund, expenses, i }) => {
       </div>
 
       {/* Categories */}
-      <p className="mono text-xs uppercase tracking-widest text-signal mb-3">Categories</p>
+      <p className="mono text-xs uppercase tracking-widest text-signal mb-3">
+        Categories <span className="text-mist/70 normal-case tracking-normal">— click to expand breakdown</span>
+      </p>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         {fund.categories.map(cat => (
-          <CategoryBar key={cat.id} cat={cat} spent={spentByCategory.get(cat.id) || 0} />
+          <CategoryBar
+            key={cat.id}
+            cat={cat}
+            spent={spentByCategory.get(cat.id) || 0}
+            expenses={expenses.filter(e => e.fundId === fund.id)}
+          />
         ))}
       </div>
 

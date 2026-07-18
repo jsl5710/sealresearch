@@ -17,5 +17,21 @@
       "url": "optional project page / GitHub URL"
     }
   },
-  "projects": []
+  "projects": [
+    {
+      "id": "when-ai-explains-itself",
+      "title": "When AI Explains Itself: Do LLM Explanations Help or Mislead Human Decision Making?",
+      "status": "active",
+      "direction": "Investigating whether LLM-generated explanations improve human decision quality in high-stakes tasks, or whether they mislead by projecting false confidence and post-hoc rationalization.",
+      "summary": "Targeting CHI 2026. Comparing explanation styles from three LLM providers (OpenAI, Anthropic, Deep Infra) in a human-subjects study across domains where user reliance on model outputs has real consequences.",
+      "start": "2026-07",
+      "end": null,
+      "themeIds": ["human", "integrity"],
+      "grantIds": ["cub-startup-2026"],
+      "leadIds": ["pi"],
+      "outputIds": [],
+      "collaboratorNames": [],
+      "url": ""
+    }
+  ]
 }

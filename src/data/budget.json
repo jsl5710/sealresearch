@@ -19,6 +19,39 @@
   ],
   "expenses": [
     {
+      "id": "exp-2026-07-15-openai-chi",
+      "date": "2026-07-15",
+      "fundId": "cub-startup-2026",
+      "categoryId": "software",
+      "projectId": "when-ai-explains-itself",
+      "vendor": "OpenAI",
+      "description": "GPT-4 API — explanation generation for human-subjects study",
+      "amount": 250,
+      "notes": ""
+    },
+    {
+      "id": "exp-2026-07-15-anthropic-chi",
+      "date": "2026-07-15",
+      "fundId": "cub-startup-2026",
+      "categoryId": "software",
+      "projectId": "when-ai-explains-itself",
+      "vendor": "Anthropic",
+      "description": "Claude API — explanation generation for human-subjects study",
+      "amount": 180,
+      "notes": ""
+    },
+    {
+      "id": "exp-2026-07-15-deepinfra-chi",
+      "date": "2026-07-15",
+      "fundId": "cub-startup-2026",
+      "categoryId": "software",
+      "projectId": "when-ai-explains-itself",
+      "vendor": "Deep Infra",
+      "description": "Llama-3 API — open-source baseline explanations",
+      "amount": 90,
+      "notes": ""
+    },
+    {
       "id": "exp-2026-09-01-openai",
       "date": "2026-09-01",
       "fundId": "cub-startup-2026",
