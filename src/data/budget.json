@@ -1,0 +1,42 @@
+{
+  "funds": [
+    {
+      "id": "cub-startup-2026",
+      "name": "CU Boulder — Faculty Start-Up Package",
+      "grantId": "cub-startup-2026",
+      "totalAmount": 378500,
+      "startDate": "2026-08-15",
+      "endDate": "2029-08-14",
+      "notes": "Three-year start-up window. Unspent funds do not roll over past end date unless negotiated.",
+      "categories": [
+        { "id": "phd",       "label": "PhD Student Support",       "allocated": 200000, "color": "#22D3EE" },
+        { "id": "equipment", "label": "Equipment & GPUs",          "allocated":  90000, "color": "#F5C147" },
+        { "id": "software",  "label": "Software, Cloud & APIs",    "allocated":  40000, "color": "#67E8F9" },
+        { "id": "travel",    "label": "Conference & Research Travel","allocated":  30000, "color": "#0F62FE" },
+        { "id": "misc",      "label": "Supplies & Miscellaneous",  "allocated":  18500, "color": "#94A3B8" }
+      ]
+    }
+  ],
+  "expenses": [
+    {
+      "id": "exp-2026-09-01-openai",
+      "date": "2026-09-01",
+      "fundId": "cub-startup-2026",
+      "categoryId": "software",
+      "vendor": "OpenAI",
+      "description": "GPT-4 API credits — dialect evaluation pilot",
+      "amount": 500,
+      "notes": ""
+    },
+    {
+      "id": "exp-2026-09-15-hf",
+      "date": "2026-09-15",
+      "fundId": "cub-startup-2026",
+      "categoryId": "software",
+      "vendor": "Hugging Face",
+      "description": "Pro subscription (annual, lab-shared)",
+      "amount": 108,
+      "notes": ""
+    }
+  ]
+}

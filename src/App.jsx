@@ -22,6 +22,7 @@ import CoursesSection from './sections/CoursesSection';
 import NewsSection from './sections/NewsSection';
 import GrantsSection from './sections/GrantsSection';
 import ConferencesSection from './sections/ConferencesSection';
+import BudgetSection from './sections/BudgetSection';
 import JoinUsSection from './sections/JoinUsSection';
 import HandbookSection from './sections/HandbookSection';
 import ContactSection from './sections/ContactSection';
@@ -71,6 +72,7 @@ function AppInner() {
             <NewsSection />
             <GrantsSection />
             <ConferencesSection />
+            <BudgetSection />
             <JoinUsSection />
             <HandbookSection />
             <ContactSection />

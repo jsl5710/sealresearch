@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import lab from '../data/lab.json';
+import { useTheme } from '../theme/ThemeContext';
 
 const primary = [
   { name: 'Research',     href: '#research' },
@@ -9,7 +10,7 @@ const primary = [
   { name: 'Join Us',      href: '#join' },
 ];
 
-const more = [
+const moreBase = [
   { name: 'Mission',     href: '#mission' },
   { name: 'Projects',    href: '#projects' },
   { name: 'Courses',     href: '#courses' },
@@ -19,10 +20,16 @@ const more = [
   { name: 'Handbook',    href: '#handbook' },
 ];
 
+const ADMIN_ENTRIES = [
+  { name: 'Budget', href: '#budget' },
+];
+
 const Navbar = () => {
+  const { isAdmin } = useTheme();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
+  const more = isAdmin ? [...moreBase, ...ADMIN_ENTRIES.map(e => ({ ...e, isAdmin: true }))] : moreBase;
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 40);
@@ -88,9 +95,10 @@ const Navbar = () => {
                     <a
                       key={l.name}
                       href={l.href}
-                      className="block px-4 py-2 rounded-lg text-sm text-paper/85 hover:bg-signal/10 hover:text-signal transition-colors"
+                      className="flex items-center justify-between px-4 py-2 rounded-lg text-sm text-paper/85 hover:bg-signal/10 hover:text-signal transition-colors"
                     >
-                      {l.name}
+                      <span>{l.name}</span>
+                      {l.isAdmin && <span className="mono text-[10px] text-ember uppercase">admin</span>}
                     </a>
                   ))}
                 </motion.div>
