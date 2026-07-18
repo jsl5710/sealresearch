@@ -1,8 +1,10 @@
 import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import budget from '../data/budget.json';
 import projectsData from '../data/projects.json';
 import { useTheme } from '../theme/ThemeContext';
+import { useBudget } from '../theme/BudgetContext';
+import ExpenseEditor from '../components/ExpenseEditor';
+import GitHubTokenModal from '../components/GitHubTokenModal';
 
 const projectById = (id) => projectsData.projects.find(p => p.id === id);
 
@@ -21,8 +23,11 @@ const fmtDate = (d) => {
   return `${months[parseInt(m[2],10)-1]} ${parseInt(m[3],10)}, ${m[1]}`;
 };
 
-const CategoryBar = ({ cat, spent, expenses }) => {
+const CategoryBar = ({ cat, spent, expenses, fundId, onEditExpense }) => {
+  const { updateCategoryAllocation, deleteExpense } = useBudget();
   const [open, setOpen] = useState(false);
+  const [editingAlloc, setEditingAlloc] = useState(false);
+  const [allocInput, setAllocInput] = useState(cat.allocated);
   const pct = cat.allocated > 0 ? Math.min(100, (spent / cat.allocated) * 100) : 0;
   const remaining = cat.allocated - spent;
   const overbudget = remaining < 0;
@@ -30,6 +35,11 @@ const CategoryBar = ({ cat, spent, expenses }) => {
     () => expenses.filter(e => e.categoryId === cat.id).sort((a, b) => (b.date || '').localeCompare(a.date || '')),
     [expenses, cat.id]
   );
+
+  const saveAlloc = () => {
+    updateCategoryAllocation(fundId, cat.id, allocInput);
+    setEditingAlloc(false);
+  };
 
   // Group expenses by project — unlinked expenses go into a "General" bucket
   const grouped = useMemo(() => {
@@ -68,9 +78,30 @@ const CategoryBar = ({ cat, spent, expenses }) => {
               <span className="mono text-[10px] text-mist">({catExpenses.length})</span>
             )}
           </div>
-          <span className={`mono text-xs ${overbudget ? 'text-ember' : 'text-mist'}`}>
-            {fmtMoney(spent, { compact: true })} / {fmtMoney(cat.allocated, { compact: true })}
-          </span>
+          {editingAlloc ? (
+            <span className="flex items-center gap-1 text-xs" onClick={(e) => e.stopPropagation()}>
+              <span className="text-mist">$</span>
+              <input
+                type="number"
+                min="0"
+                step="100"
+                value={allocInput}
+                onChange={(e) => setAllocInput(e.target.value)}
+                autoFocus
+                className="w-20 px-2 py-0.5 rounded border border-signal/30 bg-transparent text-paper text-xs focus:outline-none focus:border-signal"
+              />
+              <button type="button" onClick={saveAlloc} className="mono text-[10px] text-signal hover:text-signal-soft">save</button>
+              <button type="button" onClick={(e) => { e.stopPropagation(); setEditingAlloc(false); setAllocInput(cat.allocated); }} className="mono text-[10px] text-mist hover:text-paper">cancel</button>
+            </span>
+          ) : (
+            <span
+              className={`mono text-xs ${overbudget ? 'text-ember' : 'text-mist'} hover:text-signal transition-colors cursor-pointer`}
+              onClick={(e) => { e.stopPropagation(); setEditingAlloc(true); setAllocInput(cat.allocated); }}
+              title="Edit allocation"
+            >
+              {fmtMoney(spent, { compact: true })} / {fmtMoney(cat.allocated, { compact: true })}
+            </span>
+          )}
         </div>
 
         <div className="relative h-2 rounded-full overflow-hidden bg-signal/10 mb-2">
@@ -115,7 +146,7 @@ const CategoryBar = ({ cat, spent, expenses }) => {
                   )}
                   <ul className="space-y-1.5">
                     {g.items.map(e => (
-                      <li key={e.id} className="flex items-baseline gap-3 text-xs">
+                      <li key={e.id} className="flex items-baseline gap-3 text-xs group/row">
                         <span className="w-1 h-1 rounded-full bg-signal/40 shrink-0 mt-1.5" />
                         <div className="flex-1 min-w-0">
                           <div className="flex items-baseline justify-between gap-2">
@@ -123,7 +154,21 @@ const CategoryBar = ({ cat, spent, expenses }) => {
                               <span className="font-medium">{e.vendor}</span>
                               <span className="text-mist"> · {e.description}</span>
                             </span>
-                            <span className="mono text-paper shrink-0">{fmtMoney(e.amount)}</span>
+                            <div className="flex items-baseline gap-2 shrink-0">
+                              <span className="mono text-paper">{fmtMoney(e.amount)}</span>
+                              <span className="opacity-0 group-hover/row:opacity-100 transition-opacity flex gap-1.5">
+                                <button
+                                  onClick={(evt) => { evt.stopPropagation(); onEditExpense(e); }}
+                                  className="mono text-[10px] text-signal hover:text-signal-soft"
+                                  aria-label="Edit"
+                                >edit</button>
+                                <button
+                                  onClick={(evt) => { evt.stopPropagation(); if (confirm(`Delete ${e.vendor} · ${e.description}?`)) deleteExpense(e.id); }}
+                                  className="mono text-[10px] text-ember hover:text-ember/70"
+                                  aria-label="Delete"
+                                >delete</button>
+                              </span>
+                            </div>
                           </div>
                           <p className="mono text-[10px] text-mist/60 mt-0.5">{fmtDate(e.date)}</p>
                         </div>
@@ -140,7 +185,7 @@ const CategoryBar = ({ cat, spent, expenses }) => {
   );
 };
 
-const FundCard = ({ fund, expenses, i }) => {
+const FundCard = ({ fund, expenses, i, onEditExpense }) => {
   const spentByCategory = useMemo(() => {
     const m = new Map();
     for (const e of expenses) {
@@ -220,8 +265,10 @@ const FundCard = ({ fund, expenses, i }) => {
           <CategoryBar
             key={cat.id}
             cat={cat}
+            fundId={fund.id}
             spent={spentByCategory.get(cat.id) || 0}
             expenses={expenses.filter(e => e.fundId === fund.id)}
+            onEditExpense={onEditExpense}
           />
         ))}
       </div>
@@ -345,11 +392,74 @@ const ExpenseTable = ({ expenses, funds }) => {
   );
 };
 
+const SaveBar = ({ onOpenToken }) => {
+  const { hasDraft, token, tokenInfo, saveToGitHub, discardDraft, status, statusMsg } = useBudget();
+  const [committing, setCommitting] = useState(false);
+  const connected = !!(token && tokenInfo);
+
+  const doSave = async () => {
+    setCommitting(true);
+    await saveToGitHub('Budget: update via admin panel');
+    setCommitting(false);
+  };
+
+  return (
+    <div className="glass-strong rounded-2xl p-4 md:p-5 mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+      <div className="flex items-center gap-3 flex-wrap">
+        {connected ? (
+          <>
+            <span className="w-2 h-2 rounded-full bg-signal" />
+            <span className="mono text-xs text-signal">GitHub connected</span>
+            <span className="mono text-[10px] text-mist">…{token.slice(-4)}</span>
+          </>
+        ) : (
+          <>
+            <span className="w-2 h-2 rounded-full bg-mist" />
+            <span className="mono text-xs text-mist">Not connected — save disabled</span>
+          </>
+        )}
+        {hasDraft && <span className="chip-ember">Unsaved changes</span>}
+        {status !== 'idle' && (
+          <span className={`mono text-xs ${status === 'error' ? 'text-ember' : status === 'saved' ? 'text-signal' : 'text-mist'}`}>
+            {statusMsg}
+          </span>
+        )}
+      </div>
+      <div className="flex items-center gap-3">
+        <button onClick={onOpenToken} className="mono text-xs text-signal hover:text-signal-soft transition-colors">
+          {connected ? 'Manage token' : 'Connect GitHub'}
+        </button>
+        {hasDraft && (
+          <button onClick={() => { if (confirm('Discard all unsaved changes?')) discardDraft(); }} className="mono text-xs text-mist hover:text-ember transition-colors">
+            Discard
+          </button>
+        )}
+        <button
+          onClick={doSave}
+          disabled={!connected || !hasDraft || committing}
+          className="btn-primary text-sm py-2 disabled:opacity-40"
+        >
+          {committing ? 'Saving…' : 'Save to GitHub'}
+        </button>
+      </div>
+    </div>
+  );
+};
+
 const BudgetSection = () => {
   const { isAdmin } = useTheme();
+  const { budget } = useBudget();
+  const [editorOpen, setEditorOpen] = useState(false);
+  const [editingExpense, setEditingExpense] = useState(null);
+  const [tokenModalOpen, setTokenModalOpen] = useState(false);
+
   if (!isAdmin) return null;
 
   const { funds, expenses } = budget;
+
+  const openAdd = () => { setEditingExpense(null); setEditorOpen(true); };
+  const openEdit = (e) => { setEditingExpense(e); setEditorOpen(true); };
+  const closeEditor = () => { setEditorOpen(false); setEditingExpense(null); };
 
   return (
     <section id="budget" className="relative py-32 px-6 md:px-12 bg-slate/30">
@@ -361,16 +471,27 @@ const BudgetSection = () => {
         <h2 className="text-4xl md:text-6xl font-serif font-semibold text-paper text-center mb-4 leading-tight">
           Where the <span className="italic text-signal">funds go</span>.
         </h2>
-        <p className="text-mist text-center max-w-2xl mx-auto mb-14">
+        <p className="text-mist text-center max-w-2xl mx-auto mb-8">
           Per-fund allocations across categories, running spend totals, and a detailed expense ledger.
-          Hidden from public visitors.
+          Section is hidden from public visitors.
         </p>
 
+        <div className="flex justify-center mb-8">
+          <button onClick={openAdd} className="btn-primary text-sm py-2 flex items-center gap-2">
+            <span className="text-lg leading-none">+</span> Add expense
+          </button>
+        </div>
+
+        <SaveBar onOpenToken={() => setTokenModalOpen(true)} />
+
         {funds.map((f, i) => (
-          <FundCard key={f.id} fund={f} expenses={expenses} i={i} />
+          <FundCard key={f.id} fund={f} expenses={expenses} i={i} onEditExpense={openEdit} />
         ))}
 
         <ExpenseTable expenses={expenses} funds={funds} />
+
+        <ExpenseEditor open={editorOpen} onClose={closeEditor} expense={editingExpense} />
+        <GitHubTokenModal open={tokenModalOpen} onClose={() => setTokenModalOpen(false)} />
       </div>
     </section>
   );

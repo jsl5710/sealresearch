@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import { ThemeProvider, useTheme } from './theme/ThemeContext';
+import { BudgetProvider } from './theme/BudgetContext';
 import ThemeSwitcher, { AdminKeystrokeListener } from './components/ThemeSwitcher';
 import AdminLoginModal from './components/AdminLogin';
 
@@ -91,7 +92,9 @@ function AppInner() {
 function App() {
   return (
     <ThemeProvider>
-      <AppInner />
+      <BudgetProvider>
+        <AppInner />
+      </BudgetProvider>
     </ThemeProvider>
   );
 }
