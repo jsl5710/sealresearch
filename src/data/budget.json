@@ -26,7 +26,7 @@
       "projectId": "when-ai-explains-itself",
       "vendor": "OpenAI",
       "description": "GPT-4 API — explanation generation for human-subjects study",
-      "amount": 250,
+      "amount": 160,
       "notes": ""
     },
     {
@@ -37,8 +37,8 @@
       "projectId": "when-ai-explains-itself",
       "vendor": "Anthropic",
       "description": "Claude API — explanation generation for human-subjects study",
-      "amount": 180,
-      "notes": ""
+      "amount": 220,
+      "notes": "Includes $60 tax"
     },
     {
       "id": "exp-2026-07-15-deepinfra-chi",
@@ -48,7 +48,7 @@
       "projectId": "when-ai-explains-itself",
       "vendor": "Deep Infra",
       "description": "Llama-3 API — open-source baseline explanations",
-      "amount": 90,
+      "amount": 160,
       "notes": ""
     },
     {
@@ -59,16 +59,6 @@
       "vendor": "OpenAI",
       "description": "GPT-4 API credits — dialect evaluation pilot",
       "amount": 500,
-      "notes": ""
-    },
-    {
-      "id": "exp-2026-09-15-hf",
-      "date": "2026-09-15",
-      "fundId": "cub-startup-2026",
-      "categoryId": "software",
-      "vendor": "Hugging Face",
-      "description": "Pro subscription (annual, lab-shared)",
-      "amount": 108,
       "notes": ""
     }
   ]

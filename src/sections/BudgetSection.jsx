@@ -170,7 +170,10 @@ const CategoryBar = ({ cat, spent, expenses, fundId, onEditExpense }) => {
                               </span>
                             </div>
                           </div>
-                          <p className="mono text-[10px] text-mist/60 mt-0.5">{fmtDate(e.date)}</p>
+                          <p className="mono text-[10px] text-mist/60 mt-0.5">
+                            {fmtDate(e.date)}
+                            {e.notes && <span className="italic ml-2 text-ember/80">· {e.notes}</span>}
+                          </p>
                         </div>
                       </li>
                     ))}
