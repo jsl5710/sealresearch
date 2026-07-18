@@ -37,8 +37,8 @@
       "projectId": "when-ai-explains-itself",
       "vendor": "Anthropic",
       "description": "Claude API — explanation generation for human-subjects study",
-      "amount": 220,
-      "notes": "Includes $60 tax"
+      "amount": 160,
+      "notes": ""
     },
     {
       "id": "exp-2026-07-15-deepinfra-chi",
@@ -52,13 +52,14 @@
       "notes": ""
     },
     {
-      "id": "exp-2026-09-01-openai",
-      "date": "2026-09-01",
+      "id": "exp-2026-07-15-tax-chi",
+      "date": "2026-07-15",
       "fundId": "cub-startup-2026",
       "categoryId": "software",
-      "vendor": "OpenAI",
-      "description": "GPT-4 API credits — dialect evaluation pilot",
-      "amount": 500,
+      "projectId": "when-ai-explains-itself",
+      "vendor": "Tax",
+      "description": "Combined sales tax on OpenAI + Anthropic + Deep Infra API purchases",
+      "amount": 60,
       "notes": ""
     }
   ]
