@@ -47,6 +47,31 @@ const CoursesSection = () => {
                 {c.title}
               </h3>
 
+              {(c.instructor || c.meetingDays || c.location) && (
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6 pb-6 border-b border-signal/10">
+                  {c.instructor && (
+                    <div>
+                      <p className="mono text-[10px] uppercase tracking-widest text-signal/70 mb-1">Instructor</p>
+                      <p className="text-paper/90 text-sm">{c.instructor}</p>
+                    </div>
+                  )}
+                  {(c.meetingDays || c.meetingTime) && (
+                    <div>
+                      <p className="mono text-[10px] uppercase tracking-widest text-signal/70 mb-1">When</p>
+                      <p className="text-paper/90 text-sm">
+                        {c.meetingDays}{c.meetingDays && c.meetingTime ? ' · ' : ''}{c.meetingTime}
+                      </p>
+                    </div>
+                  )}
+                  {c.location && (
+                    <div>
+                      <p className="mono text-[10px] uppercase tracking-widest text-signal/70 mb-1">Where</p>
+                      <p className="text-paper/90 text-sm">{c.location}</p>
+                    </div>
+                  )}
+                </div>
+              )}
+
               {c.summary && (
                 <p className="text-paper/80 leading-relaxed mb-6">{c.summary}</p>
               )}

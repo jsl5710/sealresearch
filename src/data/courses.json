@@ -1,12 +1,16 @@
 [
   {
     "id": "fair-ml-fall26",
-    "title": "Fair ML",
-    "code": "",
+    "title": "Fair Machine Learning",
+    "code": "INFO 4615 / 5615",
     "term": "Fall 2026",
-    "level": "Graduate",
+    "level": "Undergraduate + Graduate",
     "institution": "CU Boulder",
     "status": "upcoming",
+    "instructor": "Jason Lucas",
+    "meetingDays": "Monday",
+    "meetingTime": "3:35 pm – 6:05 pm",
+    "location": "CASE E250",
     "summary": "An introduction to fairness in machine learning: what fairness means (and doesn't), how to measure disparate impact, and how to intervene during data collection, model training, and deployment.",
     "topics": [
       "Definitions of fairness (group vs. individual)",
