@@ -76,7 +76,7 @@ const PublicationsSection = () => {
   ];
 
   return (
-    <section id="publications" className="relative py-32 px-6 md:px-12 bg-slate/30">
+    <section id="publications" className="relative py-32 px-6 md:px-12 bg-slate/20">
       <div className="max-w-6xl mx-auto">
         <p className="section-eyebrow text-center">Publications</p>
         <h2 className="text-4xl md:text-6xl font-serif font-semibold text-paper text-center mb-4 leading-tight">

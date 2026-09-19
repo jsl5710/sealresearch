@@ -7,7 +7,7 @@ const ResearchThemes = () => {
   const activeTheme = themes.find(t => t.id === active);
 
   return (
-    <section id="research" className="relative py-32 px-6 md:px-12 bg-slate/30">
+    <section id="research" className="relative py-32 px-6 md:px-12 bg-slate/20">
       <div className="max-w-6xl mx-auto">
         <motion.p
           initial={{ opacity: 0, y: 20 }}

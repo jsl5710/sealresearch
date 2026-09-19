@@ -9,31 +9,31 @@ import { useTheme } from '../theme/ThemeContext';
 
 const THEME_CONFIG = {
   dark: {
-    nodeCount: 55,
-    linkDistance: 140,
-    canvasOpacity: 0.60,
-    dotAlphaMul: 1.0,
-    lineAlphaMul: 1.0,
+    nodeCount: 75,
+    linkDistance: 160,
+    canvasOpacity: 0.85,
+    dotAlphaMul: 1.3,
+    lineAlphaMul: 1.35,
     signal: [34, 211, 238],   // cyan
     ember:  [245, 193, 71],   // gold
     emberChance: 0.15,
   },
   light: {
-    nodeCount: 45,
-    linkDistance: 130,
-    canvasOpacity: 0.45,
-    dotAlphaMul: 0.7,
-    lineAlphaMul: 0.5,
+    nodeCount: 60,
+    linkDistance: 145,
+    canvasOpacity: 0.65,
+    dotAlphaMul: 0.85,
+    lineAlphaMul: 0.75,
     signal: [15, 98, 254],    // deep blue
     ember:  [245, 166, 35],   // amber
     emberChance: 0.25,
   },
   pro: {
-    nodeCount: 32,
-    linkDistance: 150,
-    canvasOpacity: 0.40,
-    dotAlphaMul: 0.55,
-    lineAlphaMul: 0.35,
+    nodeCount: 42,
+    linkDistance: 160,
+    canvasOpacity: 0.55,
+    dotAlphaMul: 0.70,
+    lineAlphaMul: 0.50,
     signal: [31, 90, 161],    // pro deep blue
     ember:  [107, 114, 128],  // grey (no ember in pro)
     emberChance: 0.10,

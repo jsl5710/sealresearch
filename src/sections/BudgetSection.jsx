@@ -465,7 +465,7 @@ const BudgetSection = () => {
   const closeEditor = () => { setEditorOpen(false); setEditingExpense(null); };
 
   return (
-    <section id="budget" className="relative py-32 px-6 md:px-12 bg-slate/30">
+    <section id="budget" className="relative py-32 px-6 md:px-12 bg-slate/20">
       <div className="max-w-6xl mx-auto">
         <div className="flex items-center justify-center gap-3 mb-4">
           <span className="chip-ember">🔒 Admin only</span>
