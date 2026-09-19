@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import openings from '../data/openings.json';
+import programs from '../data/programs.json';
 import lab from '../data/lab.json';
 
 const STATUS = {
@@ -14,7 +15,7 @@ const JoinUsSection = () => {
   const future = openings.filter(o => o.status !== 'open');
 
   return (
-    <section id="join" className="relative py-32 px-6 md:px-12 bg-slate/30">
+    <section id="join" className="relative py-32 px-6 md:px-12 bg-slate/20">
       <div className="max-w-6xl mx-auto">
         <p className="section-eyebrow text-center">Join Us</p>
         <h2 className="text-4xl md:text-6xl font-serif font-semibold text-paper text-center mb-4 leading-tight">
@@ -55,6 +56,25 @@ const JoinUsSection = () => {
             </div>
           </>
         )}
+
+        {/* Degree programs */}
+        <div className="mt-14">
+          <div className="flex items-baseline gap-4 mb-3">
+            <h3 className="text-xl font-serif font-semibold text-paper">Apply to a degree program</h3>
+            <span className="mono text-xs text-mist">{programs.length}</span>
+            <div className="flex-1 h-[1px] bg-signal/10" />
+          </div>
+          <p className="text-mist text-sm leading-relaxed mb-6 max-w-3xl">
+            Joining SEAL as a student means being admitted to CU Boulder first. Admission is handled by the
+            department, not the lab — so apply through the program that fits your stage, and mention SEAL in
+            your statement.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {programs.map((p, i) => (
+              <ProgramCard key={p.id} p={p} i={i} />
+            ))}
+          </div>
+        </div>
 
         {/* Mentorship note */}
         <motion.div
@@ -107,5 +127,29 @@ const OpeningCard = ({ op, i, muted = false }) => {
     </motion.div>
   );
 };
+
+const ProgramCard = ({ p, i }) => (
+  <motion.a
+    href={p.url}
+    target="_blank"
+    rel="noopener noreferrer"
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.6, delay: i * 0.08 }}
+    className="glass rounded-2xl p-6 flex flex-col group border border-transparent
+               hover:border-signal/30 transition-colors duration-300"
+  >
+    <p className="mono text-xs uppercase tracking-widest text-signal mb-2">{p.level}</p>
+    <h4 className="text-xl font-serif font-semibold text-paper mb-3">
+      {p.degree} in {p.name}
+    </h4>
+    <p className="text-mist text-sm leading-relaxed mb-6 flex-grow">{p.description}</p>
+    <span className="mono text-xs text-signal inline-flex items-center gap-2">
+      Program details &amp; how to apply
+      <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+    </span>
+  </motion.a>
+);
 
 export default JoinUsSection;

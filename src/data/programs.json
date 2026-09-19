@@ -1,0 +1,26 @@
+[
+  {
+    "id": "phd-infosci",
+    "degree": "PhD",
+    "name": "Information Science",
+    "level": "Doctoral",
+    "description": "The doctoral route for students who want to lead their own research agenda in AI safety, multilingual NLP, or algorithmic fairness. This is the program to apply to if you want to join SEAL as a PhD student.",
+    "url": "https://www.colorado.edu/cmdi/phd-information-science"
+  },
+  {
+    "id": "ms-infosci",
+    "degree": "MS",
+    "name": "Information Science",
+    "level": "Master's",
+    "description": "A master's degree for students seeking research experience or a technical foundation in socio-technical systems before industry or a PhD. SEAL takes master's researchers on thesis-length and semester projects.",
+    "url": "https://www.colorado.edu/cmdi/ms-information-science"
+  },
+  {
+    "id": "bam-infosci",
+    "degree": "BAM",
+    "name": "Information Science",
+    "level": "Bachelor's–Accelerated Master's",
+    "description": "For current CU Boulder undergraduates: begin master's coursework while finishing your bachelor's and earn both degrees on an accelerated timeline. A strong path into lab research early.",
+    "url": "https://www.colorado.edu/cmdi/bam-information-science-bachelors-accelerated-masters"
+  }
+]
