@@ -71,6 +71,48 @@
   --font-heading: var(--font-sans);
 }
 
+/*
+ * Typeface presets — independent of theme, so any font pairing can be
+ * combined with any color theme. These MUST come after the [data-theme]
+ * blocks above: both are single-attribute selectors (equal specificity),
+ * so source order decides, and an explicit font choice should win over
+ * the theme's default heading face.
+ *
+ * "editorial" is the shipped default and deliberately sets nothing — it
+ * inherits whatever the active theme chose.
+ *
+ * Only Fraunces, Inter and JetBrains Mono are fetched from Google (see
+ * index.html). The serif and system stacks below resolve to faces already
+ * on the device, so switching preset costs no extra network request.
+ */
+[data-font="modern"] {
+  --font-heading: var(--font-sans);
+}
+
+[data-font="classic"] {
+  --font-serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --font-sans: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --font-heading: var(--font-serif);
+}
+
+[data-font="system"] {
+  --font-serif: ui-serif, Georgia, serif;
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-heading: var(--font-sans);
+}
+
+/*
+ * Type scale. Everything in the app is sized in rem via Tailwind, so
+ * moving the root font-size rescales the whole page proportionally —
+ * spacing included — rather than only the text.
+ *
+ * Set on :root (not body) because rem resolves against the root element.
+ * "normal" is the browser default of 16px and is left undeclared.
+ */
+:root[data-fontsize="compact"] { font-size: 15px; }
+:root[data-fontsize="large"]   { font-size: 17.5px; }
+:root[data-fontsize="xlarge"]  { font-size: 19px; }
+
 /* Motion tokens (dark only — hidden in other themes by React conditional) */
 @theme {
   --animate-drift: drift 12s ease-in-out infinite;

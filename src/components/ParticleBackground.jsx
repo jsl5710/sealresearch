@@ -14,26 +14,29 @@ const THEME_CONFIG = {
     canvasOpacity: 0.85,
     dotAlphaMul: 1.3,
     lineAlphaMul: 1.35,
+    lineWidth: 0.6,
     signal: [34, 211, 238],   // cyan
     ember:  [245, 193, 71],   // gold
     emberChance: 0.15,
   },
   light: {
-    nodeCount: 60,
-    linkDistance: 145,
-    canvasOpacity: 0.65,
-    dotAlphaMul: 0.85,
-    lineAlphaMul: 0.75,
+    nodeCount: 70,
+    linkDistance: 160,
+    canvasOpacity: 0.95,
+    dotAlphaMul: 1.20,
+    lineAlphaMul: 1.40,
+    lineWidth: 0.7,
     signal: [15, 98, 254],    // deep blue
     ember:  [245, 166, 35],   // amber
     emberChance: 0.25,
   },
   pro: {
-    nodeCount: 42,
+    nodeCount: 58,
     linkDistance: 160,
-    canvasOpacity: 0.55,
-    dotAlphaMul: 0.70,
-    lineAlphaMul: 0.50,
+    canvasOpacity: 0.90,
+    dotAlphaMul: 1.10,
+    lineAlphaMul: 1.25,
+    lineWidth: 0.7,
     signal: [31, 90, 161],    // pro deep blue
     ember:  [107, 114, 128],  // grey (no ember in pro)
     emberChance: 0.10,
@@ -42,9 +45,14 @@ const THEME_CONFIG = {
 
 const ParticleBackground = () => {
   const canvasRef = useRef(null);
-  const { theme } = useTheme();
+  const { theme, bgIntensity } = useTheme();
+
+  // 0% means off: skip the canvas entirely so no requestAnimationFrame
+  // loop runs at all, rather than animating an invisible layer.
+  const enabled = bgIntensity > 0;
 
   useEffect(() => {
+    if (!enabled) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
     const cfg = THEME_CONFIG[theme] || THEME_CONFIG.dark;
@@ -52,7 +60,7 @@ const ParticleBackground = () => {
     let animationFrameId;
 
     const nodes = [];
-    const { nodeCount, linkDistance, dotAlphaMul, lineAlphaMul, signal, ember, emberChance } = cfg;
+    const { nodeCount, linkDistance, dotAlphaMul, lineAlphaMul, lineWidth, signal, ember, emberChance } = cfg;
     const [sr, sg, sb] = signal;
     const [er, eg, eb] = ember;
 
@@ -100,7 +108,7 @@ const ParticleBackground = () => {
           if (dist < linkDistance) {
             const alpha = (1 - dist / linkDistance) * 0.15 * lineAlphaMul;
             ctx.strokeStyle = `rgba(${sr}, ${sg}, ${sb}, ${alpha})`;
-            ctx.lineWidth = 0.6;
+            ctx.lineWidth = lineWidth;
             ctx.beginPath();
             ctx.moveTo(nodes[i].x, nodes[i].y);
             ctx.lineTo(nodes[j].x, nodes[j].y);
@@ -122,14 +130,19 @@ const ParticleBackground = () => {
       window.removeEventListener('resize', resize);
       cancelAnimationFrame(animationFrameId);
     };
-  }, [theme]);
+  }, [theme, enabled]);
+
+  if (!enabled) return null;
 
   const cfg = THEME_CONFIG[theme] || THEME_CONFIG.dark;
+  // Intensity scales each theme's tuned baseline; alpha still caps at 1.
+  const opacity = Math.min(1, cfg.canvasOpacity * (bgIntensity / 100));
+
   return (
     <canvas
       ref={canvasRef}
       className="fixed inset-0 pointer-events-none z-0 transition-opacity duration-500"
-      style={{ opacity: cfg.canvasOpacity }}
+      style={{ opacity }}
     />
   );
 };

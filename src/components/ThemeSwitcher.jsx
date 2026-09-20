@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useTheme, THEMES } from '../theme/ThemeContext';
+import {
+  useTheme, THEMES, FONTS, FONT_SIZES,
+  BG_INTENSITY_MIN, BG_INTENSITY_MAX,
+} from '../theme/ThemeContext';
 
 /*
  * Fixed bottom-right floating control:
@@ -46,7 +49,13 @@ export const AdminKeystrokeListener = () => {
 };
 
 const ThemeSwitcher = () => {
-  const { theme, setTheme, isAdmin, logout } = useTheme();
+  const {
+    theme, setTheme,
+    font, setFont,
+    fontSize, setFontSize,
+    bgIntensity, setBgIntensity,
+    isAdmin, logout,
+  } = useTheme();
   const [open, setOpen] = useState(false);
 
   if (!isAdmin) return null;
@@ -71,11 +80,11 @@ const ThemeSwitcher = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
-            className="fixed bottom-24 right-6 z-[70] w-80 glass-strong rounded-2xl p-6 shadow-xl"
+            className="fixed bottom-24 right-6 z-[70] w-80 max-h-[75vh] overflow-y-auto glass-strong rounded-2xl p-6 shadow-xl"
           >
             <div className="flex items-center justify-between mb-4">
               <div>
-                <p className="mono text-xs uppercase tracking-widest text-signal">Admin · Theme</p>
+                <p className="mono text-xs uppercase tracking-widest text-signal">Admin · Appearance</p>
                 <p className="text-mist text-xs mt-1">Site defaults for all visitors</p>
               </div>
               <button onClick={() => setOpen(false)} className="text-mist hover:text-paper transition-colors" aria-label="Close">
@@ -83,6 +92,7 @@ const ThemeSwitcher = () => {
               </button>
             </div>
 
+            <SectionLabel>Theme</SectionLabel>
             <div className="space-y-3">
               {THEMES.map(t => {
                 const active = theme === t.id;
@@ -109,7 +119,85 @@ const ThemeSwitcher = () => {
               })}
             </div>
 
-            <div className="mt-5 pt-4 border-t border-signal/10 flex justify-between items-center">
+            {/* Typeface */}
+            <SectionLabel className="mt-6">Typeface</SectionLabel>
+            <div className="space-y-2">
+              {FONTS.map(f => {
+                const active = font === f.id;
+                return (
+                  <button
+                    key={f.id}
+                    onClick={() => setFont(f.id)}
+                    className={`w-full text-left px-3 py-2 rounded-xl border transition-colors ${
+                      active ? 'border-signal bg-signal/10' : 'border-signal/15 hover:border-signal/40'
+                    }`}
+                  >
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-paper text-sm font-medium">{f.name}</span>
+                      {active && <span className="mono text-[10px] text-signal">active</span>}
+                    </div>
+                    <p className="text-mist text-[11px] leading-snug mt-0.5">{f.tagline}</p>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Text size */}
+            <SectionLabel className="mt-6">Text size</SectionLabel>
+            <div className="grid grid-cols-4 gap-1.5">
+              {FONT_SIZES.map(s => {
+                const active = fontSize === s.id;
+                return (
+                  <button
+                    key={s.id}
+                    onClick={() => setFontSize(s.id)}
+                    title={`${s.name} — ${s.px}`}
+                    className={`px-1 py-2 rounded-lg border text-[11px] transition-colors ${
+                      active
+                        ? 'border-signal bg-signal/10 text-paper'
+                        : 'border-signal/15 text-mist hover:border-signal/40'
+                    }`}
+                  >
+                    {s.name}
+                  </button>
+                );
+              })}
+            </div>
+            <p className="text-mist text-[11px] leading-snug mt-2">
+              Scales the whole layout, not just the text.
+            </p>
+
+            {/* Background visibility */}
+            <SectionLabel className="mt-6">Background animation</SectionLabel>
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-mist text-[11px]">
+                {bgIntensity === 0 ? 'Off' : `${bgIntensity}% visible`}
+              </span>
+              {bgIntensity !== 100 && (
+                <button
+                  onClick={() => setBgIntensity(100)}
+                  className="mono text-[10px] text-mist hover:text-signal transition-colors"
+                >
+                  reset
+                </button>
+              )}
+            </div>
+            <input
+              type="range"
+              min={BG_INTENSITY_MIN}
+              max={BG_INTENSITY_MAX}
+              step={5}
+              value={bgIntensity}
+              onChange={(e) => setBgIntensity(e.target.value)}
+              aria-label="Background animation visibility"
+              className="w-full accent-signal cursor-pointer"
+            />
+            <p className="text-mist text-[11px] leading-snug mt-2">
+              100% is each theme's tuned baseline. 0% removes the canvas entirely,
+              which also stops its animation loop.
+            </p>
+
+            <div className="mt-6 pt-4 border-t border-signal/10 flex justify-between items-center">
               <p className="mono text-[10px] text-mist/70">Persists per browser</p>
               <button onClick={logout} className="mono text-xs text-mist hover:text-signal transition-colors">
                 Sign out
@@ -121,6 +209,12 @@ const ThemeSwitcher = () => {
     </>
   );
 };
+
+const SectionLabel = ({ children, className = '' }) => (
+  <p className={`mono text-[10px] uppercase tracking-widest text-mist/80 mb-2 ${className}`}>
+    {children}
+  </p>
+);
 
 // Small color-swatch preview per theme
 const SWATCHES = {

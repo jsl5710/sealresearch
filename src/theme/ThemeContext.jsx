@@ -34,16 +34,60 @@ export const THEMES = [
   },
 ];
 
+/*
+ * Typeface presets. Applied to <html data-font=...>; the CSS in index.css
+ * swaps the --font-* tokens. Independent of theme, so any pairing works
+ * with any color scheme.
+ */
+export const FONTS = [
+  { id: 'editorial', name: 'Editorial', tagline: 'Fraunces headings over Inter body — the shipped look' },
+  { id: 'modern',    name: 'Modern Sans', tagline: 'Inter throughout; clean and neutral, no serif' },
+  { id: 'classic',   name: 'Classic Serif', tagline: 'Old-style serif everywhere — reads like a printed paper' },
+  { id: 'system',    name: 'System Native', tagline: "The visitor's own OS font; fastest to render" },
+];
+
+/*
+ * Type scale. Applied to <html data-fontsize=...>; scales the root
+ * font-size, which rescales the whole rem-based layout proportionally.
+ */
+export const FONT_SIZES = [
+  { id: 'compact', name: 'Compact', px: '15px' },
+  { id: 'normal',  name: 'Normal',  px: '16px' },
+  { id: 'large',   name: 'Large',   px: '17.5px' },
+  { id: 'xlarge',  name: 'X-Large', px: '19px' },
+];
+
 const DEFAULT_THEME = 'dark';
+const DEFAULT_FONT = 'editorial';
+const DEFAULT_FONT_SIZE = 'normal';
+
+// Background animation visibility, as a percentage of each theme's tuned
+// baseline. 0 turns the animation off entirely (no canvas, no rAF loop).
+const DEFAULT_BG_INTENSITY = 100;
+export const BG_INTENSITY_MIN = 0;
+export const BG_INTENSITY_MAX = 150;
+
 const ADMIN_PASSWORD = 'SEAL2026'; // Change to rotate. Also override via ?admin=<value>
 
 const STORAGE_THEME = 'seal_theme';
 const STORAGE_ADMIN = 'seal_admin';
+const STORAGE_FONT = 'seal_font';
+const STORAGE_FONT_SIZE = 'seal_fontsize';
+const STORAGE_BG = 'seal_bg_intensity';
+
+const clampIntensity = (n) => {
+  const v = Number(n);
+  if (!Number.isFinite(v)) return DEFAULT_BG_INTENSITY;
+  return Math.min(BG_INTENSITY_MAX, Math.max(BG_INTENSITY_MIN, Math.round(v)));
+};
 
 const ThemeContext = createContext(null);
 
 export const ThemeProvider = ({ children }) => {
   const [theme, setThemeState] = useState(DEFAULT_THEME);
+  const [font, setFontState] = useState(DEFAULT_FONT);
+  const [fontSize, setFontSizeState] = useState(DEFAULT_FONT_SIZE);
+  const [bgIntensity, setBgIntensityState] = useState(DEFAULT_BG_INTENSITY);
   const [isAdmin, setIsAdmin] = useState(false);
   const [loginOpen, setLoginOpen] = useState(false);
 
@@ -55,6 +99,20 @@ export const ThemeProvider = ({ children }) => {
         setThemeState(savedTheme);
       }
     } catch { /* localStorage disabled — silently fall back to default */ }
+
+    // Read persisted typography + background settings
+    try {
+      const savedFont = localStorage.getItem(STORAGE_FONT);
+      if (savedFont && FONTS.find(f => f.id === savedFont)) setFontState(savedFont);
+    } catch {}
+    try {
+      const savedSize = localStorage.getItem(STORAGE_FONT_SIZE);
+      if (savedSize && FONT_SIZES.find(s => s.id === savedSize)) setFontSizeState(savedSize);
+    } catch {}
+    try {
+      const savedBg = localStorage.getItem(STORAGE_BG);
+      if (savedBg !== null) setBgIntensityState(clampIntensity(savedBg));
+    } catch {}
 
     // Read persisted admin
     try {
@@ -70,6 +128,23 @@ export const ThemeProvider = ({ children }) => {
       setThemeState(themeParam);
       try { localStorage.setItem(STORAGE_THEME, themeParam); } catch {}
     }
+    const fontParam = params.get('font');
+    if (fontParam && FONTS.find(f => f.id === fontParam)) {
+      setFontState(fontParam);
+      try { localStorage.setItem(STORAGE_FONT, fontParam); } catch {}
+    }
+    const sizeParam = params.get('fontsize');
+    if (sizeParam && FONT_SIZES.find(s => s.id === sizeParam)) {
+      setFontSizeState(sizeParam);
+      try { localStorage.setItem(STORAGE_FONT_SIZE, sizeParam); } catch {}
+    }
+    const bgParam = params.get('bg');
+    if (bgParam !== null && bgParam !== '') {
+      const v = clampIntensity(bgParam);
+      setBgIntensityState(v);
+      try { localStorage.setItem(STORAGE_BG, String(v)); } catch {}
+    }
+
     const adminParam = params.get('admin');
     if (adminParam === ADMIN_PASSWORD) {
       setIsAdmin(true);
@@ -82,10 +157,37 @@ export const ThemeProvider = ({ children }) => {
     document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
 
+  // Typography attributes drive the --font-* token swaps in index.css
+  useEffect(() => {
+    document.documentElement.setAttribute('data-font', font);
+  }, [font]);
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-fontsize', fontSize);
+  }, [fontSize]);
+
   const setTheme = useCallback((next) => {
     if (!THEMES.find(t => t.id === next)) return;
     setThemeState(next);
     try { localStorage.setItem(STORAGE_THEME, next); } catch {}
+  }, []);
+
+  const setFont = useCallback((next) => {
+    if (!FONTS.find(f => f.id === next)) return;
+    setFontState(next);
+    try { localStorage.setItem(STORAGE_FONT, next); } catch {}
+  }, []);
+
+  const setFontSize = useCallback((next) => {
+    if (!FONT_SIZES.find(s => s.id === next)) return;
+    setFontSizeState(next);
+    try { localStorage.setItem(STORAGE_FONT_SIZE, next); } catch {}
+  }, []);
+
+  const setBgIntensity = useCallback((next) => {
+    const v = clampIntensity(next);
+    setBgIntensityState(v);
+    try { localStorage.setItem(STORAGE_BG, String(v)); } catch {}
   }, []);
 
   const login = useCallback((password) => {
@@ -106,7 +208,13 @@ export const ThemeProvider = ({ children }) => {
   const closeLogin = useCallback(() => setLoginOpen(false), []);
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme, isAdmin, login, logout, loginOpen, openLogin, closeLogin }}>
+    <ThemeContext.Provider value={{
+      theme, setTheme,
+      font, setFont,
+      fontSize, setFontSize,
+      bgIntensity, setBgIntensity,
+      isAdmin, login, logout, loginOpen, openLogin, closeLogin,
+    }}>
       {children}
     </ThemeContext.Provider>
   );
