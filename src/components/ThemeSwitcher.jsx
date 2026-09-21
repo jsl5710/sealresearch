@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   useTheme, THEMES, FONTS, FONT_SIZES,
   BG_INTENSITY_MIN, BG_INTENSITY_MAX,
+  AUTO_THEME_SCHEDULE, themeForHour,
 } from '../theme/ThemeContext';
 
 /*
@@ -51,6 +52,7 @@ export const AdminKeystrokeListener = () => {
 const ThemeSwitcher = () => {
   const {
     theme, setTheme,
+    autoTheme, setAutoTheme,
     font, setFont,
     fontSize, setFontSize,
     bgIntensity, setBgIntensity,
@@ -92,6 +94,33 @@ const ThemeSwitcher = () => {
               </button>
             </div>
 
+            {/* Auto (time of day) */}
+            <div className="mb-5 p-3 rounded-xl border border-signal/15">
+              <div className="flex items-center justify-between gap-3">
+                <div className="min-w-0">
+                  <p className="text-paper text-sm font-medium">Match time of day</p>
+                  <p className="text-mist text-[11px] leading-snug mt-0.5">
+                    {autoTheme ? <AutoThemeStatus /> : 'Off — theme stays on your manual choice.'}
+                  </p>
+                </div>
+                <button
+                  role="switch"
+                  aria-checked={autoTheme}
+                  aria-label="Match theme to time of day"
+                  onClick={() => setAutoTheme(!autoTheme)}
+                  className={`shrink-0 w-11 h-6 rounded-full transition-colors relative ${
+                    autoTheme ? 'bg-signal' : 'bg-mist/30'
+                  }`}
+                >
+                  <span
+                    className={`absolute top-0.5 w-5 h-5 rounded-full bg-ink transition-transform ${
+                      autoTheme ? 'translate-x-[22px]' : 'translate-x-0.5'
+                    }`}
+                  />
+                </button>
+              </div>
+            </div>
+
             <SectionLabel>Theme</SectionLabel>
             <div className="space-y-3">
               {THEMES.map(t => {
@@ -108,7 +137,11 @@ const ThemeSwitcher = () => {
                   >
                     <div className="flex items-center justify-between gap-2 mb-1">
                       <span className="text-paper font-medium text-sm">{t.name}</span>
-                      {active && <span className="mono text-xs text-signal">active</span>}
+                      {active && (
+                        <span className="mono text-xs text-signal">
+                          {autoTheme ? 'active · auto' : 'active'}
+                        </span>
+                      )}
                     </div>
                     <p className="text-mist text-xs leading-relaxed">{t.tagline}</p>
                     <div className="flex gap-1.5 mt-2">
@@ -206,6 +239,33 @@ const ThemeSwitcher = () => {
           </motion.div>
         )}
       </AnimatePresence>
+    </>
+  );
+};
+
+/*
+ * Live status line for auto mode: which theme is showing and when it flips.
+ * Ticks each minute so the countdown does not go stale while the panel sits
+ * open across a boundary.
+ */
+const AutoThemeStatus = () => {
+  const [now, setNow] = useState(() => new Date());
+
+  React.useEffect(() => {
+    const id = setInterval(() => setNow(new Date()), 60 * 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  const { dayStart, nightStart } = AUTO_THEME_SCHEDULE;
+  const hour = now.getHours();
+  const isDay = themeForHour(hour) === AUTO_THEME_SCHEDULE.dayTheme;
+  const nextHour = isDay ? nightStart : dayStart;
+  const label = THEMES.find(t => t.id === themeForHour(hour))?.name || '';
+  const fmt = (h) => `${String(h).padStart(2, '0')}:00`;
+
+  return (
+    <>
+      On — {label} until {fmt(nextHour)}. Follows each visitor's own clock.
     </>
   );
 };

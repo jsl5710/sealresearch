@@ -58,6 +58,31 @@ export const FONT_SIZES = [
 ];
 
 const DEFAULT_THEME = 'dark';
+
+/*
+ * Time-of-day theming. When enabled, the theme follows the clock rather
+ * than a stored choice: Professional & Simple through the working day,
+ * Dark Cinematic after hours.
+ *
+ * Boundaries are local to the VIEWER, not the lab -- someone reading from
+ * another timezone gets the theme matching their own evening, which is the
+ * point (glare, not office hours).
+ */
+const DAY_START_HOUR = 7;   // 07:00 -> switch to the light/pro theme
+const NIGHT_START_HOUR = 19; // 19:00 -> switch to the dark theme
+const AUTO_DAY_THEME = 'pro';
+const AUTO_NIGHT_THEME = 'dark';
+
+export const themeForHour = (hour) =>
+  hour >= DAY_START_HOUR && hour < NIGHT_START_HOUR ? AUTO_DAY_THEME : AUTO_NIGHT_THEME;
+
+export const AUTO_THEME_SCHEDULE = {
+  dayStart: DAY_START_HOUR,
+  nightStart: NIGHT_START_HOUR,
+  dayTheme: AUTO_DAY_THEME,
+  nightTheme: AUTO_NIGHT_THEME,
+};
+
 const DEFAULT_FONT = 'editorial';
 const DEFAULT_FONT_SIZE = 'normal';
 
@@ -74,6 +99,7 @@ const STORAGE_ADMIN = 'seal_admin';
 const STORAGE_FONT = 'seal_font';
 const STORAGE_FONT_SIZE = 'seal_fontsize';
 const STORAGE_BG = 'seal_bg_intensity';
+const STORAGE_AUTO_THEME = 'seal_auto_theme';
 
 const clampIntensity = (n) => {
   const v = Number(n);
@@ -88,6 +114,7 @@ export const ThemeProvider = ({ children }) => {
   const [font, setFontState] = useState(DEFAULT_FONT);
   const [fontSize, setFontSizeState] = useState(DEFAULT_FONT_SIZE);
   const [bgIntensity, setBgIntensityState] = useState(DEFAULT_BG_INTENSITY);
+  const [autoTheme, setAutoThemeState] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [loginOpen, setLoginOpen] = useState(false);
 
@@ -113,6 +140,9 @@ export const ThemeProvider = ({ children }) => {
       const savedBg = localStorage.getItem(STORAGE_BG);
       if (savedBg !== null) setBgIntensityState(clampIntensity(savedBg));
     } catch {}
+    try {
+      if (localStorage.getItem(STORAGE_AUTO_THEME) === 'true') setAutoThemeState(true);
+    } catch {}
 
     // Read persisted admin
     try {
@@ -123,8 +153,21 @@ export const ThemeProvider = ({ children }) => {
 
     // URL param escape hatch — ?theme=light and/or ?admin=<password>
     const params = new URLSearchParams(window.location.search);
+    const autoParam = params.get('auto');
+    if (autoParam === '1' || autoParam === 'true') {
+      setAutoThemeState(true);
+      try { localStorage.setItem(STORAGE_AUTO_THEME, 'true'); } catch {}
+    } else if (autoParam === '0' || autoParam === 'false') {
+      setAutoThemeState(false);
+      try { localStorage.setItem(STORAGE_AUTO_THEME, 'false'); } catch {}
+    }
+
     const themeParam = params.get('theme');
     if (themeParam && THEMES.find(t => t.id === themeParam)) {
+      // An explicit theme in the URL is a manual choice, so it drops out of
+      // auto rather than being overwritten a moment later by the clock.
+      setAutoThemeState(false);
+      try { localStorage.setItem(STORAGE_AUTO_THEME, 'false'); } catch {}
       setThemeState(themeParam);
       try { localStorage.setItem(STORAGE_THEME, themeParam); } catch {}
     }
@@ -166,8 +209,48 @@ export const ThemeProvider = ({ children }) => {
     document.documentElement.setAttribute('data-fontsize', fontSize);
   }, [fontSize]);
 
+  /*
+   * While auto is on, follow the clock: apply the right theme immediately,
+   * then re-check each minute so the site flips at the boundary without a
+   * reload. Also re-check when the tab becomes visible again -- a laptop
+   * asleep from afternoon to evening fires no timers, and would otherwise
+   * wake showing the stale daytime theme.
+   */
+  useEffect(() => {
+    if (!autoTheme) return;
+
+    const apply = () => setThemeState(themeForHour(new Date().getHours()));
+    apply();
+
+    const id = setInterval(apply, 60 * 1000);
+    const onVisible = () => { if (!document.hidden) apply(); };
+    document.addEventListener('visibilitychange', onVisible);
+
+    return () => {
+      clearInterval(id);
+      document.removeEventListener('visibilitychange', onVisible);
+    };
+  }, [autoTheme]);
+
+  const setAutoTheme = useCallback((on) => {
+    const next = !!on;
+    setAutoThemeState(next);
+    try { localStorage.setItem(STORAGE_AUTO_THEME, String(next)); } catch {}
+    if (!next) {
+      // Turning auto off returns to manual: restore the last theme the user
+      // actually chose, rather than freezing on whatever the clock last set.
+      try {
+        const saved = localStorage.getItem(STORAGE_THEME);
+        if (saved && THEMES.find(t => t.id === saved)) setThemeState(saved);
+      } catch {}
+    }
+  }, []);
+
+  // Picking a theme by hand is an override, so it also leaves auto mode.
   const setTheme = useCallback((next) => {
     if (!THEMES.find(t => t.id === next)) return;
+    setAutoThemeState(false);
+    try { localStorage.setItem(STORAGE_AUTO_THEME, 'false'); } catch {}
     setThemeState(next);
     try { localStorage.setItem(STORAGE_THEME, next); } catch {}
   }, []);
@@ -210,6 +293,7 @@ export const ThemeProvider = ({ children }) => {
   return (
     <ThemeContext.Provider value={{
       theme, setTheme,
+      autoTheme, setAutoTheme,
       font, setFont,
       fontSize, setFontSize,
       bgIntensity, setBgIntensity,
