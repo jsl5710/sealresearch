@@ -26,6 +26,7 @@ const ContactSection = () => {
 
             <p className="mono text-xs uppercase tracking-widest text-signal mb-3">Visit</p>
             <p className="text-paper mb-1">{lab.department}</p>
+            {lab.college && <p className="text-mist mb-1">{lab.college}</p>}
             <p className="text-mist mb-1">{lab.institution}</p>
             <p className="text-mist mb-6">{lab.location}</p>
 

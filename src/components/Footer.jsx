@@ -45,6 +45,13 @@ const Footer = () => {
           <h3 className="text-sm mono uppercase text-signal mb-6 tracking-widest">Find Us</h3>
           <ul className="space-y-3 text-sm text-mist">
             <li>{lab.department}</li>
+            {lab.college && (
+              <li>
+                {lab.collegeUrl
+                  ? <a href={lab.collegeUrl} className="hover:text-signal transition-colors">{lab.college}</a>
+                  : lab.college}
+              </li>
+            )}
             <li><a href={lab.institutionUrl} className="hover:text-signal transition-colors">{lab.institution}</a></li>
             <li>{lab.location}</li>
             <li><a href={`mailto:${lab.email}`} className="text-signal font-medium">{lab.email}</a></li>

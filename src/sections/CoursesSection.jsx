@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import courses from '../data/courses.json';
-import { useTheme } from '../theme/ThemeContext';
 
 const statusChip = (status) => {
   const map = {
@@ -14,8 +13,6 @@ const statusChip = (status) => {
 };
 
 const CoursesSection = () => {
-  const { isAdmin } = useTheme();
-
   return (
     <section id="courses" className="relative py-32 px-6 md:px-12">
       <div className="max-w-5xl mx-auto">
@@ -97,33 +94,6 @@ const CoursesSection = () => {
                 <div className="flex flex-wrap gap-4 pt-4 border-t border-signal/10 text-xs mono">
                   {c.syllabusUrl && <a href={c.syllabusUrl} className="text-signal hover:text-signal-soft transition-colors">syllabus →</a>}
                   {c.canvasUrl && <a href={c.canvasUrl} className="text-signal hover:text-signal-soft transition-colors">canvas →</a>}
-                </div>
-              )}
-
-              {isAdmin && c.materials && c.materials.length > 0 && (
-                <div className="mt-6 pt-4 border-t border-ember/30">
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="chip-ember">Admin only</span>
-                    <p className="mono text-[10px] uppercase tracking-widest text-mist">
-                      Course materials
-                    </p>
-                  </div>
-                  <ul className="space-y-2">
-                    {c.materials.map(m => (
-                      <li key={m.url || m.label}>
-                        <a
-                          href={m.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-signal hover:text-signal-soft transition-colors text-sm inline-flex items-center gap-2"
-                        >
-                          <span className="mono text-[10px] text-mist uppercase">{m.type || 'file'}</span>
-                          {m.label}
-                          <span aria-hidden="true">→</span>
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
                 </div>
               )}
             </motion.article>

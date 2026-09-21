@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useEffect, useState, useCallback, useRef } from 'react';
-import initialBudget from '../data/budget.json';
 import { getFile, putFile, testToken } from '../lib/githubApi';
 
 /*
@@ -15,14 +14,23 @@ import { getFile, putFile, testToken } from '../lib/githubApi';
  *     4. Deploy runs (~60-90s); until it lands, visitors see the pre-commit JSON
  *     5. Post-deploy, this browser will import the fresh budget.json on refresh
  *
- *   Security posture: token in localStorage. Any JS on the page can read it.
- *   Use a fine-grained PAT scoped to jsl5710/sealresearch, Contents: read/write.
- *   NEVER a classic PAT with account-wide scope.
+ *   Data lives in the PRIVATE repo jsl5710/seal-budget, fetched at runtime
+ *   by an authenticated admin. It is deliberately NOT imported from
+ *   src/data/, because anything imported is compiled into the public bundle
+ *   -- which is how the figures were previously readable by any visitor.
+ *   Non-admins now load no budget data at all.
+ *
+ *   Security posture: token in localStorage, so any JS on the page can read
+ *   it. Use a FINE-GRAINED PAT scoped to jsl5710/seal-budget alone, with
+ *   Contents: read/write. Never a classic PAT -- those are account-wide, and
+ *   never one with access to the site repo, which auto-deploys on push.
  */
+
+const EMPTY_BUDGET = { funds: [], expenses: [] };
 
 const STORAGE_TOKEN = 'seal_gh_token';
 const STORAGE_BUDGET_DRAFT = 'seal_budget_draft';
-const BUDGET_PATH = 'src/data/budget.json';
+const BUDGET_PATH = 'budget.json';
 
 const BudgetContext = createContext(null);
 
@@ -35,8 +43,13 @@ export const BudgetProvider = ({ children }) => {
         if (parsed && Array.isArray(parsed.funds) && Array.isArray(parsed.expenses)) return parsed;
       }
     } catch {}
-    return initialBudget;
+    return EMPTY_BUDGET;
   });
+
+  // Last known remote state, for dirty-checking. Null until a load lands.
+  const [remoteBudget, setRemoteBudget] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [loadError, setLoadError] = useState('');
 
   const [token, setTokenState] = useState(() => {
     try { return localStorage.getItem(STORAGE_TOKEN) || ''; } catch { return ''; }
@@ -66,6 +79,38 @@ export const BudgetProvider = ({ children }) => {
     return () => { cancelled = true; };
   }, [token]);
 
+  // Load budget from the private repo once a token is present. Without a
+  // token there is nothing to show -- and nothing leaks to non-admins.
+  useEffect(() => {
+    if (!token) {
+      setRemoteBudget(null);
+      setLoadError('');
+      return;
+    }
+    let cancelled = false;
+    setLoading(true);
+    setLoadError('');
+    getFile(BUDGET_PATH, token)
+      .then(({ json }) => {
+        if (cancelled) return;
+        const next = json && Array.isArray(json.funds) && Array.isArray(json.expenses)
+          ? json
+          : EMPTY_BUDGET;
+        setRemoteBudget(next);
+        // Only adopt remote if the user has no unsaved draft in progress.
+        let hasLocalDraft = false;
+        try { hasLocalDraft = !!localStorage.getItem(STORAGE_BUDGET_DRAFT); } catch {}
+        if (!hasLocalDraft) setBudget(next);
+        setLoading(false);
+      })
+      .catch(err => {
+        if (cancelled) return;
+        setLoadError(err.message);
+        setLoading(false);
+      });
+    return () => { cancelled = true; };
+  }, [token]);
+
   const connectToken = useCallback((t) => {
     const trimmed = (t || '').trim();
     if (!trimmed) return;
@@ -92,8 +137,9 @@ export const BudgetProvider = ({ children }) => {
       await putFile(BUDGET_PATH, budget, sha, commitMessage || 'Budget: update via admin panel', token);
       // Clear draft on successful save — repo is now source of truth
       try { localStorage.removeItem(STORAGE_BUDGET_DRAFT); } catch {}
+      setRemoteBudget(budget);
       setStatus('saved');
-      setStatusMsg('Committed. Deploy running (~60s).');
+      setStatusMsg('Committed to seal-budget.');
       setTimeout(() => setStatus('idle'), 5000);
       return { ok: true, message: 'Committed' };
     } catch (err) {
@@ -108,10 +154,11 @@ export const BudgetProvider = ({ children }) => {
 
   const discardDraft = useCallback(() => {
     try { localStorage.removeItem(STORAGE_BUDGET_DRAFT); } catch {}
-    setBudget(initialBudget);
-  }, []);
+    setBudget(remoteBudget || EMPTY_BUDGET);
+  }, [remoteBudget]);
 
-  const hasDraft = JSON.stringify(budget) !== JSON.stringify(initialBudget);
+  const hasDraft = remoteBudget !== null
+    && JSON.stringify(budget) !== JSON.stringify(remoteBudget);
 
   // --- Mutations ---
 
@@ -152,6 +199,8 @@ export const BudgetProvider = ({ children }) => {
         updateCategoryAllocation,
         token,
         tokenInfo,
+        loading,
+        loadError,
         tokenChecking,
         tokenError,
         connectToken,

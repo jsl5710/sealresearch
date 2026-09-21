@@ -5,7 +5,7 @@
   "mission": "The Secure and Ethical AI Lab (SEAL) at CU Boulder investigates how AI systems fail — and for whom — and designs the socio-technical guardrails that let them serve every community, in every language, without compromising safety, fairness, or human agency.",
   "institution": "University of Colorado Boulder",
   "institutionUrl": "https://www.colorado.edu/",
-  "department": "College of Engineering and Applied Science",
+  "department": "Department of Information Science",
   "location": "Boulder, Colorado, USA",
   "email": "seal.info@colorado.edu",
   "social": {
@@ -13,5 +13,7 @@
     "github": "https://github.com/seal-lab",
     "scholar": ""
   },
-  "founded": "2026"
+  "founded": "2026",
+  "college": "College of Communication, Media, Design, and Information (CMDI)",
+  "collegeUrl": "https://www.colorado.edu/cmdi/"
 }

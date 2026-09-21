@@ -1,15 +1,24 @@
 /*
- * Minimal GitHub Contents API client for writing single JSON files.
- * Used by the Budget section's admin CRUD to commit changes directly to
- * budget.json in the repo, triggering a Pages redeploy.
+ * Minimal GitHub Contents API client for reading and writing single JSON
+ * files. Used by the Budget section's admin CRUD.
+ *
+ * TARGET: jsl5710/seal-budget -- a PRIVATE repo holding only budget data.
+ * Deliberately NOT the site repo. Two reasons:
+ *
+ *   1. The site repo is public and its contents are compiled into the JS
+ *      bundle, so budget figures kept there were readable by anyone. In
+ *      a private repo, GitHub enforces access server-side.
+ *   2. The site repo auto-deploys on push, so a token with write access to
+ *      it could inject arbitrary JavaScript into the live site. Scoped
+ *      here, a stolen token can corrupt budget numbers and nothing else.
  *
  * The token is passed in from BudgetContext; nothing is stored here.
- * SCOPE: token needs Contents: read/write on jsl5710/sealresearch.
- * Fine-grained PATs restricted to this single repo are strongly preferred.
+ * SCOPE: a FINE-GRAINED PAT restricted to jsl5710/seal-budget with
+ * Contents: read/write. Never a classic PAT -- those are account-wide.
  */
 
 const REPO_OWNER = 'jsl5710';
-const REPO_NAME = 'sealresearch';
+const REPO_NAME = 'seal-budget';
 const BRANCH = 'main';
 
 const API_BASE = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}`;
