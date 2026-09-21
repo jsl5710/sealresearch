@@ -1,0 +1,36 @@
+# Netlify deploy for the SEAL lab site (Vite + React SPA).
+#
+# base stays '/' here: on Netlify the site is served from a custom domain
+# root, unlike the GitHub Pages build which serves it under /sealresearch/
+# and sets VITE_BASE accordingly.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+  VITE_BASE = "/"
+
+# SPA fallback: the app is client-routed, so unknown paths must return
+# index.html rather than a 404. Keep this last among redirects.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    # The admin panel talks to api.github.com; Google Fonts supplies the
+    # typefaces. Everything else is same-origin.
+    Content-Security-Policy = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://api.github.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
+
+# Long-cache the fingerprinted assets; never the HTML entry point.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
