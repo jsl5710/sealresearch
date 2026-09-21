@@ -1,5 +1,40 @@
 [
   {
+    "id": "emnlp26-aor-bench",
+    "date": "2026-09-20",
+    "title": "AOR-Bench accepted at EMNLP 2026",
+    "summary": "Do large audio language models over-refuse pseudo-harmful queries? AOR-Bench measures the over-refusal failure mode in speech-facing safety alignment. Main conference, Budapest.",
+    "tag": "Paper"
+  },
+  {
+    "id": "emnlp26-lost-in-speech",
+    "date": "2026-09-20",
+    "title": "Lost in Speech accepted at SALMA 2026",
+    "summary": "Trilingual spoken hallucination detection across audio and transcripts, at the 2nd Workshop on Speech and Audio Language Models, co-located with EMNLP 2026 in Budapest.",
+    "tag": "Paper"
+  },
+  {
+    "id": "joitmc26-sdg-ai-readiness",
+    "date": "2026-09-01",
+    "title": "SDG prediction paper published in Journal of Open Innovation",
+    "summary": "A hybrid Bayesian Belief Network and Artificial Neural Network approach for predicting Sustainable Development Goal outcomes from country-level AI readiness indicators.",
+    "tag": "Paper"
+  },
+  {
+    "id": "seal-launch",
+    "date": "2026-08-15",
+    "title": "SEAL Lab launches at CU Boulder",
+    "summary": "The Secure and Ethical AI Lab formally begins operations. Recruiting PhD students, postdocs, and undergrad researchers.",
+    "tag": "Announcement"
+  },
+  {
+    "id": "kdd26-bluff",
+    "date": "2026-08-09",
+    "title": "BLUFF presented at KDD 2026",
+    "summary": "Benchmarking falsehoods in long-tail multilingual low-resource languages, in the Datasets and Benchmarks Track at KDD 2026 in Jeju, South Korea.",
+    "tag": "Paper"
+  },
+  {
     "id": "icml26-position",
     "date": "2026-07-09",
     "title": "ICML 2026 Position Paper accepted",
@@ -12,12 +47,5 @@
     "title": "DIA-HARM wins ACL 2026 Social Impact Paper Award 🏆",
     "summary": "Recognized at the 64th ACL for advancing equity in harmful-content detection across 50 English dialects.",
     "tag": "Award"
-  },
-  {
-    "id": "seal-launch",
-    "date": "2026-08-15",
-    "title": "SEAL Lab launches at CU Boulder",
-    "summary": "The Secure and Ethical AI Lab formally begins operations. Recruiting PhD students, postdocs, and undergrad researchers.",
-    "tag": "Announcement"
   }
 ]

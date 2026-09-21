@@ -12,6 +12,10 @@ const tagColor = (tag) => {
 };
 
 const NewsSection = () => {
+  // Newest first. The JSON is hand-edited, so sort here rather than relying
+  // on entries being appended in the right order.
+  const items = [...news].sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
+
   return (
     <section id="news" className="relative py-32 px-6 md:px-12">
       <div className="max-w-5xl mx-auto">
@@ -25,7 +29,7 @@ const NewsSection = () => {
           <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-[1px] bg-signal/20 -translate-x-1/2" aria-hidden="true" />
 
           <div className="space-y-10">
-            {news.map((item, i) => (
+            {items.map((item, i) => (
               <motion.div
                 key={item.id}
                 initial={{ opacity: 0, x: i % 2 === 0 ? -30 : 30 }}
