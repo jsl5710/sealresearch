@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { useBudget } from '../theme/BudgetContext';
+import Modal from './Modal';
 
 /**
  * Admin-only modal to paste a GitHub fine-grained PAT.
@@ -10,8 +10,6 @@ const GitHubTokenModal = ({ open, onClose }) => {
   const { token, tokenInfo, tokenChecking, tokenError, connectToken, disconnectToken } = useBudget();
   const [input, setInput] = useState('');
 
-  if (!open) return null;
-
   const submit = (e) => {
     e.preventDefault();
     connectToken(input);
@@ -19,24 +17,13 @@ const GitHubTokenModal = ({ open, onClose }) => {
   };
 
   return (
-    <AnimatePresence>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        onClick={onClose}
-        className="fixed inset-0 z-[200] flex items-center justify-center bg-ink/70 backdrop-blur-sm p-6"
-      >
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95, y: 10 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.95 }}
-          onClick={(e) => e.stopPropagation()}
-          className="glass-strong rounded-2xl p-8 max-w-lg w-full"
-        >
-          <p className="mono text-xs uppercase tracking-widest text-signal mb-2">Admin · GitHub</p>
-          <h3 className="text-2xl font-serif text-paper mb-4">Connect GitHub</h3>
-
+    <Modal
+      open={open}
+      onOpenChange={(next) => { if (!next) onClose(); }}
+      eyebrow="Admin · GitHub"
+      title="Connect GitHub"
+      maxWidth="max-w-lg"
+    >
           {token && tokenInfo && (
             <div className="mb-6 p-4 glass rounded-xl">
               <p className="mono text-xs text-mist mb-1">Connected to</p>
@@ -87,18 +74,18 @@ const GitHubTokenModal = ({ open, onClose }) => {
                 Go to <a href="https://github.com/settings/personal-access-tokens/new" className="text-signal underline">github.com/settings/personal-access-tokens/new</a>
               </li>
               <li>Name it "SEAL Budget CRUD", 90-day expiration.</li>
-              <li>Repository access → Only select <span className="mono text-signal-soft">jsl5710/sealresearch</span></li>
+              <li>Repository access → Only select <span className="mono text-signal-soft">jsl5710/seal-budget</span></li>
               <li>Permissions → Repository → <span className="mono text-signal-soft">Contents: Read and write</span></li>
               <li>Generate, copy, paste above.</li>
             </ol>
             <p className="mono text-[10px] text-mist/70 mt-4 leading-relaxed">
               Token is stored in this browser's localStorage. Any JS on this domain can read it —
-              only paste on a device you trust. Disconnect when done.
+              only paste on a device you trust. Disconnect when done. Scope it to
+              seal-budget alone: a token with access to the site repo could publish
+              code to the live site, since that repo auto-deploys.
             </p>
           </div>
-        </motion.div>
-      </motion.div>
-    </AnimatePresence>
+    </Modal>
   );
 };
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../theme/ThemeContext';
+import Modal from './Modal';
 
 /**
  * Modal that shows the admin login form. Rendered once at the root of the
@@ -22,7 +22,8 @@ const AdminLoginModal = () => {
     }
   }, [loginOpen]);
 
-  if (isAdmin || !loginOpen) return null;
+  // Radix manages visibility, so only the admin short-circuit remains here.
+  if (isAdmin) return null;
 
   const submit = (e) => {
     e.preventDefault();
@@ -34,49 +35,41 @@ const AdminLoginModal = () => {
   };
 
   return (
-    <AnimatePresence>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        onClick={closeLogin}
-        className="fixed inset-0 z-[200] flex items-center justify-center bg-ink/70 backdrop-blur-sm p-6"
-      >
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95, y: 10 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.95 }}
-          onClick={(e) => e.stopPropagation()}
-          className="glass-strong rounded-2xl p-8 max-w-sm w-full"
-        >
-          <p className="mono text-xs uppercase tracking-widest text-signal mb-2">Admin</p>
-          <h3 className="text-2xl font-serif text-paper mb-4">Sign in</h3>
-          <form onSubmit={submit}>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => { setPassword(e.target.value); setError(''); }}
-              autoFocus
-              placeholder="Admin password"
-              className="w-full px-4 py-3 rounded-full border border-signal/30 bg-transparent text-paper placeholder:text-mist focus:outline-none focus:border-signal transition-colors mb-2"
-            />
-            {error && <p className="text-ember text-xs mb-3">{error}</p>}
-            <div className="flex justify-end gap-3 mt-4">
-              <button type="button" onClick={closeLogin} className="text-mist text-sm hover:text-paper transition-colors">
-                Cancel
-              </button>
-              <button type="submit" className="btn-primary text-sm py-2">
-                Enter
-              </button>
-            </div>
-          </form>
-          <p className="mono text-xs text-mist/70 mt-6 leading-relaxed">
-            Client-side gate for admin-only UI (theme switcher).
-            Sign-in persists per browser.
-          </p>
-        </motion.div>
-      </motion.div>
-    </AnimatePresence>
+    <Modal
+      open={loginOpen}
+      onOpenChange={(next) => { if (!next) closeLogin(); }}
+      eyebrow="Admin"
+      title="Sign in"
+    >
+      <form onSubmit={submit}>
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => { setPassword(e.target.value); setError(''); }}
+          autoFocus
+          placeholder="Admin password"
+          aria-invalid={!!error}
+          aria-describedby={error ? 'admin-login-error' : undefined}
+          className="w-full px-4 py-3 rounded-full border border-signal/30 bg-transparent text-paper placeholder:text-mist focus:outline-none focus:border-signal transition-colors mb-2"
+        />
+        {/* role=alert so the failure is announced, not just shown. */}
+        {error && (
+          <p id="admin-login-error" role="alert" className="text-ember text-xs mb-3">{error}</p>
+        )}
+        <div className="flex justify-end gap-3 mt-4">
+          <button type="button" onClick={closeLogin} className="text-mist text-sm hover:text-paper transition-colors">
+            Cancel
+          </button>
+          <button type="submit" className="btn-primary text-sm py-2">
+            Enter
+          </button>
+        </div>
+      </form>
+      <p className="mono text-xs text-mist/70 mt-6 leading-relaxed">
+        Client-side gate for admin-only UI (theme switcher).
+        Sign-in persists per browser.
+      </p>
+    </Modal>
   );
 };
 
