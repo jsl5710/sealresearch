@@ -1,6 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import grantsData from '../data/grants.json';
+import { useBudget } from '../theme/BudgetContext';
+import { getFile } from '../lib/githubApi';
+
+/*
+ * Awarded grants ship in the public bundle -- federal awards are public
+ * record, and showing them signals an active lab.
+ *
+ * The pipeline does NOT. It names which programs the lab is targeting, at
+ * what scale and on what timeline, so it lives in the private seal-budget
+ * repo and is fetched at runtime only when an admin token is present.
+ * Gating the render alone would not be enough: anything imported here is
+ * compiled into the public bundle, which is exactly how the budget figures
+ * leaked before.
+ */
+const PIPELINE_PATH = 'pipeline.json';
 
 const STATUS = {
   targeting: { label: 'Targeting', cls: 'chip' },
@@ -31,25 +46,44 @@ const fmtDate = (d) => {
 
 const GrantsSection = () => {
   const [sourceFilter, setSourceFilter] = useState('all');
-  const { sources, grants } = grantsData;
+  const { token } = useBudget();
+  const [pipeline, setPipeline] = useState([]);
+  const [pipelineSources, setPipelineSources] = useState([]);
+  const [pipelineError, setPipelineError] = useState('');
+
+  const { grants } = grantsData;
 
   const awarded = grants
     .filter(g => AWARDED_STATUSES.has(g.status))
     .sort((a, b) => (b.date || '').localeCompare(a.date || ''));
 
-  const pipeline = grants.filter(g => !AWARDED_STATUSES.has(g.status));
-
   const totalAwarded = awarded.reduce((sum, g) => sum + parseAmount(g.amount), 0);
+
+  useEffect(() => {
+    if (!token) { setPipeline([]); setPipelineSources([]); setPipelineError(''); return; }
+    let cancelled = false;
+    getFile(PIPELINE_PATH, token)
+      .then(({ json }) => {
+        if (cancelled) return;
+        setPipeline(Array.isArray(json?.grants) ? json.grants : []);
+        setPipelineSources(Array.isArray(json?.sources) ? json.sources : []);
+        setPipelineError('');
+      })
+      .catch(err => { if (!cancelled) { setPipeline([]); setPipelineSources([]); setPipelineError(err.message); } });
+    return () => { cancelled = true; };
+  }, [token]);
+
+  const showPipeline = pipeline.length > 0 || !!pipelineError;
 
   const filtered = sourceFilter === 'all'
     ? pipeline
     : pipeline.filter(g => g.source === sourceFilter);
 
-  const grouped = sources
+  const grouped = pipelineSources
     .map(src => ({ ...src, items: filtered.filter(g => g.source === src.id) }))
     .filter(g => g.items.length > 0);
 
-  const sourceChips = [{ id: 'all', label: 'All Sources' }, ...sources.map(s => ({ id: s.id, label: s.label }))];
+  const sourceChips = [{ id: 'all', label: 'All Sources' }, ...pipelineSources.map(s => ({ id: s.id, label: s.label }))];
 
   return (
     <section id="grants" className="relative py-32 px-6 md:px-12 bg-slate/20">
@@ -59,8 +93,8 @@ const GrantsSection = () => {
           Funding & <span className="italic text-signal">opportunities</span>.
         </h2>
         <p className="text-mist text-center max-w-2xl mx-auto mb-10">
-          Active, targeted, and planned funding across internal CU Boulder programs, federal agencies (NSF, NIH, DARPA),
-          the American Cancer Association, and industry sponsors.
+          Funding supporting SEAL's research across internal CU Boulder programs, federal agencies,
+          and industry sponsors.
         </p>
 
         {/* Awarded — summary row */}
@@ -82,6 +116,8 @@ const GrantsSection = () => {
           </div>
         )}
 
+        {showPipeline && (
+          <>
         {/* Phase-3 roadmap callout — remove or update once the tracker agent is deployed */}
         <div className="glass rounded-2xl p-5 md:p-6 mb-12 max-w-3xl mx-auto text-sm">
           <p className="mono text-xs uppercase tracking-widest text-signal mb-2">Coming soon — automated tracker</p>
@@ -92,11 +128,18 @@ const GrantsSection = () => {
           </p>
         </div>
 
-        <div className="flex items-baseline gap-4 mb-6">
+        <div className="flex items-baseline gap-4 mb-3">
           <h3 className="text-2xl md:text-3xl font-serif font-semibold text-paper">Pipeline</h3>
           <span className="mono text-xs text-mist">{pipeline.length}</span>
+          <span className="chip-ember">Admin only</span>
           <div className="flex-1 h-[1px] bg-signal/10" />
         </div>
+        <p className="text-mist text-xs mb-6 max-w-2xl">
+          Loaded from the private <span className="mono">seal-budget</span> repo. Visitors never receive it.
+        </p>
+        {pipelineError && (
+          <p className="text-ember mono text-xs mb-6">Could not load pipeline: {pipelineError}</p>
+        )}
 
         <div className="flex flex-wrap justify-center gap-2 mb-14">
           {sourceChips.map(c => (
@@ -130,8 +173,10 @@ const GrantsSection = () => {
           ))}
         </div>
 
-        {grouped.length === 0 && (
+        {grouped.length === 0 && !pipelineError && (
           <p className="text-mist text-center mono text-sm">No grants match this filter.</p>
+        )}
+          </>
         )}
       </div>
     </section>
