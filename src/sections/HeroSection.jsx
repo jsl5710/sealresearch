@@ -1,6 +1,96 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import lab from '../data/lab.json';
+
+/*
+ * Hero logo with a light "AI" treatment, built from the same vocabulary as
+ * the site's DataFlow background: cyan signal, drifting nodes, thin lines.
+ *
+ *   - a breathing halo behind the mark
+ *   - a ring of orbiting nodes
+ *   - a scan sweep that is MASKED BY THE LOGO ITSELF, so the light travels
+ *     through the mark's shape rather than a rectangle over it
+ *
+ * Colors come from the signal token, so the effect re-tints per theme
+ * instead of hardcoding cyan onto the light themes.
+ *
+ * All of it collapses to a static logo under prefers-reduced-motion: this
+ * is the first thing on the page, and a perpetual pulse is exactly what
+ * that setting exists to prevent.
+ */
+const HeroLogo = () => {
+  const reduce = useReducedMotion();
+  const src = `${import.meta.env.BASE_URL}seal-logo.png`;
+
+  const maskStyle = {
+    WebkitMaskImage: `url(${src})`,
+    maskImage: `url(${src})`,
+    WebkitMaskSize: 'contain',
+    maskSize: 'contain',
+    WebkitMaskRepeat: 'no-repeat',
+    maskRepeat: 'no-repeat',
+    WebkitMaskPosition: 'center',
+    maskPosition: 'center',
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.9, delay: 0.15 }}
+      /* Sized against viewport HEIGHT, not width: the hero is min-h-screen
+         with overflow-hidden, so a fixed-height logo would push the headline
+         and buttons out of frame on a short laptop window and they would be
+         clipped rather than scrollable. */
+      className="relative mx-auto w-[clamp(7rem,17vh,15rem)] aspect-square
+                 mb-[clamp(1.75rem,5vh,4rem)]"
+    >
+      {/* Halo */}
+      <motion.div
+        aria-hidden="true"
+        className="absolute inset-[-18%] rounded-full bg-signal/20 blur-2xl"
+        animate={reduce ? undefined : { opacity: [0.3, 0.65, 0.3], scale: [0.92, 1.06, 0.92] }}
+        transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
+      />
+
+      {/* Orbiting nodes — same motif as the DataFlow background */}
+      {!reduce && (
+        <motion.div
+          aria-hidden="true"
+          className="absolute inset-[-12%] rounded-full border border-signal/20"
+          animate={{ rotate: 360 }}
+          transition={{ duration: 22, repeat: Infinity, ease: 'linear' }}
+        >
+          {[0, 120, 240].map(deg => (
+            /* Rotate a full-size wrapper and pin the node to its top edge --
+               simpler and more reliable than composing translate offsets. */
+            <div key={deg} className="absolute inset-0" style={{ transform: `rotate(${deg}deg)` }}>
+              <span className="absolute left-1/2 top-0 h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2
+                               rounded-full bg-signal shadow-[0_0_8px_var(--color-signal)]" />
+            </div>
+          ))}
+        </motion.div>
+      )}
+
+      <img src={src} alt="" aria-hidden="true"
+           className="relative z-10 h-full w-full object-contain
+                      drop-shadow-[0_6px_28px_rgba(0,0,0,0.45)]" />
+
+      {/* Scan sweep, clipped to the logo's own silhouette */}
+      {!reduce && (
+        <div aria-hidden="true"
+             className="pointer-events-none absolute inset-0 z-20 overflow-hidden"
+             style={maskStyle}>
+          <motion.div
+            className="absolute inset-x-0 h-1/2 bg-gradient-to-b from-transparent via-signal/70 to-transparent"
+            animate={{ y: ['-120%', '240%'] }}
+            transition={{ duration: 2.6, repeat: Infinity, repeatDelay: 2.4, ease: 'easeInOut' }}
+          />
+        </div>
+      )}
+    </motion.div>
+  );
+};
 
 const HeroSection = () => {
   return (
@@ -22,6 +112,8 @@ const HeroSection = () => {
       </motion.div>
 
       <div className="relative z-10 text-center px-6 max-w-5xl">
+        <HeroLogo />
+
         <motion.span
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}

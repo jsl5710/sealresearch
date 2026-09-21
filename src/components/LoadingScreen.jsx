@@ -22,7 +22,9 @@ const LoadingScreen = ({ onComplete }) => {
         <img
           src={`${import.meta.env.BASE_URL}seal-logo.png`}
           alt="SEAL logo"
-          className="w-28 h-28 object-contain"
+          /* Source is 1600x1565, so even the largest step here renders at a
+             fraction of native resolution -- no upscaling blur. */
+          className="w-40 h-40 md:w-56 md:h-56 object-contain"
         />
       </motion.div>
 
