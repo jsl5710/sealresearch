@@ -8,8 +8,9 @@ import lab from '../data/lab.json';
  *
  *   - a breathing halo behind the mark
  *   - a ring of orbiting nodes
- *   - a scan sweep that is MASKED BY THE LOGO ITSELF, so the light travels
- *     through the mark's shape rather than a rectangle over it
+ *
+ * Deliberately no sweep or shimmer across the mark itself: motion sits
+ * around the logo, never on it, so the logo always reads as the logo.
  *
  * Colors come from the signal token, so the effect re-tints per theme
  * instead of hardcoding cyan onto the light themes.
@@ -22,16 +23,6 @@ const HeroLogo = () => {
   const reduce = useReducedMotion();
   const src = `${import.meta.env.BASE_URL}seal-logo.png`;
 
-  const maskStyle = {
-    WebkitMaskImage: `url(${src})`,
-    maskImage: `url(${src})`,
-    WebkitMaskSize: 'contain',
-    maskSize: 'contain',
-    WebkitMaskRepeat: 'no-repeat',
-    maskRepeat: 'no-repeat',
-    WebkitMaskPosition: 'center',
-    maskPosition: 'center',
-  };
 
   return (
     <motion.div
@@ -76,18 +67,6 @@ const HeroLogo = () => {
            className="relative z-10 h-full w-full object-contain
                       drop-shadow-[0_6px_28px_rgba(0,0,0,0.45)]" />
 
-      {/* Scan sweep, clipped to the logo's own silhouette */}
-      {!reduce && (
-        <div aria-hidden="true"
-             className="pointer-events-none absolute inset-0 z-20 overflow-hidden"
-             style={maskStyle}>
-          <motion.div
-            className="absolute inset-x-0 h-1/2 bg-gradient-to-b from-transparent via-signal/70 to-transparent"
-            animate={{ y: ['-120%', '240%'] }}
-            transition={{ duration: 2.6, repeat: Infinity, repeatDelay: 2.4, ease: 'easeInOut' }}
-          />
-        </div>
-      )}
     </motion.div>
   );
 };
