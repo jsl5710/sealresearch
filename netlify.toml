@@ -26,7 +26,7 @@
     X-Frame-Options = "DENY"
     Referrer-Policy = "strict-origin-when-cross-origin"
     # The admin panel talks to api.github.com; Google Fonts supplies the
-    # typefaces. Everything else is same-origin.
+    # typefaces. Images are all self-hosted, so img-src stays same-origin.
     Content-Security-Policy = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://api.github.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
 
 # Long-cache the fingerprinted assets; never the HTML entry point.

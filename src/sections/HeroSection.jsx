@@ -82,12 +82,18 @@ const HeroSection = () => {
         className="absolute inset-0 z-0"
       >
         <img
-          src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2000&auto=format&fit=crop"
+          /* Self-hosted rather than hot-linked from Unsplash: a third-party
+             image can be blocked by tracking protection or an ad blocker,
+             and it silently blanks the hero when that happens. Serving it
+             ourselves also drops a cross-origin request on first paint.
+             Source: Unsplash photo-1451187580459-43490279c0fa (Unsplash
+             License). */
+          src={`${import.meta.env.BASE_URL}hero-earth.jpg`}
           alt=""
           aria-hidden="true"
-          className="w-full h-full object-cover opacity-30"
+          className="hero-media w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/60 to-ink" />
+        <div className="hero-scrim absolute inset-0" />
       </motion.div>
 
       <div className="relative z-10 text-center px-6 max-w-5xl">

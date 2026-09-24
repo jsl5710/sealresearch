@@ -273,3 +273,47 @@
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover { background: var(--color-signal); }
+
+/*
+ * Hero backdrop tuning, per theme.
+ *
+ * The hero scrim is built from --color-ink, which is near-white on the two
+ * light themes -- so the Earth photo underneath was being painted out
+ * entirely on Professional & Simple, and washed to nothing on Light
+ * Editorial. It only ever read correctly against the dark navy.
+ *
+ * Light themes therefore get a much weaker scrim, and the image leans on
+ * contrast/brightness rather than opacity so a mostly-black photo does not
+ * turn into a grey smudge on white.
+ */
+:root,
+[data-theme="dark"] {
+  --hero-img-opacity: 0.30;
+  --hero-img-filter: none;
+  --hero-scrim-top: 70%;
+  --hero-scrim-mid: 60%;
+  --hero-scrim-bottom: 100%;
+}
+
+[data-theme="light"],
+[data-theme="pro"] {
+  --hero-img-opacity: 0.16;
+  --hero-img-filter: invert(1) hue-rotate(180deg) contrast(0.85);
+  --hero-scrim-top: 25%;
+  --hero-scrim-mid: 45%;
+  --hero-scrim-bottom: 92%;
+}
+
+.hero-media {
+  opacity: var(--hero-img-opacity);
+  filter: var(--hero-img-filter);
+}
+
+.hero-scrim {
+  background-image: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--color-ink) var(--hero-scrim-top), transparent),
+    color-mix(in srgb, var(--color-ink) var(--hero-scrim-mid), transparent),
+    color-mix(in srgb, var(--color-ink) var(--hero-scrim-bottom), transparent)
+  );
+}
