@@ -1,16 +1,16 @@
 [
   {
-    "id": "emnlp26-aor-bench",
-    "date": "2026-09-20",
-    "title": "AOR-Bench accepted at EMNLP 2026",
-    "summary": "Do large audio language models over-refuse pseudo-harmful queries? AOR-Bench measures the over-refusal failure mode in speech-facing safety alignment. Main conference, Budapest.",
-    "tag": "Paper"
-  },
-  {
     "id": "emnlp26-lost-in-speech",
     "date": "2026-09-20",
     "title": "Lost in Speech accepted at SALMA 2026",
     "summary": "Trilingual spoken hallucination detection across audio and transcripts, at the 2nd Workshop on Speech and Audio Language Models, co-located with EMNLP 2026 in Budapest.",
+    "tag": "Paper"
+  },
+  {
+    "id": "emnlp26-aor-bench",
+    "date": "2026-09-20",
+    "title": "AOR-Bench accepted at EMNLP 2026",
+    "summary": "Do large audio language models over-refuse pseudo-harmful queries? AOR-Bench measures the over-refusal failure mode in speech-facing safety alignment. Main conference, Budapest.",
     "tag": "Paper"
   },
   {
@@ -35,6 +35,13 @@
     "tag": "Paper"
   },
   {
+    "id": "cmdi-now-2026",
+    "date": "2026-08-01",
+    "tag": "Press",
+    "title": "Featured in CMDI Now: “Heads of the Class”",
+    "summary": "CU Boulder's College of Communication, Media, Design, and Information profiles its incoming faculty."
+  },
+  {
     "id": "icml26-position",
     "date": "2026-07-09",
     "title": "ICML 2026 Position Paper accepted",
@@ -47,5 +54,194 @@
     "title": "DIA-HARM wins ACL 2026 Social Impact Paper Award 🏆",
     "summary": "Recognized at the 64th ACL for advancing equity in harmful-content detection across 50 English dialects.",
     "tag": "Award"
+  },
+  {
+    "id": "dagstuhl-2026",
+    "date": "2026-06-01",
+    "tag": "Talk",
+    "title": "Dagstuhl Seminar 26252, Schloss Dagstuhl",
+    "summary": "From Speech Translation to Multilingual Communication, at the Leibniz Center for Informatics in Wadern, Germany."
+  },
+  {
+    "id": "slator-2026",
+    "date": "2026-03-01",
+    "tag": "Press",
+    "title": "Slator covers our multilingual detection benchmark",
+    "summary": "“New Benchmark Tests AI Detection Across Languages and Translation.”"
+  },
+  {
+    "id": "sgu-lead-2026",
+    "date": "2026-01-01",
+    "tag": "Talk",
+    "title": "LEAD Faculty Workshop at St. George's University",
+    "summary": "Responsible and ethical use of generative AI in teaching and research, in Grenada."
+  },
+  {
+    "id": "psu-nova-2026",
+    "date": "2026-01-01",
+    "tag": "Press",
+    "title": "Penn State on the Amazon Nova AI Challenge",
+    "summary": "“IST and Engineering Students Competing in Global Amazon Nova AI Challenge.”"
+  },
+  {
+    "id": "emnlp25-morgan",
+    "date": "2025-11-05",
+    "tag": "Paper",
+    "title": "Graph-based molecular in-context learning at Findings of EMNLP 2025",
+    "summary": "In-context learning for molecular tasks, grounded on Morgan fingerprints."
+  },
+  {
+    "id": "emnlp25-coi",
+    "date": "2025-11-05",
+    "tag": "Paper",
+    "title": "Chain-of-Interactions accepted to Findings of EMNLP 2025",
+    "summary": "An iterative in-context learning framework for abstractive task-oriented dialogue summarization of conversational AI interactions."
+  },
+  {
+    "id": "llnl-dssi-2025",
+    "date": "2025-05-01",
+    "tag": "Announcement",
+    "title": "Summer at Lawrence Livermore National Laboratory",
+    "summary": "Graduate research internship with the Data Science Institute's DSSI program, May through August 2025."
+  },
+  {
+    "id": "naacl25-beemo",
+    "date": "2025-04-29",
+    "tag": "Paper",
+    "title": "Beemo presented at NAACL 2025",
+    "summary": "A benchmark of expert-edited machine-generated outputs, probing detection when humans revise what a model wrote."
+  },
+  {
+    "id": "psu-startup-week-2025",
+    "date": "2025-03-01",
+    "tag": "Talk",
+    "title": "Penn State Startup Week panel on deepfakes for social good",
+    "summary": "On applications of synthetic media for patients with aphasia, and where the line sits between benefit and harm."
+  },
+  {
+    "id": "coling25-sql2text",
+    "date": "2025-01-19",
+    "tag": "Paper",
+    "title": "SQL2Text semantic captioning at COLING 2025",
+    "summary": "A benchmark dataset and graph-aware few-shot in-context learning approach, presented in Abu Dhabi."
+  },
+  {
+    "id": "sgu-profile-2025",
+    "date": "2025-01-01",
+    "tag": "Press",
+    "title": "St. George's University profile",
+    "summary": "“From SGU to the Frontiers of AI: Jason Lucas’ Journey of Purpose.”"
+  },
+  {
+    "id": "psu-news-2025",
+    "date": "2025-01-01",
+    "tag": "Press",
+    "title": "Penn State News feature",
+    "summary": "“Penn State Connections Lead Doctoral Student to Interdisciplinary College of IST.”"
+  },
+  {
+    "id": "psu-ist-panel-2025",
+    "date": "2025-01-01",
+    "tag": "Talk",
+    "title": "Penn State College of IST research panel",
+    "summary": "Cutting-edge research and future directions for combating harmful text."
+  },
+  {
+    "id": "munich-nlp-2025",
+    "date": "2025-01-01",
+    "tag": "Talk",
+    "title": "Invited talk at Munich NLP",
+    "summary": "Beemo: benchmark of expert-edited machine-generated outputs, in Munich, Germany."
+  },
+  {
+    "id": "iconnect-2025",
+    "date": "2025-01-01",
+    "tag": "Press",
+    "title": "Penn State IST iConnect feature",
+    "summary": "“Leadership Examples in Tech Rarely Look Like Me.”"
+  },
+  {
+    "id": "emnlp24-ao",
+    "date": "2024-11-12",
+    "tag": "Paper",
+    "title": "Authorship obfuscation study at Findings of EMNLP 2024",
+    "summary": "How obfuscation degrades multilingual machine-generated text detection, across languages and detectors."
+  },
+  {
+    "id": "ieee-longtail-2024",
+    "date": "2024-11-01",
+    "tag": "Paper",
+    "title": "Long-tail harms of generative AI in IEEE Computer",
+    "summary": "Evidence that generative AI disproportionately harms long-tail users, and what follows for deployment."
+  },
+  {
+    "id": "cohere-talk-2024",
+    "date": "2024-05-01",
+    "tag": "Talk",
+    "title": "Invited talk at Cohere for AI",
+    "summary": "Advancing low-resource multilingual approaches in the era of large language models."
+  },
+  {
+    "id": "wxxi-2024",
+    "date": "2024-01-01",
+    "tag": "Press",
+    "title": "WXXI News on AI in journalism",
+    "summary": "“Artificial Intelligence in Journalism: How Is It Being Used Now? What’s Coming Next?”"
+  },
+  {
+    "id": "sgu-forum-2024",
+    "date": "2024-01-01",
+    "tag": "Talk",
+    "title": "Emerging technology forum at St. George's University",
+    "summary": "On opportunities in emerging technology, with the Department of Computers and Technology in Grenada."
+  },
+  {
+    "id": "ieee-is-longtail-2024",
+    "date": "2024-01-01",
+    "tag": "Paper",
+    "title": "Harmonizing dichotomous perspectives in IEEE Intelligent Systems",
+    "summary": "On the long-tail impact of generative AI on disinformation, reconciling two opposing readings of the evidence."
+  },
+  {
+    "id": "emnlp23-oral",
+    "date": "2023-12-06",
+    "tag": "Talk",
+    "title": "Fighting Fire with Fire presented at EMNLP 2023",
+    "summary": "Oral presentation on the dual role of LLMs in crafting and detecting elusive disinformation, in Singapore."
+  },
+  {
+    "id": "sgu-ai-2023",
+    "date": "2023-11-01",
+    "tag": "Talk",
+    "title": "AI research talk at St. George's University",
+    "summary": "Artificial intelligence and the latest AI research, for the Department of Computers and Technology."
+  },
+  {
+    "id": "nsf-ies-2023",
+    "date": "2023-09-01",
+    "tag": "Talk",
+    "title": "NSF and IES AI Research Institutes meeting",
+    "summary": "AI transforming education for children with speech and language pathologies."
+  },
+  {
+    "id": "panapa-2023",
+    "date": "2023-04-01",
+    "tag": "Talk",
+    "title": "Pan-APA 6th Annual Conference",
+    "summary": "Detecting false claims in low-resource regions: a Caribbean case study."
+  },
+  {
+    "id": "crawp-ideals-2023",
+    "date": "2023-03-01",
+    "tag": "Talk",
+    "title": "Lightning talk at CRA-WP Grad Cohort for IDEALS",
+    "summary": "Detecting false claims in low-resource regions, presented in Honolulu."
+  },
+  {
+    "id": "acl22-constraint-oral",
+    "date": "2022-05-26",
+    "tag": "Talk",
+    "title": "Caribbean false-claim detection at ACL 2022 CONSTRAINT",
+    "summary": "Oral presentation on detecting false claims in low-resource regions, at the CONSTRAINT workshop in Dublin."
   }
 ]

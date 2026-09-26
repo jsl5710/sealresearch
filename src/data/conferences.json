@@ -1,15 +1,37 @@
 {
-  "source": {
-    "name": "AI Deadlines (mlciv.com)",
-    "url": "https://mlciv.com/ai-deadlines/?sub=ML,CV,CG,NLP,RO,SP,DM,AP,KR,HCI,EDU",
-    "note": "Deadlines are cross-checked against mlciv.com/ai-deadlines. Unconfirmed deadlines are marked TBA rather than guessed."
-  },
+  "sources": [
+    {
+      "name": "AI Deadlines (mlciv.com)",
+      "url": "https://mlciv.com/ai-deadlines/?sub=ML,CV,CG,NLP,RO,SP,DM,AP,KR,HCI,EDU",
+      "note": "Deadlines are cross-checked against mlciv.com/ai-deadlines. Unconfirmed deadlines are marked TBA rather than guessed."
+    },
+    {
+      "name": "ConferenceDeadlines.com (CS)",
+      "url": "https://www.conferencedeadlines.com/cs",
+      "note": "Covers 40+ CS venues across NLP, ML, CV, HCI and more; refreshed weekly."
+    }
+  ],
   "fields": [
-    { "id": "nlp",     "label": "NLP" },
-    { "id": "ml",      "label": "ML" },
-    { "id": "data",    "label": "Data Mining" },
-    { "id": "ethics",  "label": "AI Ethics & Society" },
-    { "id": "hci",     "label": "HCI" }
+    {
+      "id": "nlp",
+      "label": "NLP"
+    },
+    {
+      "id": "ml",
+      "label": "ML"
+    },
+    {
+      "id": "data",
+      "label": "Data Mining"
+    },
+    {
+      "id": "ethics",
+      "label": "AI Ethics & Society"
+    },
+    {
+      "id": "hci",
+      "label": "HCI"
+    }
   ],
   "conferences": [
     {
@@ -24,7 +46,8 @@
       "note": "Presented DIA-HARM — Social Impact Paper Award. Jason served as Area Chair.",
       "site": "https://2026.aclweb.org/",
       "cfp": "",
-      "deadlines": []
+      "deadlines": [],
+      "type": "conference"
     },
     {
       "id": "icml-2026",
@@ -38,7 +61,8 @@
       "note": "Two position papers accepted: Dual Curse of Multilingual AI + Contamination-Resistant Benchmarks.",
       "site": "https://icml.cc/Conferences/2026",
       "cfp": "",
-      "deadlines": []
+      "deadlines": [],
+      "type": "conference"
     },
     {
       "id": "kdd-2026",
@@ -52,7 +76,8 @@
       "note": "BLUFF accepted in Datasets and Benchmarks Track.",
       "site": "https://kdd2026.kdd.org/",
       "cfp": "",
-      "deadlines": []
+      "deadlines": [],
+      "type": "conference"
     },
     {
       "id": "emnlp-2026",
@@ -66,7 +91,8 @@
       "note": "Two preprints being prepped for submission (Lost in Dialect; Spoken Hallucinations). Submitted via ACL Rolling Review.",
       "site": "https://2026.emnlp.org/",
       "cfp": "",
-      "deadlines": []
+      "deadlines": [],
+      "type": "conference"
     },
     {
       "id": "neurips-2026",
@@ -80,7 +106,8 @@
       "note": "Watching Datasets & Benchmarks track for a BLUFF-style extension. Dates and deadlines TBA.",
       "site": "https://neurips.cc/",
       "cfp": "",
-      "deadlines": []
+      "deadlines": [],
+      "type": "conference"
     },
     {
       "id": "aaai-2027",
@@ -95,8 +122,12 @@
       "site": "https://aaai.org/conference/aaai/aaai-27/",
       "cfp": "",
       "deadlines": [
-        { "label": "Notification", "date": "2026-11-30" }
-      ]
+        {
+          "label": "Notification",
+          "date": "2026-11-30"
+        }
+      ],
+      "type": "conference"
     },
     {
       "id": "eacl-2027",
@@ -110,7 +141,8 @@
       "note": "Submission via ACL Rolling Review; deadlines TBA.",
       "site": "https://2027.eacl.org/",
       "cfp": "https://2027.eacl.org/calls/papers/",
-      "deadlines": []
+      "deadlines": [],
+      "type": "conference"
     },
     {
       "id": "iclr-2027",
@@ -124,7 +156,8 @@
       "note": "Considering an evaluation-methods submission on multilingual reward-model failure modes. Deadlines TBA.",
       "site": "https://iclr.cc/Conferences/2027/CallForPapers",
       "cfp": "https://iclr.cc/Conferences/2027/CallForPapers",
-      "deadlines": []
+      "deadlines": [],
+      "type": "conference"
     },
     {
       "id": "coling-2027",
@@ -139,8 +172,12 @@
       "site": "https://2027.coling-iccl.org/",
       "cfp": "",
       "deadlines": [
-        { "label": "Paper (via ARR, predicted)", "date": "2026-10-12" }
-      ]
+        {
+          "label": "Paper (via ARR, predicted)",
+          "date": "2026-10-12"
+        }
+      ],
+      "type": "conference"
     },
     {
       "id": "facct-2027",
@@ -154,7 +191,8 @@
       "note": "Natural home for the dialect-fairness and community-led harm-spec work. Dates and deadlines TBA.",
       "site": "https://facctconference.org/",
       "cfp": "",
-      "deadlines": []
+      "deadlines": [],
+      "type": "conference"
     },
     {
       "id": "naacl-2027",
@@ -168,7 +206,8 @@
       "note": "Target venue for a DIA-HARM-style extension to speech. Dates and deadlines TBA.",
       "site": "https://naacl.org/",
       "cfp": "",
-      "deadlines": []
+      "deadlines": [],
+      "type": "conference"
     },
     {
       "id": "acl-2027",
@@ -182,7 +221,135 @@
       "note": "Primary submission target for full lab papers in 2027. Submission via ACL Rolling Review.",
       "site": "https://2027.aclweb.org/",
       "cfp": "",
-      "deadlines": []
+      "deadlines": [],
+      "type": "conference"
+    },
+    {
+      "id": "salma-2026",
+      "type": "workshop",
+      "name": "SALMA 2026",
+      "long": "2nd Workshop on Speech and Audio Language Models, co-located with EMNLP 2026",
+      "field": "nlp",
+      "location": "Budapest, Hungary",
+      "start": "2026-10-24",
+      "end": "2026-10-29",
+      "status": "attending",
+      "note": "Lost in Speech accepted — trilingual spoken hallucination detection.",
+      "site": "",
+      "cfp": "",
+      "deadlines": [],
+      "match": [
+        "SALMA"
+      ]
+    },
+    {
+      "id": "loreslm-2026",
+      "type": "workshop",
+      "name": "LoResLM 2026",
+      "long": "Workshop on Low-Resource Languages and Multilingual NLP, co-located with EACL",
+      "field": "nlp",
+      "location": "TBA",
+      "start": "",
+      "end": "",
+      "status": "targeting",
+      "note": "Jason serves on the programme committee.",
+      "site": "",
+      "cfp": "",
+      "deadlines": [],
+      "match": [
+        "LoResLM"
+      ]
+    },
+    {
+      "id": "constraint-acl",
+      "type": "workshop",
+      "name": "CONSTRAINT @ ACL",
+      "long": "Workshop on Combating Online Hostile Posts in Regional Languages during Emergency Situations",
+      "field": "nlp",
+      "location": "Dublin, Ireland",
+      "start": "2022-05-26",
+      "end": "2022-05-26",
+      "status": "presented",
+      "note": "Detecting False Claims in Low-Resource Regions — the lab's Caribbean case study.",
+      "site": "",
+      "cfp": "",
+      "deadlines": [],
+      "match": [
+        "CONSTRAINT"
+      ]
+    },
+    {
+      "id": "ieee-computer",
+      "type": "journal",
+      "name": "IEEE Computer",
+      "long": "IEEE Computer Magazine",
+      "field": "ethics",
+      "location": "",
+      "start": "",
+      "end": "",
+      "status": "published",
+      "note": "Rolling submissions.",
+      "site": "https://www.computer.org/csdl/magazine/co",
+      "cfp": "",
+      "deadlines": [],
+      "match": [
+        "IEEE Computer"
+      ]
+    },
+    {
+      "id": "ieee-intelligent-systems",
+      "type": "journal",
+      "name": "IEEE Intelligent Systems",
+      "long": "IEEE Intelligent Systems",
+      "field": "ml",
+      "location": "",
+      "start": "",
+      "end": "",
+      "status": "published",
+      "note": "Rolling submissions.",
+      "site": "https://www.computer.org/csdl/magazine/ex",
+      "cfp": "",
+      "deadlines": [],
+      "match": [
+        "IEEE Intelligent Systems"
+      ]
+    },
+    {
+      "id": "joitmc",
+      "type": "journal",
+      "name": "Journal of Open Innovation",
+      "long": "Journal of Open Innovation: Technology, Market, and Complexity (Q1)",
+      "field": "ethics",
+      "location": "",
+      "start": "",
+      "end": "",
+      "status": "published",
+      "note": "Rolling submissions.",
+      "site": "https://www.sciencedirect.com/journal/journal-of-open-innovation-technology-market-and-complexity",
+      "cfp": "",
+      "deadlines": [],
+      "match": [
+        "J\\. Open Innov",
+        "Journal of Open Innovation"
+      ]
+    },
+    {
+      "id": "cogent-social-sciences",
+      "type": "journal",
+      "name": "Cogent Social Sciences",
+      "long": "Cogent Social Sciences (Q1)",
+      "field": "ethics",
+      "location": "",
+      "start": "",
+      "end": "",
+      "status": "published",
+      "note": "Rolling submissions.",
+      "site": "https://www.tandfonline.com/journals/oass20",
+      "cfp": "",
+      "deadlines": [],
+      "match": [
+        "Cogent Social Sciences"
+      ]
     }
   ]
 }

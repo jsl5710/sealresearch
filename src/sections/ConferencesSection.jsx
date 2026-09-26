@@ -1,6 +1,49 @@
 import React, { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import data from '../data/conferences.json';
+import pubs from '../data/publications.json';
+
+/*
+ * Papers published per venue SERIES, derived from publications.json rather
+ * than stored alongside each conference -- a hand-kept count is one more
+ * thing to forget when a paper lands.
+ *
+ * The series is the conference name minus its year ("ACL 2027" -> "ACL"),
+ * matched against publication venues on a word boundary. The boundary
+ * matters: a bare substring test would count every NAACL and EACL paper
+ * as an ACL paper.
+ *
+ * Counts include Findings and co-located workshops (so "Findings of EMNLP
+ * 2025" counts toward EMNLP, and "CONSTRAINT @ ACL 2022" toward ACL),
+ * which is the reading most people expect from "papers we published
+ * there".
+ */
+const seriesOf = (name) => String(name).replace(/\s*\d{4}\s*$/, '').trim();
+
+const esc = (t) => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+/*
+ * Journals need an explicit `match`: their publication venue strings are
+ * abbreviated ("J. Open Innov.: Tech., Market, Complexity (Q1)") and would
+ * never match the display name on their own.
+ */
+const patternsFor = (c) =>
+  (c.match && c.match.length ? c.match : [esc(seriesOf(c.name))]);
+
+const countFor = (c, list) => {
+  const res = patternsFor(c).map(pat => new RegExp(`\\b${pat}\\b`));
+  return list.filter(p => res.some(re => re.test(String(p.venue || '')))).length;
+};
+
+const publicationCounts = (() => {
+  const list = Array.isArray(pubs) ? pubs : (pubs.publications || []);
+  const counts = new Map();
+  for (const c of data.conferences) counts.set(c.id, countFor(c, list));
+  return counts;
+})();
+
+const paperCountLabel = (n) =>
+  n === 0 ? 'No papers yet' : n === 1 ? '1 paper' : `${n} papers`;
 
 const STATUS = {
   targeting:  { label: 'Targeting',   cls: 'chip' },
@@ -8,6 +51,7 @@ const STATUS = {
   attending:  { label: 'Attending',   cls: 'chip-ember' },
   presented:  { label: 'Presented',   cls: 'chip-ember' },
   past:       { label: 'Past',        cls: 'chip' },
+  published:  { label: 'Published',   cls: 'chip-ember' },
 };
 
 const fmtDate = (d) => {
@@ -69,6 +113,20 @@ const ConferenceCard = ({ c, i, now }) => {
         <span className="mono text-mist text-xs">{c.start ? c.start.slice(0, 4) : ''}</span>
       </div>
 
+      {(() => {
+        const n = publicationCounts.get(c.id) ?? 0;
+        return (
+          <p
+            className={`mono text-[10px] uppercase tracking-widest mb-2 ${n > 0 ? 'text-ember' : 'text-mist/70'}`}
+            title={n > 0
+              ? `${n} paper${n === 1 ? '' : 's'} published at ${c.name}, including Findings and co-located workshops`
+              : `No ${c.name} papers yet \u2014 a venue we are targeting`}
+          >
+            {paperCountLabel(n)}
+          </p>
+        );
+      })()}
+
       <h4 className="text-xl font-serif font-semibold text-paper mb-1 group-hover:text-signal transition-colors">
         {c.site ? <a href={c.site}>{c.name}</a> : c.name}
       </h4>
@@ -76,8 +134,12 @@ const ConferenceCard = ({ c, i, now }) => {
 
       <div className="grid grid-cols-2 gap-3 text-xs mb-3">
         <div>
-          <p className="mono uppercase tracking-widest text-signal/70 mb-1">When</p>
-          <p className="text-paper/85">{fmtRange(c.start, c.end)}</p>
+          <p className="mono uppercase tracking-widest text-signal/70 mb-1">
+            {c.type === 'journal' ? 'Submissions' : 'When'}
+          </p>
+          <p className="text-paper/85">
+            {c.type === 'journal' ? 'Rolling' : fmtRange(c.start, c.end)}
+          </p>
         </div>
         <div>
           <p className="mono uppercase tracking-widest text-signal/70 mb-1">Where</p>
@@ -113,6 +175,9 @@ const ConferencesSection = () => {
 
   const filtered = useMemo(() => {
     return data.conferences.filter(c => {
+      // Journals have no dates, so the upcoming/past filter is meaningless
+      // for them -- they are listed separately below.
+      if (c.type === 'journal') return false;
       if (fieldFilter !== 'all' && c.field !== fieldFilter) return false;
       const startDays = c.start ? daysFromNow(c.start, now) : null;
       const isPast = startDays !== null && startDays < -14;
@@ -121,6 +186,11 @@ const ConferencesSection = () => {
       return true;
     }).sort((a, b) => (a.start || '').localeCompare(b.start || ''));
   }, [fieldFilter, statusFilter, now]);
+
+  const journals = useMemo(
+    () => data.conferences.filter(c => c.type === 'journal'
+      && (fieldFilter === 'all' || c.field === fieldFilter)),
+    [fieldFilter]);
 
   const fieldChips = [{ id: 'all', label: 'All Fields' }, ...data.fields];
   const statusChips = [
@@ -140,25 +210,6 @@ const ConferencesSection = () => {
           Venues we've presented at, are attending, or are targeting for submission — with paper deadlines counted down
           to the day.
         </p>
-
-        {/* Source + Phase-3 tracker callout */}
-        <div className="glass rounded-2xl p-5 md:p-6 mb-12 max-w-3xl mx-auto text-sm">
-          <p className="mono text-xs uppercase tracking-widest text-signal mb-2">Canonical source</p>
-          <p className="text-mist leading-relaxed mb-4">
-            Deadlines are cross-checked against{' '}
-            <a href={data.source.url} className="text-signal hover:text-signal-soft underline transition-colors">
-              {data.source.name}
-            </a>
-            . Where a CFP isn't posted yet, we mark deadlines <span className="mono text-signal-soft">TBA</span>{' '}
-            rather than guess.
-          </p>
-          <p className="mono text-xs uppercase tracking-widest text-signal mb-2">Coming soon — automated tracker</p>
-          <p className="text-mist leading-relaxed">
-            Same Phase-3 backbone as Grants: a scheduled agent will poll the mlciv.com feed and conference sites,
-            surface deadline changes, and auto-PR updates to <span className="mono text-signal-soft">conferences.json</span> —
-            so the countdowns never go stale.
-          </p>
-        </div>
 
         <div className="flex flex-wrap justify-center gap-4 mb-10">
           <div className="flex flex-wrap gap-2">
@@ -188,12 +239,69 @@ const ConferencesSection = () => {
           </div>
         </div>
 
+        <div className="flex items-baseline gap-4 mb-6">
+          <h3 className="text-2xl md:text-3xl font-serif font-semibold text-paper">Conferences</h3>
+          <span className="mono text-xs text-mist">{filtered.length}</span>
+          <div className="flex-1 h-[1px] bg-signal/10" />
+        </div>
+
         {filtered.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {filtered.map((c, i) => <ConferenceCard key={c.id} c={c} i={i} now={now} />)}
           </div>
         ) : (
           <p className="text-mist text-center mono text-sm">No conferences match this filter.</p>
+        )}
+
+        {/* Source + Phase-3 tracker callout */}
+        <div className="glass rounded-2xl p-5 md:p-6 mt-16 mb-4 max-w-3xl mx-auto text-sm text-center">
+          <p className="mono text-xs uppercase tracking-widest text-signal mb-2">
+            Canonical source{data.sources.length > 1 ? 's' : ''}
+          </p>
+          <p className="text-mist leading-relaxed mb-3 mx-auto max-w-prose">
+            Deadlines are cross-checked against the trackers below. Where a CFP isn't posted
+            yet, we mark deadlines <span className="mono text-signal-soft">TBA</span> rather
+            than guess.
+          </p>
+          <ul className="mb-4 space-y-2 list-none">
+            {data.sources.map(src => (
+              <li key={src.url} className="text-mist leading-relaxed">
+                <a
+                  href={src.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-signal hover:text-signal-soft underline transition-colors"
+                >
+                  {src.name}
+                </a>
+                {src.note && <span className="block text-xs text-mist/80 mt-0.5">{src.note}</span>}
+              </li>
+            ))}
+          </ul>
+          <p className="mono text-xs uppercase tracking-widest text-signal mb-2">Coming soon — automated tracker</p>
+          <p className="text-mist leading-relaxed mx-auto max-w-prose">
+            Same Phase-3 backbone as Grants: a scheduled agent will poll the mlciv.com feed and conference sites,
+            surface deadline changes, and auto-PR updates to <span className="mono text-signal-soft">conferences.json</span> —
+            so the countdowns never go stale.
+          </p>
+        </div>
+
+        {journals.length > 0 && (
+          <div className="mt-16 mb-4">
+            <div className="flex items-baseline gap-4 mb-6">
+              <h3 className="text-2xl md:text-3xl font-serif font-semibold text-paper">Journals</h3>
+              <span className="mono text-xs text-mist">{journals.length}</span>
+              <div className="flex-1 h-[1px] bg-signal/10" />
+            </div>
+            <p className="text-mist text-sm mb-6 max-w-3xl">
+              Rolling submissions rather than a deadline, so these sit outside the countdown above.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {journals.map((c, i) => (
+                <ConferenceCard key={c.id} c={c} i={i} now={now} />
+              ))}
+            </div>
+          </div>
         )}
       </div>
     </section>

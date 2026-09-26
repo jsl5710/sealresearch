@@ -5,7 +5,9 @@
     "title": "Assistant Professor, CU Boulder",
     "photo": "people/jason.jpg",
     "bio": "Dr. Jason Lucas leads the Secure and Ethical AI Lab. His research spans multilingual NLP across 79 languages, information integrity, and socio-technical AI safety — with published work in ACL, EMNLP, NAACL, KDD, and ICML.",
-    "teachesCourseIds": ["fair-ml-fall26"],
+    "teachesCourseIds": [
+      "fair-ml-fall26"
+    ],
     "appointments": [
       {
         "role": "Assistant Professor",
@@ -24,14 +26,21 @@
         "start": "2026-06",
         "end": "2026-08",
         "links": [
-          { "label": "Project page", "url": "https://www.clsp.jhu.edu/uncertainty-aware-health-coaching-for-sustainable-habit-building-with-human-oversight/" },
-          { "label": "Workshop page", "url": "https://www.clsp.jhu.edu/the-12th-frederick-jelinek-memorial-summer-workshop-on-speech-and-language-technology/" }
+          {
+            "label": "Project page",
+            "url": "https://www.clsp.jhu.edu/uncertainty-aware-health-coaching-for-sustainable-habit-building-with-human-oversight/"
+          },
+          {
+            "label": "Workshop page",
+            "url": "https://www.clsp.jhu.edu/the-12th-frederick-jelinek-memorial-summer-workshop-on-speech-and-language-technology/"
+          }
         ]
       }
     ],
     "links": {
       "website": "https://www.jasonslucas.com",
       "scholar": "https://scholar.google.com/citations?hl=en&user=XU1WN6YAAAAJ",
+      "orcid": "https://orcid.org/0009-0000-3494-6935",
       "github": "https://github.com/jsl5710",
       "twitter": "https://twitter.com/jasonslucas1",
       "email": "jason.lucas@colorado.edu"
@@ -52,13 +61,17 @@
       "name": "Dr. Dongwon Lee",
       "role": "Advisor & Collaborator",
       "affiliation": "Penn State — PIKE Lab",
-      "links": { "website": "https://pike.psu.edu/dongwon/" }
+      "links": {
+        "website": "https://pike.psu.edu/dongwon/"
+      }
     },
     {
       "name": "Dr. Adaku Uchendu",
       "role": "Collaborator",
       "affiliation": "MIT Lincoln Laboratory",
-      "links": { "website": "https://adauchendu.github.io/" }
+      "links": {
+        "website": "https://adauchendu.github.io/"
+      }
     },
     {
       "name": "Pureheart Ogheneogaga Irikefe",
