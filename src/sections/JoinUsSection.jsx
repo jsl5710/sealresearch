@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
+import joiningMd from '../content/joining.md?raw';
+import { mdToHtml } from '../lib/markdown';
 import openings from '../data/openings.json';
 import programs from '../data/programs.json';
 import lab from '../data/lab.json';
@@ -24,6 +26,10 @@ const JoinUsSection = () => {
         <p className="text-mist text-center max-w-2xl mx-auto mb-14">
           If you care about AI that works safely and fairly for everyone — not just English speakers — we want to hear from you.
         </p>
+
+        {/* Joining statement — placed above the openings: deciding whether this
+            lab fits comes before deciding which role to apply for. */}
+        <JoiningStatement />
 
         {/* Active roles */}
         {active.length > 0 && (
@@ -100,6 +106,66 @@ const JoinUsSection = () => {
         </div>
       </div>
     </section>
+  );
+};
+
+/*
+ * The full joining statement, collapsed by default. Prospective students who
+ * want the detail can open it; everyone else keeps a scannable page. The
+ * opening paragraphs stay visible either way, since those are the part that
+ * tells someone whether to read on.
+ */
+const JoiningStatement = () => {
+  const [open, setOpen] = useState(false);
+  const html = useMemo(() => mdToHtml(joiningMd), []);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+      className="mb-16 glass-strong rounded-2xl p-7 md:p-10 border-signal/25"
+    >
+      <p className="mono text-xs uppercase tracking-widest text-signal mb-3">
+        Read this first
+      </p>
+
+      <h3 className="text-2xl md:text-3xl font-serif font-semibold text-paper mb-4 leading-tight">
+        Before you apply
+      </h3>
+
+      <p className="text-paper/90 text-lg leading-relaxed max-w-3xl">
+        Applying to a PhD often feels like a guessing game — you write a statement for
+        someone whose actual priorities you cannot see. This sets out what I am genuinely
+        looking for, what I can offer, and what I expect, so you can decide whether SEAL
+        fits before you spend a weekend on an application.
+      </p>
+
+      {!open && (
+        <p className="text-mist text-sm leading-relaxed mt-4 max-w-3xl">
+          Covers what we work on, who does well here, how I advise, funding, and how to
+          apply — for PhD, Master's and undergraduate researchers.
+        </p>
+      )}
+
+      <button
+        onClick={() => setOpen(o => !o)}
+        aria-expanded={open}
+        aria-controls="joining-statement"
+        className="btn-primary text-sm py-2.5 mt-6"
+      >
+        {open ? 'Collapse statement' : 'Read the full statement →'}
+      </button>
+
+      {open && (
+        <div
+          id="joining-statement"
+          className="hb-content mt-8 pt-8 border-t border-signal/15"
+          dangerouslySetInnerHTML={{ __html: html }}
+        />
+      )}
+    </motion.div>
   );
 };
 
