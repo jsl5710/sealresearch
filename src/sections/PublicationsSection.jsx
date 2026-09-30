@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import publications from '../data/publications.json';
 import themes from '../data/themes.json';
@@ -11,6 +11,31 @@ const TYPE_ORDER = [
   { id: 'preprint',   label: 'Under Review / In Preparation' },
   { id: 'thesis',     label: 'Dissertation & Theses' },
 ];
+
+/*
+ * Disclosure chevron. Rotating a single glyph rather than swapping two
+ * icons keeps the control visually stable while it animates.
+ */
+const Chevron = ({ open }) => (
+  <svg
+    aria-hidden="true"
+    viewBox="0 0 20 20"
+    className={`h-4 w-4 shrink-0 text-signal transition-transform duration-200 ${open ? 'rotate-90' : ''}`}
+  >
+    <path d="M7 4l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="2"
+          strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+const byYearDesc = (items) => {
+  const years = new Map();
+  for (const p of items) {
+    const y = String(p.year);
+    if (!years.has(y)) years.set(y, []);
+    years.get(y).push(p);
+  }
+  return [...years.entries()].sort((a, b) => Number(b[0]) - Number(a[0]));
+};
 
 const themeShort = (t) => t.short || t.title.split(' and ')[0].split(':')[0];
 
@@ -58,17 +83,46 @@ const PublicationItem = ({ p, i }) => (
 const PublicationsSection = () => {
   const [themeFilter, setThemeFilter] = useState('all');
 
+  /*
+   * Two sets, deliberately asymmetric:
+   *
+   *   openTypes   - which type sections are OPEN. Empty by default, so the
+   *                 section arrives collapsed: six headings with counts,
+   *                 reading as a contents page rather than a wall of papers.
+   *
+   *   closedYears - which year rows inside an open type the visitor has
+   *                 since closed. Years open WITH their type; requiring a
+   *                 second click to see anything would make opening a
+   *                 section feel like it had failed.
+   *
+   * Year keys are namespaced by type ("conference:2026"), since the same
+   * year appears under several types.
+   */
+  const [openTypes, setOpenTypes] = useState(() => new Set());
+  const [closedYears, setClosedYears] = useState(() => new Set());
+
+  const toggle = (setFn) => (key) => setFn(prev => {
+    const next = new Set(prev);
+    next.has(key) ? next.delete(key) : next.add(key);
+    return next;
+  });
+  const toggleType = toggle(setOpenTypes);
+  const toggleYear = toggle(setClosedYears);
+
   const filtered = themeFilter === 'all'
     ? publications
     : publications.filter(p => p.themes.includes(themeFilter));
 
-  // Group by type, then sort by year desc within each type
-  const grouped = TYPE_ORDER.map(t => ({
-    ...t,
-    items: filtered
-      .filter(p => p.type === t.id)
-      .sort((a, b) => b.year - a.year),
-  })).filter(g => g.items.length > 0);
+  // Group by type, then by year within each type, newest first.
+  const grouped = useMemo(() => TYPE_ORDER.map(t => {
+    const items = filtered.filter(p => p.type === t.id).sort((a, b) => b.year - a.year);
+    return { ...t, items, years: byYearDesc(items) };
+  }).filter(g => g.items.length > 0), [filtered]);
+
+  const allClosed = openTypes.size === 0;
+
+  const expandAll = () => { setOpenTypes(new Set(grouped.map(g => g.id))); setClosedYears(new Set()); };
+  const collapseAll = () => { setOpenTypes(new Set()); setClosedYears(new Set()); };
 
   const themeChips = [
     { id: 'all', label: 'All Themes' },
@@ -101,23 +155,79 @@ const PublicationsSection = () => {
           ))}
         </div>
 
-        <div className="space-y-14">
-          {grouped.map(group => (
-            <div key={group.id}>
-              <div className="flex items-baseline gap-4 mb-6">
-                <h3 className="text-2xl md:text-3xl font-serif font-semibold text-paper">
-                  {group.label}
+        {grouped.length > 0 && (
+          <div className="flex justify-end mb-6">
+            <button
+              onClick={allClosed ? expandAll : collapseAll}
+              className="mono text-xs text-mist hover:text-signal transition-colors"
+            >
+              {allClosed ? 'Expand all' : 'Collapse all'}
+            </button>
+          </div>
+        )}
+
+        <div className="space-y-10">
+          {grouped.map(group => {
+            const typeOpen = openTypes.has(group.id);
+            return (
+              <div key={group.id}>
+                <h3>
+                  <button
+                    onClick={() => toggleType(group.id)}
+                    aria-expanded={typeOpen}
+                    aria-controls={`pub-type-${group.id}`}
+                    className="group/th flex w-full items-baseline gap-3 text-left"
+                  >
+                    <span className="self-center"><Chevron open={typeOpen} /></span>
+                    <span className="text-2xl md:text-3xl font-serif font-semibold text-paper
+                                     group-hover/th:text-signal transition-colors">
+                      {group.label}
+                    </span>
+                    <span className="mono text-xs text-mist">{group.items.length}</span>
+                    <span className="flex-1 h-[1px] bg-signal/10" />
+                  </button>
                 </h3>
-                <span className="mono text-xs text-mist">{group.items.length}</span>
-                <div className="flex-1 h-[1px] bg-signal/10" />
+
+                {typeOpen && (
+                  <div id={`pub-type-${group.id}`} className="mt-6 space-y-8">
+                    {group.years.map(([year, items]) => {
+                      const key = `${group.id}:${year}`;
+                      const yearOpen = !closedYears.has(key);
+                      return (
+                        <div key={key}>
+                          <h4>
+                            <button
+                              onClick={() => toggleYear(key)}
+                              aria-expanded={yearOpen}
+                              aria-controls={`pub-year-${key}`}
+                              className="group/yr flex w-full items-center gap-2 text-left ml-1 mb-4"
+                            >
+                              <Chevron open={yearOpen} />
+                              <span className="mono text-sm text-paper group-hover/yr:text-signal transition-colors">
+                                {year}
+                              </span>
+                              <span className="mono text-[11px] text-mist">
+                                {items.length} paper{items.length === 1 ? '' : 's'}
+                              </span>
+                              <span className="flex-1 h-[1px] bg-signal/10" />
+                            </button>
+                          </h4>
+
+                          {yearOpen && (
+                            <div id={`pub-year-${key}`} className="space-y-4">
+                              {items.map((p, i) => (
+                                <PublicationItem key={p.id} p={p} i={i} />
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
               </div>
-              <div className="space-y-4">
-                {group.items.map((p, i) => (
-                  <PublicationItem key={p.id} p={p} i={i} />
-                ))}
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {grouped.length === 0 && (
