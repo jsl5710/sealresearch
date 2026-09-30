@@ -485,7 +485,7 @@
   {
     "id": "phd-dissertation-psu-26",
     "type": "thesis",
-    "title": "Advancing Trustworthy AI Through Low-Resource Multilingual Natural Language Processing and Cybersecurity",
+    "title": "Trustworthy AI for Language-Diverse Harmful Content: Attacks and Defenses in Multilingual NLP",
     "authors": [
       "Jason S. Lucas"
     ],
@@ -497,7 +497,7 @@
       "integrity"
     ],
     "featured": false,
-    "url": ""
+    "url": "https://etda.libraries.psu.edu/catalog/25810jsl5710"
   },
   {
     "id": "mph-capstone-sgu-20",
