@@ -3,11 +3,22 @@
     "id": "speculation-ieee-computer-26",
     "type": "journal",
     "title": "Beyond Speculation: Measuring the Growing Presence of LLM-Generated Texts in Multilingual Disinformation",
-    "authors": ["Dominik Macko", "Aashish Anantha Ramakrishnan", "Jason Lucas", "Robert Moro", "Ivan Srba", "Adaku Uchendu", "Dongwon Lee"],
+    "authors": [
+      "Dominik Macko",
+      "Aashish Anantha Ramakrishnan",
+      "Jason Lucas",
+      "Robert Moro",
+      "Ivan Srba",
+      "Adaku Uchendu",
+      "Dongwon Lee"
+    ],
     "venue": "IEEE Computer",
     "venueLong": "IEEE Computer",
     "year": 2026,
-    "themes": ["multilingual", "integrity"],
+    "themes": [
+      "multilingual",
+      "integrity"
+    ],
     "featured": true,
     "url": "https://ieeexplore.ieee.org/document/11371014"
   },
@@ -15,11 +26,21 @@
     "id": "longtail-disinfo-ieee-is-24",
     "type": "journal",
     "title": "The Long-Tail Impact of Generative AI on Disinformation: Harmonizing Dichotomous Perspectives",
-    "authors": ["Jason Lucas", "Barani Maung Maung", "Maryam Tabar", "Keegan McBride", "Dongwon Lee"],
+    "authors": [
+      "Jason Lucas",
+      "Barani Maung Maung",
+      "Maryam Tabar",
+      "Keegan McBride",
+      "Dongwon Lee"
+    ],
     "venue": "IEEE Intelligent Systems",
     "venueLong": "IEEE Intelligent Systems",
     "year": 2024,
-    "themes": ["multilingual", "integrity", "equity"],
+    "themes": [
+      "multilingual",
+      "integrity",
+      "equity"
+    ],
     "featured": false,
     "url": "https://doi.ieeecomputersociety.org/10.1109/MIS.2024.3439109"
   },
@@ -27,11 +48,20 @@
     "id": "longtail-harm-ieee-computer-24",
     "type": "journal",
     "title": "Generative AI Disproportionately Harms Long-Tail Users",
-    "authors": ["Barani Maung Maung", "Keegan McBride", "Jason Lucas", "Maryam Tabar", "Dongwon Lee"],
+    "authors": [
+      "Barani Maung Maung",
+      "Keegan McBride",
+      "Jason Lucas",
+      "Maryam Tabar",
+      "Dongwon Lee"
+    ],
     "venue": "IEEE Computer 57(11)",
     "venueLong": "IEEE Computer, Vol. 57, Issue 11",
     "year": 2024,
-    "themes": ["multilingual", "equity"],
+    "themes": [
+      "multilingual",
+      "equity"
+    ],
     "featured": false,
     "url": "https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10718648"
   },
@@ -39,11 +69,21 @@
     "id": "sdg-bayesian-ann-joi-26",
     "type": "journal",
     "title": "Predicting Sustainable Development Goals with Global AI Readiness: A Hybrid Bayesian Belief Network and Artificial Neural Network Approach",
-    "authors": ["Pureheart Ogheneogaga Irikefe", "Reuben George", "Peterson Ozili", "Mohammad Falahat", "Peter Nwachukwu Mba", "Denis Nfor Yuni", "Jason Lucas"],
+    "authors": [
+      "Pureheart Ogheneogaga Irikefe",
+      "Reuben George",
+      "Peterson Ozili",
+      "Mohammad Falahat",
+      "Peter Nwachukwu Mba",
+      "Denis Nfor Yuni",
+      "Jason Lucas"
+    ],
     "venue": "J. Open Innov.: Tech., Market, Complexity (Q1)",
     "venueLong": "Journal of Open Innovation: Technology, Market, and Complexity (Q1)",
     "year": 2026,
-    "themes": ["human"],
+    "themes": [
+      "human"
+    ],
     "featured": false,
     "url": ""
   },
@@ -51,11 +91,19 @@
     "id": "cybernetic-cogent-26",
     "type": "journal",
     "title": "Cybernetic Principles and Artificial Neural Networks in Social Science Scale Development: A Systematic Review and Science Mapping",
-    "authors": ["Pureheart Ogheneogaga Irikefe", "Mohammad Falahat", "Kings Ferrels Kondowe", "Jason Lucas", "Kwame Ntim Sekyere"],
+    "authors": [
+      "Pureheart Ogheneogaga Irikefe",
+      "Mohammad Falahat",
+      "Kings Ferrels Kondowe",
+      "Jason Lucas",
+      "Kwame Ntim Sekyere"
+    ],
     "venue": "Cogent Social Sciences (Q1)",
     "venueLong": "Cogent Social Sciences (Q1)",
     "year": 2026,
-    "themes": ["human"],
+    "themes": [
+      "human"
+    ],
     "featured": false,
     "url": ""
   },
@@ -63,11 +111,18 @@
     "id": "asean-sustainability-springer",
     "type": "chapter",
     "title": "Sustainable Development Attitudes and Pro-Environmental Behaviour in ASEAN: A Systematic Review and Meta-Analysis",
-    "authors": ["Jason Lucas", "Pureheart Ogheneogaga Irikefe", "Mohammad Falahat", "Jonathan Ojarikre Oniore"],
+    "authors": [
+      "Jason Lucas",
+      "Pureheart Ogheneogaga Irikefe",
+      "Mohammad Falahat",
+      "Jonathan Ojarikre Oniore"
+    ],
     "venue": "Business of the Future — Springer",
     "venueLong": "In Business of the Future: Innovating Sustainability. Springer.",
     "year": 2026,
-    "themes": ["human"],
+    "themes": [
+      "human"
+    ],
     "featured": false,
     "url": ""
   },
@@ -75,11 +130,24 @@
     "id": "bluff-kdd26",
     "type": "conference",
     "title": "BLUFF: Benchmarking Falsehoods in Long-Tail Multilingual Low-Resource Languages",
-    "authors": ["Jason Lucas", "Matt Murtagh-White", "Adaku Uchendu", "Ali Al-Lawati", "Michiharu Yamashita", "Dominik Macko", "Ivan Srba", "Robert Moro", "Dongwon Lee"],
+    "authors": [
+      "Jason Lucas",
+      "Matt Murtagh-White",
+      "Adaku Uchendu",
+      "Ali Al-Lawati",
+      "Michiharu Yamashita",
+      "Dominik Macko",
+      "Ivan Srba",
+      "Robert Moro",
+      "Dongwon Lee"
+    ],
     "venue": "KDD 2026",
     "venueLong": "32nd ACM SIGKDD Conference on Knowledge Discovery and Data Mining (KDD '26), Datasets and Benchmarks Track, Jeju, South Korea",
     "year": 2026,
-    "themes": ["multilingual", "integrity"],
+    "themes": [
+      "multilingual",
+      "integrity"
+    ],
     "featured": true,
     "url": "https://arxiv.org/abs/2603.00634"
   },
@@ -87,11 +155,19 @@
     "id": "contamination-icml26",
     "type": "conference",
     "title": "Position: LLM Benchmark Datasets Should Be Contamination-Resistant",
-    "authors": ["Ali Al-Lawati", "Jason Lucas", "Dongwon Lee", "Suhang Wang"],
+    "authors": [
+      "Ali Al-Lawati",
+      "Jason Lucas",
+      "Dongwon Lee",
+      "Suhang Wang"
+    ],
     "venue": "ICML 2026",
     "venueLong": "43rd International Conference on Machine Learning (ICML '26), Position Paper Track, Seoul, South Korea",
     "year": 2026,
-    "themes": ["integrity", "human"],
+    "themes": [
+      "integrity",
+      "human"
+    ],
     "featured": false,
     "url": "https://icml.cc/virtual/2026/poster/67191"
   },
@@ -99,11 +175,23 @@
     "id": "dual-curse-icml26",
     "type": "conference",
     "title": "Position: Breaking the Dual Curse of Multilingual AI Requires Socio-Technical Guardrails, Not Post-Hoc Alignment",
-    "authors": ["Jason Lucas", "Pureheart Irikefe", "Adaku Uchendu", "Umniya Najaer", "Cornelius Adejoro", "Patrice Sterling", "Dongwon Lee"],
+    "authors": [
+      "Jason Lucas",
+      "Pureheart Irikefe",
+      "Adaku Uchendu",
+      "Umniya Najaer",
+      "Cornelius Adejoro",
+      "Patrice Sterling",
+      "Dongwon Lee"
+    ],
     "venue": "ICML 2026",
     "venueLong": "43rd International Conference on Machine Learning (ICML '26), Position Paper Track, Seoul, South Korea",
     "year": 2026,
-    "themes": ["multilingual", "equity", "integrity"],
+    "themes": [
+      "multilingual",
+      "equity",
+      "integrity"
+    ],
     "featured": true,
     "url": "https://icml.cc/virtual/2026/poster/67071",
     "abstract": "Multilingual language models exhibit a dual curse — harmful generation rises to 35% in low-resource languages while instruction-following collapses. Reward models achieve only 49–50% accuracy in low-resource languages, undermining post-deployment safety. We argue for socio-technical guardrails built in from pre-training."
@@ -112,11 +200,21 @@
     "id": "dia-harm-acl26",
     "type": "conference",
     "title": "DIA-HARM: Dialectal Disparities in Harmful Content Detection Across 50 English Dialects",
-    "authors": ["Jason Lucas", "Matt Murtagh", "Ali Al-Lawati", "Adaku Uchendu", "Dongwon Lee"],
+    "authors": [
+      "Jason Lucas",
+      "Matt Murtagh",
+      "Ali Al-Lawati",
+      "Adaku Uchendu",
+      "Dongwon Lee"
+    ],
     "venue": "ACL 2026",
     "venueLong": "64th Annual Meeting of the Association for Computational Linguistics (ACL '26), San Diego, CA, USA",
     "year": 2026,
-    "themes": ["multilingual", "integrity", "equity"],
+    "themes": [
+      "multilingual",
+      "integrity",
+      "equity"
+    ],
     "featured": true,
     "award": "Social Impact Paper Award",
     "url": "https://arxiv.org/abs/2604.05318",
@@ -126,11 +224,19 @@
     "id": "coi-emnlp25",
     "type": "conference",
     "title": "Chain-of-Interactions: Iterative ICL Framework for Abstractive Task-Oriented Dialogue Summarization of Conversational AI Interactions",
-    "authors": ["Jason Lucas", "John Chen", "Ali Al-Lawati", "Mahjabin Nahar", "Mahnoosh Mehrabani"],
+    "authors": [
+      "Jason Lucas",
+      "John Chen",
+      "Ali Al-Lawati",
+      "Mahjabin Nahar",
+      "Mahnoosh Mehrabani"
+    ],
     "venue": "Findings of EMNLP 2025",
     "venueLong": "Findings of the Association for Computational Linguistics: EMNLP 2025",
     "year": 2025,
-    "themes": ["human"],
+    "themes": [
+      "human"
+    ],
     "featured": false,
     "url": "https://aclanthology.org/2025.findings-emnlp.191/"
   },
@@ -138,11 +244,19 @@
     "id": "gamic-emnlp25",
     "type": "conference",
     "title": "Graph-Based Molecular In-Context Learning Grounded on Morgan Fingerprints",
-    "authors": ["Ali Al-Lawati", "Jason Lucas", "Zhiwei Zhang", "Prasenjit Mitra", "Suhang Wang"],
+    "authors": [
+      "Ali Al-Lawati",
+      "Jason Lucas",
+      "Zhiwei Zhang",
+      "Prasenjit Mitra",
+      "Suhang Wang"
+    ],
     "venue": "Findings of EMNLP 2025",
     "venueLong": "Findings of the Association for Computational Linguistics: EMNLP 2025",
     "year": 2025,
-    "themes": ["human"],
+    "themes": [
+      "human"
+    ],
     "featured": false,
     "url": "https://aclanthology.org/2025.findings-emnlp.996/"
   },
@@ -150,11 +264,22 @@
     "id": "beemo-naacl25",
     "type": "conference",
     "title": "Beemo: Benchmark of Expert-Edited Machine-Generated Outputs",
-    "authors": ["Ekaterina Artemova", "Jason Lucas", "Saranya Venkatraman", "Jooyoung Lee", "Sergei Tilga", "Adaku Uchendu", "Vladislav Mikhailov"],
+    "authors": [
+      "Ekaterina Artemova",
+      "Jason Lucas",
+      "Saranya Venkatraman",
+      "Jooyoung Lee",
+      "Sergei Tilga",
+      "Adaku Uchendu",
+      "Vladislav Mikhailov"
+    ],
     "venue": "NAACL 2025",
     "venueLong": "2025 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies (NAACL '25), pp. 6992–7018",
     "year": 2025,
-    "themes": ["integrity", "human"],
+    "themes": [
+      "integrity",
+      "human"
+    ],
     "featured": false,
     "url": "https://aclanthology.org/2025.naacl-long.357/"
   },
@@ -162,11 +287,17 @@
     "id": "sql2text-coling25",
     "type": "conference",
     "title": "Semantic Captioning: Benchmark Dataset and Graph-Aware Few-Shot In-Context Learning for SQL2Text",
-    "authors": ["Ali Al-Lawati", "Jason Lucas", "Prasenjit Mitra"],
+    "authors": [
+      "Ali Al-Lawati",
+      "Jason Lucas",
+      "Prasenjit Mitra"
+    ],
     "venue": "COLING 2025",
     "venueLong": "31st International Conference on Computational Linguistics (COLING '25), pp. 8026–8042, Abu Dhabi, UAE",
     "year": 2025,
-    "themes": ["human"],
+    "themes": [
+      "human"
+    ],
     "featured": false,
     "url": "https://aclanthology.org/2025.coling-main.536/"
   },
@@ -174,11 +305,25 @@
     "id": "authorship-obfuscation-emnlp24",
     "type": "conference",
     "title": "Authorship Obfuscation in Multilingual Machine-Generated Text Detection",
-    "authors": ["Dominik Macko", "Robert Moro", "Adaku Uchendu", "Ivan Srba", "Jason Lucas", "Michiharu Yamashita", "Nafis Irtiza Tripto", "Dongwon Lee", "Jakub Simko", "Maria Bielikova"],
+    "authors": [
+      "Dominik Macko",
+      "Robert Moro",
+      "Adaku Uchendu",
+      "Ivan Srba",
+      "Jason Lucas",
+      "Michiharu Yamashita",
+      "Nafis Irtiza Tripto",
+      "Dongwon Lee",
+      "Jakub Simko",
+      "Maria Bielikova"
+    ],
     "venue": "Findings of EMNLP 2024",
     "venueLong": "Findings of the Association for Computational Linguistics: EMNLP 2024, pp. 13706–13724",
     "year": 2024,
-    "themes": ["multilingual", "integrity"],
+    "themes": [
+      "multilingual",
+      "integrity"
+    ],
     "featured": false,
     "url": "https://aclanthology.org/2024.findings-emnlp.369/"
   },
@@ -186,11 +331,26 @@
     "id": "multitude-emnlp23",
     "type": "conference",
     "title": "MULTITuDE: Large-Scale Multilingual Machine-Generated Text Detection Benchmark",
-    "authors": ["Dominik Macko", "Robert Moro", "Adaku Uchendu", "Jason Lucas", "Michiharu Yamashita", "Matúš Pikuliak", "Ivan Srba", "Thai Le", "Dongwon Lee", "Jakub Simko", "Maria Bielikova"],
+    "authors": [
+      "Dominik Macko",
+      "Robert Moro",
+      "Adaku Uchendu",
+      "Jason Lucas",
+      "Michiharu Yamashita",
+      "Matúš Pikuliak",
+      "Ivan Srba",
+      "Thai Le",
+      "Dongwon Lee",
+      "Jakub Simko",
+      "Maria Bielikova"
+    ],
     "venue": "EMNLP 2023",
     "venueLong": "2023 Conference on Empirical Methods in Natural Language Processing (EMNLP '23), pp. 9960–9987, Singapore",
     "year": 2023,
-    "themes": ["multilingual", "integrity"],
+    "themes": [
+      "multilingual",
+      "integrity"
+    ],
     "featured": false,
     "url": "https://aclanthology.org/2023.emnlp-main.616/"
   },
@@ -198,11 +358,20 @@
     "id": "f3-emnlp23",
     "type": "conference",
     "title": "Fighting Fire with Fire: The Dual Role of LLMs in Crafting and Detecting Elusive Disinformation",
-    "authors": ["Jason Lucas", "Adaku Uchendu", "Michiharu Yamashita", "Jooyoung Lee", "Shaurya Rohatgi", "Dongwon Lee"],
+    "authors": [
+      "Jason Lucas",
+      "Adaku Uchendu",
+      "Michiharu Yamashita",
+      "Jooyoung Lee",
+      "Shaurya Rohatgi",
+      "Dongwon Lee"
+    ],
     "venue": "EMNLP 2023",
     "venueLong": "2023 Conference on Empirical Methods in Natural Language Processing (EMNLP '23), pp. 14279–14305, Singapore",
     "year": 2023,
-    "themes": ["integrity"],
+    "themes": [
+      "integrity"
+    ],
     "featured": false,
     "url": "https://aclanthology.org/2023.emnlp-main.883/"
   },
@@ -210,11 +379,20 @@
     "id": "caribbean-constraint22",
     "type": "workshop",
     "title": "Detecting False Claims in Low-Resource Regions: A Case Study of Caribbean Islands",
-    "authors": ["Jason Lucas", "Limeng Cui", "Thai Le", "Dongwon Lee"],
+    "authors": [
+      "Jason Lucas",
+      "Limeng Cui",
+      "Thai Le",
+      "Dongwon Lee"
+    ],
     "venue": "CONSTRAINT @ ACL 2022",
     "venueLong": "Workshop on Combating Online Hostile Posts in Regional Languages during Emergency Situations (CONSTRAINT, ACL '22), pp. 95–102, Dublin, Ireland",
     "year": 2022,
-    "themes": ["multilingual", "integrity", "equity"],
+    "themes": [
+      "multilingual",
+      "integrity",
+      "equity"
+    ],
     "featured": false,
     "url": "https://aclanthology.org/2022.constraint-1.11/"
   },
@@ -222,11 +400,18 @@
     "id": "self-modifying-ai-preprint",
     "type": "preprint",
     "title": "When AI Rewrites Itself: Auditing Alone Cannot Govern Self-Modifying AI",
-    "authors": ["Jason Lucas", "Umniya Najaer", "Dongwon Lee"],
+    "authors": [
+      "Jason Lucas",
+      "Umniya Najaer",
+      "Dongwon Lee"
+    ],
     "venue": "Under Review 2026",
     "venueLong": "Manuscript under review",
     "year": 2026,
-    "themes": ["integrity", "equity"],
+    "themes": [
+      "integrity",
+      "equity"
+    ],
     "featured": false,
     "url": ""
   },
@@ -234,35 +419,66 @@
     "id": "dialect-evasion-preprint",
     "type": "preprint",
     "title": "Lost in Dialect: Dialectal Evasion Attacks and Defenses Against Safety-Aligned AI Models",
-    "authors": ["Jason Lucas", "Ali Al-Lawati", "Matt Murtagh-White", "Md Toufikuzzaman", "Rajveer Dharkar", "Adaku Uchendu", "Yuchen Yang", "Xinyu Xing", "Dongwon Lee"],
+    "authors": [
+      "Jason Lucas",
+      "Ali Al-Lawati",
+      "Matt Murtagh-White",
+      "Md Toufikuzzaman",
+      "Rajveer Dharkar",
+      "Adaku Uchendu",
+      "Yuchen Yang",
+      "Xinyu Xing",
+      "Dongwon Lee"
+    ],
     "venue": "Under Review 2026",
     "venueLong": "Manuscript under review",
     "year": 2026,
-    "themes": ["multilingual", "integrity"],
+    "themes": [
+      "multilingual",
+      "integrity"
+    ],
     "featured": false,
     "url": ""
   },
   {
-    "id": "spoken-hallucination-preprint",
-    "type": "preprint",
-    "title": "Detecting Spoken Hallucinations Across Three Languages: Generation, Challenges, and Insights from Audio Data",
-    "authors": ["Meruyert Aristombayeva", "Jason Lucas", "Chaewan Chun", "Dongwon Lee"],
-    "venue": "Under Review 2026",
-    "venueLong": "Manuscript under review",
+    "id": "lost-in-speech-salma26",
+    "type": "workshop",
+    "title": "Lost in Speech: Trilingual Spoken Hallucination Detection Across Audio and Transcripts",
+    "authors": [
+      "Meruyert Aristombayeva",
+      "Jason S. Lucas",
+      "Chaewan Chun",
+      "Dongwon Lee"
+    ],
+    "venue": "SALMA 2026",
+    "venueLong": "2nd Workshop on Speech and Audio Language Models (SALMA 2026), co-located with EMNLP '26, Oct. 24-29, 2026, Budapest, Hungary",
     "year": 2026,
-    "themes": ["multilingual", "integrity"],
-    "featured": false,
+    "themes": [
+      "multilingual",
+      "integrity"
+    ],
+    "featured": true,
     "url": ""
   },
   {
     "id": "moltbook-moderation-preprint",
     "type": "preprint",
     "title": "Moltbook Moderation: Uncovering Hidden Intent Through Multi-Turn Dialogue",
-    "authors": ["Ali Al-Lawati", "Nafis Tripto", "Abolfazl Ansari", "Jason Lucas", "Suhang Wang", "Dongwon Lee"],
+    "authors": [
+      "Ali Al-Lawati",
+      "Nafis Tripto",
+      "Abolfazl Ansari",
+      "Jason Lucas",
+      "Suhang Wang",
+      "Dongwon Lee"
+    ],
     "venue": "Under Review 2026",
     "venueLong": "Manuscript under review",
     "year": 2026,
-    "themes": ["integrity", "human"],
+    "themes": [
+      "integrity",
+      "human"
+    ],
     "featured": false,
     "url": ""
   },
@@ -270,11 +486,16 @@
     "id": "phd-dissertation-psu-26",
     "type": "thesis",
     "title": "Advancing Trustworthy AI Through Low-Resource Multilingual Natural Language Processing and Cybersecurity",
-    "authors": ["Jason S. Lucas"],
+    "authors": [
+      "Jason S. Lucas"
+    ],
     "venue": "Ph.D. Dissertation — Penn State",
     "venueLong": "Ph.D. Dissertation, College of Information Sciences and Technology, The Pennsylvania State University (Advisor: Dongwon Lee)",
     "year": 2026,
-    "themes": ["multilingual", "integrity"],
+    "themes": [
+      "multilingual",
+      "integrity"
+    ],
     "featured": false,
     "url": ""
   },
@@ -282,11 +503,15 @@
     "id": "mph-capstone-sgu-20",
     "type": "thesis",
     "title": "Effects of Self-Care Apps in Prediabetics in Grenada",
-    "authors": ["Jason S. Lucas"],
+    "authors": [
+      "Jason S. Lucas"
+    ],
     "venue": "M.P.H. Capstone — SGU",
     "venueLong": "M.P.H. Capstone, School of Graduate Studies, St. George's University (Advisor: Emanuel Keku)",
     "year": 2020,
-    "themes": ["human"],
+    "themes": [
+      "human"
+    ],
     "featured": false,
     "url": ""
   },
@@ -294,11 +519,15 @@
     "id": "msc-capstone-bu-14",
     "type": "thesis",
     "title": "Advancing Health Information Systems (EHR) in Low- and Middle-Income Countries",
-    "authors": ["Jason S. Lucas"],
+    "authors": [
+      "Jason S. Lucas"
+    ],
     "venue": "M.Sc. Capstone — Boston University",
     "venueLong": "M.Sc. Capstone, Metropolitan College, Boston University (Advisor: Vladimir Brusic)",
     "year": 2014,
-    "themes": ["human"],
+    "themes": [
+      "human"
+    ],
     "featured": false,
     "url": ""
   },
@@ -306,12 +535,37 @@
     "id": "bsc-project-sgu-10",
     "type": "thesis",
     "title": "Azure Medical Clinic Web Application",
-    "authors": ["Jason S. Lucas"],
+    "authors": [
+      "Jason S. Lucas"
+    ],
     "venue": "B.Sc. Project — SGU",
     "venueLong": "B.Sc. Information Systems Project, Department of Computers and Technology, St. George's University (Cum Laude, Advisor: Michael Roberts)",
     "year": 2010,
-    "themes": ["human"],
+    "themes": [
+      "human"
+    ],
     "featured": false,
+    "url": ""
+  },
+  {
+    "id": "aor-bench-emnlp26",
+    "type": "conference",
+    "title": "AOR-Bench: Do Large Audio Language Models Over-Refuse Pseudo-Harmful Queries?",
+    "authors": [
+      "Jiaxi Yang",
+      "Chaewan Chun",
+      "Jason Lucas",
+      "Yuchen Yang",
+      "Dongwon Lee"
+    ],
+    "venue": "EMNLP 2026",
+    "venueLong": "2026 Conference on Empirical Methods in Natural Language Processing (EMNLP '26), Oct. 24-29, 2026, Budapest, Hungary",
+    "year": 2026,
+    "themes": [
+      "integrity",
+      "human"
+    ],
+    "featured": true,
     "url": ""
   }
 ]
