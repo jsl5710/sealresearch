@@ -138,27 +138,105 @@ const PersonCard = ({ person, isPI }) => (
         <AppointmentsBlock appointments={person.appointments} />
         {person.links && (
           <div className="flex flex-wrap gap-x-4 gap-y-2 text-xs mono">
-            {person.links.website && <a href={person.links.website} className="text-signal hover:text-signal-soft transition-colors">website</a>}
-            {person.links.scholar && <a href={person.links.scholar} className="text-signal hover:text-signal-soft transition-colors">scholar</a>}
+            {person.links.website && (
+              <a href={person.links.website} target="_blank" rel="noopener noreferrer"
+                 className="inline-flex items-center gap-1.5 text-signal hover:text-signal-soft transition-colors">
+                <WebsiteIcon />website
+              </a>
+            )}
+            {person.links.scholar && (
+              <a href={person.links.scholar} target="_blank" rel="noopener noreferrer"
+                 className="inline-flex items-center gap-1.5 text-signal hover:text-signal-soft transition-colors">
+                <ScholarIcon />scholar
+              </a>
+            )}
             {person.links.orcid && (
               <a
                 href={person.links.orcid}
                 rel="me noopener noreferrer"
                 target="_blank"
                 title={person.links.orcid}
-                className="inline-flex items-center gap-1 text-signal hover:text-signal-soft transition-colors"
+                className="inline-flex items-center gap-1.5 text-signal hover:text-signal-soft transition-colors"
               >
                 <OrcidIcon />orcid
               </a>
             )}
-            {person.links.github && <a href={person.links.github} className="text-signal hover:text-signal-soft transition-colors">github</a>}
-            {person.links.twitter && <a href={person.links.twitter} className="text-signal hover:text-signal-soft transition-colors">twitter</a>}
-            {person.links.email && <a href={`mailto:${person.links.email}`} className="text-signal hover:text-signal-soft transition-colors">email</a>}
+            {person.links.github && (
+              <a href={person.links.github} target="_blank" rel="noopener noreferrer"
+                 className="inline-flex items-center gap-1.5 text-signal hover:text-signal-soft transition-colors">
+                <GithubIcon />github
+              </a>
+            )}
+            {person.links.twitter && (
+              <a href={person.links.twitter} target="_blank" rel="noopener noreferrer"
+                 className="inline-flex items-center gap-1.5 text-signal hover:text-signal-soft transition-colors">
+                <TwitterIcon />twitter
+              </a>
+            )}
+            {person.links.email && (
+              <a href={`mailto:${person.links.email}`}
+                 className="inline-flex items-center gap-1.5 text-signal hover:text-signal-soft transition-colors">
+                <EmailIcon />email
+              </a>
+            )}
           </div>
         )}
       </div>
     </div>
   </motion.div>
+);
+
+/*
+ * Inline profile marks. All hand-drawn paths rather than an icon font or a
+ * remote sprite: the same reason the ORCID mark is inlined here, since
+ * third-party assets get blocked by tracking protection and leave a broken
+ * image where a link should be.
+ *
+ * currentColor throughout, so they inherit the link colour and re-tint with
+ * the theme instead of needing a per-theme variant.
+ */
+const iconClass = 'inline-block h-[1em] w-[1em] align-[-0.125em]';
+
+const WebsiteIcon = () => (
+  <svg viewBox="0 0 24 24" aria-hidden="true" className={iconClass}
+       fill="none" stroke="currentColor" strokeWidth="1.8">
+    <circle cx="12" cy="12" r="9" />
+    <path d="M3 12h18M12 3c2.5 2.6 2.5 15.4 0 18M12 3c-2.5 2.6-2.5 15.4 0 18" />
+  </svg>
+);
+
+const ScholarIcon = () => (
+  <svg viewBox="0 0 24 24" aria-hidden="true" className={iconClass} fill="currentColor">
+    <path d="M12 3 1 9l11 6 9-4.91V17h2V9L12 3z" />
+    <path d="M6 13.2V17c0 1.66 2.69 3 6 3s6-1.34 6-3v-3.8l-6 3.27-6-3.27z" />
+  </svg>
+);
+
+const GithubIcon = () => (
+  <svg viewBox="0 0 16 16" aria-hidden="true" className={iconClass} fill="currentColor">
+    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
+             0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01
+             1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95
+             0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.4 7.4 0 0 1 2-.27c.68 0
+             1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0
+             3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01
+             8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
+  </svg>
+);
+
+const EmailIcon = () => (
+  <svg viewBox="0 0 24 24" aria-hidden="true" className={iconClass}
+       fill="none" stroke="currentColor" strokeWidth="1.8">
+    <rect x="2.5" y="4.5" width="19" height="15" rx="2" />
+    <path d="m3 7 9 6 9-6" />
+  </svg>
+);
+
+const TwitterIcon = () => (
+  <svg viewBox="0 0 24 24" aria-hidden="true" className={iconClass} fill="currentColor">
+    <path d="M18.24 2.25h3.31l-7.23 8.26 8.5 11.24h-6.65l-5.22-6.82-5.96 6.82H1.68l7.73-8.84L1.25
+             2.25h6.83l4.71 6.23 5.45-6.23zm-1.16 17.52h1.83L7.08 4.13H5.11l11.97 15.64z" />
+  </svg>
 );
 
 const PeopleSection = () => {
