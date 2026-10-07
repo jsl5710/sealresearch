@@ -32,8 +32,7 @@ const HandbookSection = () => {
 
         <p className="text-mist text-center max-w-2xl mx-auto mb-12">
           SEAL's operating norms — culture, authorship, communication, project lifecycle, wellbeing,
-          data ethics. Items tagged <span className="hb-tag hb-tag-decide">DECIDE</span> are open decisions the PI is still choosing on;
-          <span className="hb-tag hb-tag-seal ml-1">SEAL-SPECIFIC</span> marks norms tied to our multilingual and community-facing work.
+          and data ethics. Written down so that how the lab works is visible before you join it.
         </p>
 
         <div className="glass rounded-2xl p-6 md:p-8">

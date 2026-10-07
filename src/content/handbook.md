@@ -1,20 +1,14 @@
-# SEAL Lab Handbook (Skeleton v1)
+# SEAL Lab Handbook
 
 *Secure and Ethical AI Research Lab · University of Colorado Boulder · Department of Information Science*
 
-*Version 1.0 · Last updated: [DATE] · Maintained by: Jason Lucas*
+*Version 1.0 · Last updated: October 2026 · Maintained by: Jason Lucas*
 
 ---
 
 ## How to read this document
 
 This handbook exists so that the norms that make SEAL work well are visible, explicit, and revisable — rather than tacit knowledge that new members have to guess at. Every section here is a norm the PI is currently committing to. If something in this document doesn't match how the lab actually operates, that's a bug: either the norm needs to change or the practice does, and either way it should be flagged.
-
-Markers you'll see in this skeleton:
-
-- **[DECIDE]** — the PI needs to choose between real options here; the current text is a placeholder.
-- **[SEAL-SPECIFIC]** — this is a norm tied to something distinctive about SEAL's work (multilingual data, community collaborations, dialect-sensitive research), and shouldn't be generic-labbed.
-- **[OPTIONAL]** — worth having eventually, not strictly needed on day one.
 
 The handbook is a living document. Members can propose changes at any time; changes affecting the whole lab are discussed in group meeting.
 
@@ -36,7 +30,7 @@ We commit to a small number of values that we think are load-bearing for the kin
 
 **Rigor before novelty.** A boring result done carefully is more valuable than a novel result done sloppily. We test our own claims harder than any reviewer will, and we expect the same of each other. Failure to replicate our own numbers is a serious matter, not a routine one.
 
-**Communities are collaborators, not data sources.** Much of our work touches communities whose languages and dialects have historically been extracted from without consent or benefit. Our default is engagement, not extraction. [SEAL-SPECIFIC] Section 12 makes this concrete.
+**Communities are collaborators, not data sources.** Much of our work touches communities whose languages and dialects have historically been extracted from without consent or benefit. Our default is engagement, not extraction. Section 12 makes this concrete.
 
 **Care about each other.** We're a small lab; the wellbeing of every member is legible to the rest. Nobody is expected to work while sick, grieving, in crisis, or observing religious or cultural obligations. The lab is stronger when members are supported, and the PI would rather lose a paper deadline than lose a person.
 
@@ -58,15 +52,15 @@ Authorship disputes are the single most common source of lasting damage in acade
 
 **Advisor role.** The PI's contribution is typically supervision, conceptualization, funding, and writing. This does not entitle the PI to first-author position on student work. If the PI ever becomes first author on a paper primarily driven by a student, that is an exceptional situation that has been explicitly discussed and agreed with the student.
 
-**Disputes.** Authorship disagreements are raised with the PI as early as possible. If the PI is party to the dispute, disputes are raised with [DECIDE: Dept Chair / an agreed-on external mentor / an ombudsperson]. No paper is submitted with unresolved authorship questions.
+**Disputes.** Authorship disagreements are raised with the PI as early as possible. If the PI is party to the dispute, disputes are raised with an independent party — the department's graduate leadership or the CU Boulder Ombuds Office. No paper is submitted with unresolved authorship questions.
 
-**Acknowledgments.** We acknowledge contributions that don't rise to authorship — annotators, data providers, informal reviewers, community consultants. [SEAL-SPECIFIC] For community-sourced data, we discuss with community collaborators whether they want to be acknowledged, co-authored, or neither, and we honor that.
+**Acknowledgments.** We acknowledge contributions that don't rise to authorship — annotators, data providers, informal reviewers, community consultants. For community-sourced data, we discuss with community collaborators whether they want to be acknowledged, co-authored, or neither, and we honor that.
 
 ---
 
 ## 4. Communication Norms
 
-**Primary channels.** Slack for lab-internal, day-to-day communication; email for external communication and anything that needs a formal record; GitHub/Overleaf for code and paper collaboration; [DECIDE: Notion / Coda / shared Google Drive] for lab-wide documents. Text messages are for logistics and emergencies only.
+**Primary channels.** Slack for lab-internal, day-to-day communication; email for external communication and anything that needs a formal record; GitHub/Overleaf for code and paper collaboration; a shared lab workspace for lab-wide documents. Text messages are for logistics and emergencies only.
 
 **Response expectations.** During normal working hours (roughly 9am–5pm Mountain, Mon–Fri), Slack replies within one working day are expected. Email replies within two working days. Outside those hours: no response expected, ever. If something is truly urgent, say so explicitly.
 
@@ -74,23 +68,23 @@ Authorship disputes are the single most common source of lasting damage in acade
 
 **Meetings vs. async.** Default is async. A meeting is called when: (a) a decision needs to be made and back-and-forth would be faster live, (b) a research idea needs collaborative thinking that doesn't work in writing, or (c) something is emotionally difficult and shouldn't be handled in text. Everything else — updates, questions, feedback on drafts — goes async first.
 
-**PI availability.** The PI holds [DECIDE: N] office hours per week open to lab members without appointment, plus [DECIDE: weekly / biweekly] scheduled 1:1s with each direct advisee. For anything urgent outside those, Slack DM.
+**PI availability.** The PI holds weekly office hours open to lab members without appointment, plus regularly scheduled 1:1s with each direct advisee. For anything urgent outside those, Slack DM.
 
 ---
 
 ## 5. Meeting Structure
 
-**Weekly group meeting.** [DECIDE: day and time] · 90 minutes · all lab members. Format alternates: one week is research updates (each member: 3 min on what they did, what's blocking them, what they want feedback on), the other is a reading or topic (one member presents a paper, dataset, or emerging topic). Once a month, one slot is a *failure post-mortem*: a failed experiment, a rejection, an abandoned line of work, presented by a volunteer.
+**Weekly group meeting.** Time set at the start of each semester · 90 minutes · all lab members. Format alternates: one week is research updates (each member: 3 min on what they did, what's blocking them, what they want feedback on), the other is a reading or topic (one member presents a paper, dataset, or emerging topic). Once a month, one slot is a *failure post-mortem*: a failed experiment, a rejection, an abandoned line of work, presented by a volunteer.
 
 **1:1s.** The PI meets weekly with every direct advisee, 30 minutes. The agenda is co-owned: the advisee brings the running list. Discussions cover current project state, blockers, career development, and anything else. Weekly frequency is the default for first-year PhD students; senior students can move to biweekly if it works better for them.
 
-**Project meetings.** For any paper with more than two lab authors, a standing project meeting is set up: [DECIDE: weekly / biweekly], with clear ownership of agenda, notes, and action items. When the paper submits, the meeting either dissolves or converts explicitly into a new project.
+**Project meetings.** For any paper with more than two lab authors, a standing project meeting is set up — weekly or biweekly, as the project needs — with clear ownership of agenda, notes, and action items. When the paper submits, the meeting either dissolves or converts explicitly into a new project.
 
 **Admin check.** Once a month, the PI does a 30-minute admin sync with each advisee: paperwork, funding, deadlines, upcoming applications, milestones. Kept separate from research 1:1s so admin doesn't crowd out research thinking.
 
 **Semester planning.** Every semester, each lab member writes a one-page plan: research goals, coursework, milestones, career development, personal constraints. Discussed with the PI in the first two weeks of the semester and revisited at the halfway point.
 
-**Retreat.** [OPTIONAL] Once per semester, half-day off-campus lab retreat — research vision, big-picture direction, culture check-in. Rotating host.
+**Retreat.** Once per semester, half-day off-campus lab retreat — research vision, big-picture direction, culture check-in. Rotating host.
 
 ---
 
@@ -114,7 +108,7 @@ Authorship disputes are the single most common source of lasting damage in acade
 
 Every new lab member — PhD, postdoc, MS, undergraduate — walks through a structured onboarding. The full checklist lives in the lab knowledge base; the outline is here.
 
-**Week 1.** Handbook read and signed off; accounts set up (Slack, GitHub, Overleaf, cluster access, [DECIDE: Notion / Coda]); IT and building access; introductory 1:1 with the PI; introductory 1:1s scheduled with every current lab member.
+**Week 1.** Handbook read and signed off; accounts set up (Slack, GitHub, Overleaf, cluster access, the lab workspace); IT and building access; introductory 1:1 with the PI; introductory 1:1s scheduled with every current lab member.
 
 **Weeks 2–4.** Reading list: 5–10 papers spanning SEAL's four pillars, plus 2–3 papers from the member's immediate project area. Weekly 1:1 with the PI on what they read, what they'd want to work on, and what's unclear. Pair up with a peer mentor (see below).
 
@@ -134,13 +128,13 @@ Every new lab member — PhD, postdoc, MS, undergraduate — walks through a str
 
 PhD study itself — coursework, qualifying exam preparation, and self-directed dissertation research — is your degree, not employment, and is not tracked in hours or policed by the PI. What we do track is sustainability. Sustained overwork is not a signal of dedication; it is a signal that something is wrong. If work is regularly consuming evenings and weekends outside of a short pre-deadline push, that is a conversation with the PI, not a private problem.
 
-[SEAL-SPECIFIC] International students on F-1 or J-1 status: raise any visa- or funding-timeline concerns with the PI early. The lab plans milestones and funding around your status, not the other way around.
+International students on F-1 or J-1 status: raise any visa- or funding-timeline concerns with the PI early. The lab plans milestones and funding around your status, not the other way around.
 
-**Vacation and rest.** PhD students and postdocs are expected to take real vacation — at least [DECIDE: 3–4] weeks per year of full disconnection from work, in addition to university holidays. The PI takes vacation and expects the lab to see this as normal.
+**Vacation and rest.** PhD students and postdocs are expected to take real vacation — at least three weeks per year of full disconnection from work, in addition to university holidays. The PI takes vacation and expects the lab to see this as normal.
 
 **Illness and personal circumstances.** Nobody works while sick. Nobody is asked to justify a personal or family emergency. If a deadline needs to slip, it slips.
 
-**Mental health.** Graduate school is unusually hard on mental health. [CU-SPECIFIC: link to CU Boulder counseling services, ombuds, disability services] Talking to the PI about mental health is fine and does not affect professional standing. The PI is not a therapist and will not try to be one.
+**Mental health.** Graduate school is unusually hard on mental health. CU Boulder offers confidential support through [Counseling and Psychiatric Services](https://www.colorado.edu/counseling/), the [Ombuds Office](https://www.colorado.edu/ombuds/), and [Disability Services](https://www.colorado.edu/disabilityservices/). Talking to the PI about mental health is fine and does not affect professional standing. The PI is not a therapist and will not try to be one.
 
 **Accessibility.** The lab commits to accessibility in meetings, publications, and materials: captions when possible, screen-reader-compatible documents, physical space arranged for accessibility, flexible attendance for meetings. Members with accessibility needs are invited to raise them at any time.
 
@@ -152,13 +146,13 @@ PhD study itself — coursework, qualifying exam preparation, and self-directed 
 
 ## 9. Compute, Data, and Tools
 
-**Compute.** The lab uses [DECIDE: CU Research Computing (Alpine/Blanca) / dedicated SEAL cluster resources / cloud (AWS/Azure/GCP credits)]. Allocation is: [DECIDE — default policy]. Job scheduling etiquette: don't hog interactive nodes; long jobs go to batch queues; if you kill a node, tell the group.
+**Compute.** The lab uses CU Research Computing (Alpine and Blanca), supplemented by cloud credits where a project needs them. Allocation is agreed per project with the PI. Job scheduling etiquette: don't hog interactive nodes; long jobs go to batch queues; if you kill a node, tell the group.
 
-**Data.** All lab data lives in [DECIDE: named location]. Personal copies on laptops are permitted for active work but are not the source of truth. Data with any sensitivity (community-sourced, human-subjects, licensed) has additional handling rules — see Section 12.
+**Data.** All lab data lives in the lab's shared storage. Personal copies on laptops are permitted for active work but are not the source of truth. Data with any sensitivity (community-sourced, human-subjects, licensed) has additional handling rules — see Section 12.
 
-**Code.** All lab code lives in the [DECIDE: SEAL GitHub organization]. Every project has a repo from day one; even exploratory work goes in a repo. README, environment file, and a `reproduce.md` are the minimum for any repo that supports a paper. Code is released publicly at paper acceptance unless there is a specific reason not to (discussed with the PI).
+**Code.** All lab code lives in the SEAL GitHub organization. Every project has a repo from day one; even exploratory work goes in a repo. README, environment file, and a `reproduce.md` are the minimum for any repo that supports a paper. Code is released publicly at paper acceptance unless there is a specific reason not to (discussed with the PI).
 
-**Tools we standardize on.** [DECIDE: Overleaf for papers; GitHub for code; Slack for chat; Notion or Coda for knowledge base; Zotero group library for references; W&B or similar for experiment tracking.] Members can use whatever additional tools they like personally; deliverables that other lab members interact with use the shared stack.
+**Tools we standardize on.** Overleaf for papers; GitHub for code; Slack for chat; a shared knowledge base for lab documentation; a Zotero group library for references; Weights & Biases or similar for experiment tracking. Members can use whatever additional tools they like personally; deliverables that other lab members interact with use the shared stack.
 
 **Backups.** Everything important is in a system that backs itself up (GitHub, Overleaf, cluster storage). Laptop-only artifacts are not backed up and will eventually be lost; plan accordingly.
 
@@ -170,7 +164,7 @@ PhD study itself — coursework, qualifying exam preparation, and self-directed 
 
 **Talks.** Members give internal practice talks before any external invited talk or conference presentation. The PI reviews slides at least 48 hours in advance for high-stakes talks.
 
-**Social media.** [DECIDE the lab stance.] Default draft: lab members represent themselves, not the lab, when posting on personal accounts. The lab's own accounts are managed by [DECIDE]. Members are welcome to share lab work, but avoid claiming results before publication and be cautious about representing collaborators' views.
+**Social media.** Lab members represent themselves, not the lab, when posting on personal accounts. The lab's own accounts are managed by the PI. Members are welcome to share lab work, but avoid claiming results before publication and be cautious about representing collaborators' views.
 
 **Media requests.** Media requests about SEAL work go to the PI first, who will coordinate with CU communications. Members are free to talk to journalists about their own work but should loop the PI in for anything involving policy claims or attribution to the lab.
 
@@ -192,7 +186,7 @@ PhD study itself — coursework, qualifying exam preparation, and self-directed 
 
 ---
 
-## 12. Data Ethics and Community Engagement [SEAL-SPECIFIC]
+## 12. Data Ethics and Community Engagement
 
 Much of SEAL's work touches languages, dialects, and communities that have been historically underrepresented, extracted from, or misrepresented in NLP research. The following norms are not optional.
 
@@ -229,4 +223,4 @@ The following are maintained in the lab knowledge base and updated regularly. Th
 
 ## Change log
 
-- **v1.0** — [DATE] — Initial version. Author: Jason Lucas.
+- **v1.0** — October 2026 — Initial version. Author: Jason Lucas.

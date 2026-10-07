@@ -2,7 +2,7 @@
 
 *Secure and Ethical AI Lab · University of Colorado Boulder · Department of Information Science, CMDI*
 
-*Last updated: [DATE] · Written by Jason Lucas*
+*Last updated: October 2026 · Written by Jason Lucas*
 
 ---
 
@@ -33,11 +33,9 @@ The signature thread is **dialect-conditioned vulnerability**: safety systems th
 
 ---
 
-## What I am looking for this cycle
+## What I am looking for
 
-[DECIDE: state the specific direction you most want a student for this cycle — e.g. audio/speech safety, dialectal evaluation infrastructure, community-grounded data work — and name the skills that go with it. Being specific here is the single most useful thing on this page.]
-
-More generally, I am looking for people who want to build things that do not exist yet: benchmarks, evaluation tooling, datasets for languages nobody has served. A good fraction of this lab's contribution is infrastructure, and infrastructure work rewards care more than cleverness.
+I am looking for people who want to build things that do not exist yet: benchmarks, evaluation tooling, datasets for languages nobody has served. A good fraction of this lab's contribution is infrastructure, and infrastructure work rewards care more than cleverness.
 
 **Backgrounds that fit well.** NLP and machine learning; speech and audio processing; linguistics, especially sociolinguistics and language variation; security and adversarial ML; human-centered computing. You do not need all of these. You do need to be willing to learn enough of the others to talk to people who have them.
 
@@ -74,9 +72,9 @@ Tell me what you have worked on, what went wrong with it, and what you would do 
 
 ## Funding
 
-[DECIDE: state the actual terms — how many years of support admitted students receive, the TA/RA mix, and whether you have funding for a student this cycle. Applicants weigh this heavily, and vagueness here reads as bad news whether or not it is.]
+Accepted PhD students are **fully funded**, with five years of guaranteed support at CU Boulder. You should not be deciding whether to do a PhD here on the basis of whether you can afford to finish it.
 
-I encourage applicants to apply for external fellowships — the **NSF GRFP** in particular — and I will work on your application with you. [SEAL-SPECIFIC] I am also glad to advise on fellowships aimed at international students and at students from backgrounds underrepresented in AI, which are less well known and less often mentioned.
+I also encourage you to apply for external fellowships — the **NSF GRFP** in particular — and I will work on your application with you. A fellowship is not a condition of admission or a substitute for your funding; it adds to it, and the independence it brings is worth having. I am also glad to advise on fellowships aimed at international students and at students from backgrounds underrepresented in AI, which are less well known and less often mentioned.
 
 ---
 
